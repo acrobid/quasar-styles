@@ -1,5 +1,3 @@
-// Modern Organic Dark Theme - 2024 Edition
-
 body.theme3 {
   --primary-color: #7eb77f;
   --secondary-color: #4d8c9e;
@@ -107,6 +105,11 @@ body.theme3 {
         background: rgba(126, 183, 127, 0.1);
       }
     }
+
+    &:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
   }
 
   // Modern form fields
@@ -154,6 +157,11 @@ body.theme3 {
       padding-left: 18px;
       font-size: 16px;
       color: var(--text-primary);
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
     }
   }
 

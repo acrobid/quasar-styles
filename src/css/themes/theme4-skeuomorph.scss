@@ -1,17 +1,15 @@
-// Modern iOS-Inspired Theme (2024)
-
 body.theme4 {
   --primary-color: #0071e3;
   --secondary-color: #06c;
   --surface-color: #ffffff;
-  --text-color: #1d1d1d;
+  --text-color: #e0e0e0; /* Adjusted for readability in dark mode */
   --text-secondary: #6e6e73;
-  --background-color: #f5f5f7;
-  --border-color: rgba(0, 0, 0, 0.1);
+  --background-color: #1d1d1d; /* Adjusted for dark mode */
+  --border-color: rgba(255, 255, 255, 0.1); /* Adjusted for dark mode */
   --border-radius: 12px;
   --shadow-subtle: rgba(0, 0, 0, 0.05);
-  --highlight-color: rgba(0, 0, 0, 0.03);
-  --card-bg-color: rgba(255, 255, 255, 0.8);
+  --highlight-color: rgba(255, 255, 255, 0.03); /* Adjusted for dark mode */
+  --card-bg-color: rgba(255, 255, 255, 0.1); /* Adjusted for dark mode */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -72,6 +70,11 @@ body.theme4 {
         transform: scale(0.98);
         background-color: darken(#0071e3, 8%);
       }
+
+      &:focus {
+        outline: 2px solid var(--primary-color); /* Add focus state for buttons */
+        outline-offset: 2px;
+      }
     }
 
     &.q-btn--flat {
@@ -106,7 +109,7 @@ body.theme4 {
       }
 
       &:hover {
-        border-color: rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.2); /* Adjusted for dark mode */
       }
 
       &:focus-within {
@@ -125,6 +128,11 @@ body.theme4 {
       left: 16px;
       color: var(--text-secondary);
       font-size: 14px;
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--primary-color); /* Add focus state for input fields */
+      outline-offset: 2px;
     }
   }
 

@@ -1,7 +1,7 @@
-// Brutalist Digital Theme
+/* Brutalist Digital Theme */
 
 body.theme2 {
-  // Light theme colors
+  /* Light theme colors */
   --primary-color: #121212;
   --secondary-color: #ff5252;
   --accent-color: #ffeb3b;
@@ -14,7 +14,7 @@ body.theme2 {
   color: var(--text-color);
   font-family: 'Courier New', monospace;
 
-  // Dark mode overrides
+  /* Dark mode overrides */
   &.dark-mode {
     --primary-color: #ffffff;
     --secondary-color: #ff5252;
@@ -29,7 +29,7 @@ body.theme2 {
     border-radius: 0 !important;
   }
 
-  // Typography
+  /* Typography */
   h1,
   h2,
   h3,
@@ -49,7 +49,7 @@ body.theme2 {
     color: var(--text-color);
   }
 
-  // Cards and elements with harsh borders and random alignment
+  /* Cards and elements with harsh borders and random alignment */
   .q-card {
     background-color: var(--card-bg-color);
     border: 3px solid var(--border-color);
@@ -75,6 +75,11 @@ body.theme2 {
       background-color: var(--secondary-color);
       color: var(--background-color);
     }
+
+    &:focus {
+      outline: 2px solid var(--primary-color); /* Add focus state for buttons */
+      outline-offset: 2px;
+    }
   }
 
   .q-input,
@@ -94,9 +99,14 @@ body.theme2 {
     .q-field__input {
       color: var(--text-color);
     }
+
+    &:focus-within {
+      outline: 2px solid var(--primary-color); /* Add focus state for input fields */
+      outline-offset: 2px;
+    }
   }
 
-  // Raw, unfinished table style
+  /* Raw, unfinished table style */
   .q-table {
     border: 3px solid var(--border-color);
     background-color: var(--card-bg-color);
@@ -128,7 +138,7 @@ body.theme2 {
     }
   }
 
-  // Dashboard elements
+  /* Dashboard elements */
   .dashboard-header {
     border: 3px solid var(--border-color);
     background: repeating-linear-gradient(
@@ -179,7 +189,7 @@ body.theme2 {
     background-color: var(--card-bg-color);
   }
 
-  // Enhanced Select styling for Brutalist Digital
+  /* Enhanced Select styling for Brutalist Digital */
   .q-select {
     margin-left: -4px;
     margin-right: 4px;
@@ -227,7 +237,7 @@ body.theme2 {
     }
 
     .q-menu {
-      border: 2px solid var(--border-color);
+      border: 2px solid var (--border-color);
       box-shadow: 4px 4px 0 var(--border-color);
       background-color: var(--card-bg-color);
       margin-top: 4px;
@@ -264,33 +274,33 @@ body.theme2 {
     }
   }
 
-  // Layout styling
+  /* Layout styling */
   .layout-header {
-    background-color: var(--border-color); // Black background
-    color: var(--background-color); // White text
+    background-color: var(--border-color); /* Black background */
+    color: var(--background-color); /* White text */
     border-bottom: 3px solid var(--secondary-color);
 
     .app-title {
       text-transform: uppercase;
       font-weight: 800;
       letter-spacing: -1px;
-      color: var(--background-color); // Ensure white text on black header
+      color: var(--background-color); /* Ensure white text on black header */
     }
 
     .theme-selector {
       border: 2px solid var(--background-color);
       transform: rotate(-1deg);
-      background-color: var(--border-color); // Match header background
+      background-color: var(--border-color); /* Match header background */
 
       select {
-        color: var(--background-color); // White text for selector
+        color: var(--background-color); /* White text for selector */
         font-family: 'Courier New', monospace;
         text-transform: uppercase;
         font-weight: bold;
       }
 
       .select-icon {
-        color: var(--background-color); // White icon
+        color: var(--background-color); /* White icon */
       }
     }
 
@@ -304,7 +314,7 @@ body.theme2 {
     }
   }
 
-  // In dark mode, adjust contrast for selected elements
+  /* In dark mode, adjust contrast for selected elements */
   &.dark-mode {
     .q-select .q-menu .q-item--active {
       background-color: var(--border-color);
