@@ -109,7 +109,7 @@ onMounted(() => {
     currentTheme.value = savedTheme;
     changeTheme(savedTheme);
   } else {
-    changeTheme('theme1');
+    changeTheme('theme4');
   }
 });
 </script>
