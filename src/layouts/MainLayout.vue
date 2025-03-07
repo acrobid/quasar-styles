@@ -45,8 +45,11 @@ const themeOptions = [
   { label: 'Shadcn-inspired', value: 'theme6' },
 ];
 
-// Map of theme values to stylesheet paths
-const themeStylesheets = {
+// Determine if we're in development or production
+const isDev = import.meta.env.DEV;
+
+// Define paths for both environments
+const devPaths = {
   theme1: '/src/css/themes/theme1-linear.scss',
   theme2: '/src/css/themes/theme2-brutalist.scss',
   theme3: '/src/css/themes/theme3-organic.scss',
@@ -54,6 +57,18 @@ const themeStylesheets = {
   theme5: '/src/css/themes/theme5-kinetic.scss',
   theme6: '/src/css/themes/theme6-shadcn.scss',
 };
+
+const prodPaths = {
+  theme1: './css/themes/theme1-linear.css',
+  theme2: './css/themes/theme2-brutalist.css',
+  theme3: './css/themes/theme3-organic.css',
+  theme4: './css/themes/theme4-skeuomorph.css',
+  theme5: './css/themes/theme5-kinetic.css',
+  theme6: './css/themes/theme6-shadcn.css',
+};
+
+// Use the appropriate paths based on environment
+const themeStylesheets = isDev ? devPaths : prodPaths;
 
 // Keep track of the current stylesheet element
 let currentStylesheetLink: HTMLLinkElement | null = null;
