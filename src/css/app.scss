@@ -189,7 +189,271 @@
   }
 }
 
-// Add CSS variables for RGB values of primary color
-:root {
-  --q-primary-rgb: 33, 150, 243; // Default blue, replace with your theme's primary color
+// Modern Linear Progress Styling
+.q-linear-progress {
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.08);
+
+  // Container for the progress bar
+  &__track {
+    background: inherit;
+  }
+
+  // Actual progress indicator
+  &__model {
+    border-radius: 3px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Add subtle gradient to the progress bar
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1)
+      );
+    }
+  }
+
+  // Indeterminate animation improvements
+  &--indeterminate {
+    .q-linear-progress__model {
+      animation-duration: 2s;
+    }
+
+    &:before {
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    }
+  }
+
+  // Stripe animation improvements
+  &--striped {
+    .q-linear-progress__model {
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 40px 40px;
+    }
+  }
+
+  // Variants
+  &--rounded {
+    border-radius: 12px;
+    height: 8px;
+
+    .q-linear-progress__model {
+      border-radius: 12px;
+    }
+  }
+
+  &--thin {
+    height: 3px;
+    border-radius: 1.5px;
+
+    .q-linear-progress__model {
+      border-radius: 1.5px;
+    }
+  }
+
+  // Animation for loading state
+  @keyframes q-progress-stripes {
+    from {
+      background-position: 40px 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  &--animate-stripes {
+    .q-linear-progress__model {
+      animation: q-progress-stripes 2s linear infinite;
+    }
+  }
+}
+
+// Modern Input Styling
+.q-field {
+  // Base field styling
+  .q-field__control {
+    height: 48px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &:before {
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: inherit;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    &:hover:before {
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  // Label styling
+  .q-field__label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.7);
+    transition: all 0.2s ease;
+  }
+
+  // Native input styling
+  .q-field__native,
+  .q-field__input {
+    padding: 0 12px;
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.9);
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Bottom styling
+  .q-field__bottom {
+    padding: 4px 12px 0;
+    font-size: 0.75rem;
+    min-height: 20px;
+  }
+
+  // Focused state
+  &.q-field--focused {
+    .q-field__control:before {
+      border-color: var(--q-primary);
+      border-width: 1px;
+    }
+
+    .q-field__control:after {
+      display: none;
+    }
+
+    .q-field__control {
+      box-shadow: 0 0 0 3px rgba(var(--q-primary-rgb), 0.15);
+    }
+
+    .q-field__label {
+      color: var(--q-primary);
+    }
+  }
+
+  // Filled variant
+  &.q-field--filled {
+    .q-field__control {
+      background: rgba(0, 0, 0, 0.03);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    &.q-field--focused .q-field__control {
+      background: rgba(var(--q-primary-rgb), 0.05);
+    }
+  }
+
+  // Outlined variant
+  &.q-field--outlined {
+    .q-field__control {
+      background: transparent;
+    }
+
+    &.q-field--focused .q-field__control:before {
+      border-width: 1px;
+    }
+  }
+
+  // Standout variant
+  &.q-field--standout {
+    .q-field__control {
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 8px;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    &.q-field--focused .q-field__control {
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Rounded variant
+  &.q-field--rounded {
+    .q-field__control {
+      border-radius: 24px;
+    }
+  }
+
+  // Error state
+  &.q-field--error {
+    .q-field__control:before {
+      border-color: var(--q-negative);
+    }
+
+    &.q-field--focused .q-field__control {
+      box-shadow: 0 0 0 3px rgba(var(--q-negative-rgb), 0.15);
+    }
+
+    .q-field__bottom {
+      color: var(--q-negative);
+    }
+  }
+
+  // Disabled state
+  &.q-field--disabled {
+    .q-field__control {
+      opacity: 0.6;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .q-field__label,
+    .q-field__native,
+    .q-field__input {
+      opacity: 0.6;
+    }
+  }
+
+  // Dense variant
+  &.q-field--dense {
+    .q-field__control {
+      height: 40px;
+    }
+
+    .q-field__label {
+      font-size: 0.8rem;
+    }
+
+    .q-field__native,
+    .q-field__input {
+      font-size: 0.875rem;
+    }
+  }
+
+  // With icon
+  .q-field__prepend,
+  .q-field__append {
+    padding: 0 8px;
+    color: rgba(0, 0, 0, 0.5);
+  }
 }
