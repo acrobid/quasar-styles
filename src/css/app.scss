@@ -1,3 +1,6 @@
+// Add this at the top of the file:
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 // app global css in SCSS form
 
 /* Common Elements Styling */
@@ -21,4 +24,172 @@
     border-radius: 4px 4px 0 0;
     transition: all 0.3s;
   }
+}
+
+// Modern Avatar Styling
+.q-avatar {
+  border-radius: 14px; // Slightly rounded square for modern look
+  overflow: hidden;
+  transition: transform 0.2s ease;
+
+  &--bordered {
+    border: 2px solid rgba(var(--q-primary-rgb), 0.2);
+  }
+
+  // Hover effect for interactive avatars
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  // Status indicator
+  &__status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+
+    &--online {
+      background: #34d399;
+    }
+
+    &--away {
+      background: #fbbf24;
+    }
+
+    &--offline {
+      background: #9ca3af;
+    }
+  }
+}
+
+// Modern Badge Styling
+.q-badge {
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  font-size: 0.65rem;
+  box-shadow: none;
+  border: 1px solid transparent;
+
+  // Subtle variant
+  &--subtle {
+    background-color: rgba(var(--q-primary-rgb), 0.12);
+    color: var(--q-primary);
+  }
+
+  // Outline variant
+  &--outline {
+    background-color: transparent;
+    border-color: currentColor;
+  }
+}
+
+// Modern Chip Styling
+.q-chip {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  // Softer shadow
+  &--clickable {
+    &:hover {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Modern outline style
+  &--outline {
+    border: 1px solid currentColor;
+    background: transparent;
+  }
+
+  // Soft background style
+  &--soft {
+    background-color: rgba(var(--q-primary-rgb), 0.12);
+    color: var(--q-primary);
+  }
+
+  // Improved icon spacing
+  .q-chip__icon {
+    margin-right: 6px;
+  }
+
+  // Improved close button
+  .q-chip__icon--remove {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+// Modern Select Styling
+.q-select {
+  .q-field__control {
+    border-radius: 8px;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      border-color: rgba(var(--q-primary-rgb), 0.5);
+    }
+  }
+
+  .q-field__marginal {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  // Focused state
+  &.q-field--focused {
+    .q-field__control {
+      box-shadow: 0 0 0 3px rgba(var(--q-primary-rgb), 0.15);
+    }
+  }
+
+  // Dropdown styling
+  .q-menu {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 8px;
+
+    .q-item {
+      border-radius: 6px;
+      min-height: 40px;
+      padding: 8px 12px;
+      margin-bottom: 2px;
+
+      &--active {
+        background: rgba(var(--q-primary-rgb), 0.12);
+        color: var(--q-primary);
+        font-weight: 500;
+      }
+
+      &:hover:not(.q-item--active) {
+        background: rgba(0, 0, 0, 0.03);
+      }
+    }
+  }
+
+  // Selected chip styling inside select
+  .q-chip {
+    margin: 2px;
+  }
+}
+
+// Add CSS variables for RGB values of primary color
+:root {
+  --q-primary-rgb: 33, 150, 243; // Default blue, replace with your theme's primary color
 }

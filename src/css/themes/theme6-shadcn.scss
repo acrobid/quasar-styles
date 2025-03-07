@@ -1,65 +1,64 @@
-// Shadcn-inspired Theme
+// Shadcn-inspired Dark Theme
 
 body.theme6 {
-  --background: #ffffff;
-  --foreground: #020817;
+  // Dark mode colors as default
+  --background: #020817;
+  --foreground: #f8fafc;
 
-  --card: #ffffff;
-  --card-foreground: #020817;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
 
-  --popover: #ffffff;
-  --popover-foreground: #020817;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
 
-  --primary: #18181b;
-  --primary-foreground: #ffffff;
+  --primary: #f8fafc;
+  --primary-foreground: #020817;
 
-  --secondary: #f1f5f9;
-  --secondary-foreground: #18181b;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
 
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
 
-  --accent: #f1f5f9;
-  --accent-foreground: #18181b;
+  --accent: #1e293b;
+  --accent-foreground: #f8fafc;
 
-  --destructive: #ef4444;
+  --destructive: #7f1d1d;
   --destructive-foreground: #f8fafc;
 
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #020817;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #cbd5e1;
 
-  --radius: 0.5rem;
+  // For light mode support (opt-in)
+  &.light-mode {
+    --background: #ffffff;
+    --foreground: #020817;
 
-  // For dark mode support
-  &.dark-mode {
-    --background: #020817;
-    --foreground: #f8fafc;
+    --card: #ffffff;
+    --card-foreground: #020817;
 
-    --card: #1e293b;
-    --card-foreground: #f8fafc;
+    --popover: #ffffff;
+    --popover-foreground: #020817;
 
-    --popover: #1e293b;
-    --popover-foreground: #f8fafc;
+    --primary: #18181b;
+    --primary-foreground: #ffffff;
 
-    --primary: #f8fafc;
-    --primary-foreground: #020817;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #18181b;
 
-    --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
 
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
+    --accent: #f1f5f9;
+    --accent-foreground: #18181b;
 
-    --accent: #1e293b;
-    --accent-foreground: #f8fafc;
-
-    --destructive: #7f1d1d;
+    --destructive: #ef4444;
     --destructive-foreground: #f8fafc;
 
-    --border: #1e293b;
-    --input: #1e293b;
-    --ring: #cbd5e1;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #020817;
   }
 
   background-color: var(--background);
@@ -149,7 +148,7 @@ body.theme6 {
       box-shadow 0.15s;
 
     &:hover {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     // Remove default Quasar padding
@@ -193,7 +192,7 @@ body.theme6 {
       border: 1px solid transparent;
 
       &:hover {
-        background-color: color-mix(in srgb, var(--primary) 90%, black);
+        background-color: color-mix(in srgb, var(--primary) 90%, #ffffff);
         transform: translateY(-1px);
       }
 
@@ -209,7 +208,7 @@ body.theme6 {
       border: 1px solid var(--border);
 
       &:hover {
-        border-color: color-mix(in srgb, var(--border) 80%, black);
+        border-color: color-mix(in srgb, var(--border) 80%, #ffffff);
         background-color: color-mix(in srgb, var(--secondary) 50%, transparent);
       }
     }
@@ -230,7 +229,7 @@ body.theme6 {
       color: var(--destructive-foreground);
 
       &:hover {
-        background-color: color-mix(in srgb, var(--destructive) 90%, black);
+        background-color: color-mix(in srgb, var(--destructive) 90%, #ffffff);
       }
     }
 
@@ -264,7 +263,7 @@ body.theme6 {
       }
 
       &:hover {
-        border-color: color-mix(in srgb, var(--input) 80%, black);
+        border-color: color-mix(in srgb, var(--input) 80%, #ffffff);
       }
 
       &:focus-within {
@@ -285,7 +284,8 @@ body.theme6 {
       }
     }
 
-    .q-field__native {
+    .q-field__native,
+    .q-field__input {
       padding-left: 12px;
       color: var(--foreground);
       font-size: 0.875rem;
@@ -316,8 +316,8 @@ body.theme6 {
       background-color: var(--popover);
       border-radius: var(--radius);
       box-shadow:
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        0 10px 15px -3px rgba(0, 0, 0, 0.3),
+        0 4px 6px -4px rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border);
       padding: 4px;
 
@@ -351,6 +351,8 @@ body.theme6 {
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: none;
+    background-color: var(--card);
+    color: var(--card-foreground);
 
     .q-table__card {
       box-shadow: none;
@@ -416,7 +418,7 @@ body.theme6 {
       transition: background-color 0.2s ease;
 
       &:hover {
-        background-color: var(--muted);
+        background-color: color-mix(in srgb, var(--muted) 90%, transparent);
       }
 
       &:last-child td {
@@ -490,11 +492,13 @@ body.theme6 {
   // List styling
   .q-list {
     padding: 0.5rem;
+    background-color: var(--card);
 
     .q-item {
       border-radius: var(--radius);
       padding: 12px;
       transition: background-color 0.2s ease;
+      color: var(--card-foreground);
 
       &:hover {
         background-color: var(--secondary);
@@ -540,6 +544,7 @@ body.theme6 {
     background-color: var(--background);
     color: var(--foreground);
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
     .app-title {
       font-weight: 600;
@@ -552,10 +557,10 @@ body.theme6 {
       border: 1px solid var(--border);
       border-radius: var(--radius);
       transition: border-color 0.2s ease;
-      background-color: transparent;
+      background-color: var(--card);
 
       &:hover {
-        border-color: color-mix(in srgb, var(--border) 80%, black);
+        border-color: color-mix(in srgb, var(--border) 80%, #ffffff);
       }
 
       &:focus-within {
@@ -575,8 +580,39 @@ body.theme6 {
     }
 
     .version-text {
-      color: var(--muted-foreground);
+      color: var (--muted-foreground);
       font-size: 0.75rem;
     }
+  }
+
+  // Menu
+  .q-menu {
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  // Dialog
+  .q-dialog {
+    .q-card {
+      background-color: var(--card);
+      color: var(--card-foreground);
+    }
+  }
+
+  // Separator
+  .q-separator {
+    background-color: var(--border);
+  }
+
+  // Fix for dark mode input autofill
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--foreground) !important;
+    -webkit-box-shadow: 0 0 0 30px var(--card) inset !important;
+    transition: background-color 5000s ease-in-out 0s;
   }
 }

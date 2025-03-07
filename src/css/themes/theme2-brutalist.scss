@@ -266,29 +266,31 @@ body.theme2 {
 
   // Layout styling
   .layout-header {
-    background-color: var(--border-color);
-    color: var(--background-color);
+    background-color: var(--border-color); // Black background
+    color: var(--background-color); // White text
     border-bottom: 3px solid var(--secondary-color);
 
     .app-title {
       text-transform: uppercase;
       font-weight: 800;
       letter-spacing: -1px;
+      color: var(--background-color); // Ensure white text on black header
     }
 
     .theme-selector {
       border: 2px solid var(--background-color);
       transform: rotate(-1deg);
+      background-color: var(--border-color); // Match header background
 
       select {
-        color: var(--background-color);
+        color: var(--background-color); // White text for selector
         font-family: 'Courier New', monospace;
         text-transform: uppercase;
         font-weight: bold;
       }
 
       .select-icon {
-        color: var(--background-color);
+        color: var(--background-color); // White icon
       }
     }
 

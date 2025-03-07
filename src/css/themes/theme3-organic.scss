@@ -1,49 +1,60 @@
-// Organic Minimalism Theme
+// Modern Organic Dark Theme - 2024 Edition
 
 body.theme3 {
-  --primary-color: #4a6fa5;
-  --secondary-color: #86b49c;
-  --tertiary-color: #ebdccb;
-  --clay-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  --primary-color: #7eb77f;
+  --secondary-color: #4d8c9e;
+  --tertiary-color: #31403b;
+  --accent-color: #9fc6b7;
+  --background-color: #171f1a;
+  --surface-color: #1e2922;
+  --card-color: #243029;
+  --text-primary: #e9efec;
+  --text-secondary: #b0c1b5;
+  --clay-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  --q-primary-rgb: 126, 183, 127;
 
-  background-color: #f9f7f3;
-  color: #333;
-  font-family: 'Garamond', 'Georgia', serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
 
-  // Override Material ripples with organic spread
+  // Modern, subtle ripples
   .q-ripple {
-    background-color: rgba(134, 180, 156, 0.2) !important;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    background-color: rgba(126, 183, 127, 0.15) !important;
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1) !important;
   }
 
-  // Override standard transitions
+  // Smooth transitions
   * {
-    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1) !important;
   }
 
-  // Clay-like, organic shapes for cards
+  // Modern cards with subtle glow
   .q-card {
-    border-radius: 36px !important;
-    background-color: #fff;
-    box-shadow: var(--clay-shadow);
-    padding: 5px;
-    border: none !important;
+    border-radius: 20px !important;
+    background-color: var(--card-color);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.2),
+      0 1px 3px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
     transition:
-      transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-      box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      transform 0.3s cubic-bezier(0.2, 1, 0.3, 1),
+      box-shadow 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+    overflow: hidden;
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.25),
+        0 8px 10px rgba(0, 0, 0, 0.2);
     }
 
     & > div:first-child {
-      border-radius: 32px !important;
+      border-radius: 16px !important;
       overflow: hidden;
     }
   }
 
-  // Organic typography
+  // Contemporary typography
   h1,
   h2,
   h3,
@@ -56,57 +67,65 @@ body.theme3 {
   .text-h4,
   .text-h5,
   .text-h6 {
-    font-family: 'Garamond', 'Georgia', serif;
-    font-weight: 300;
-    letter-spacing: 0;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
   }
 
-  // Nature-inspired buttons
+  // Modern buttons
   .q-btn {
-    border-radius: 24px !important;
-    background: linear-gradient(145deg, var(--secondary-color), var(--primary-color));
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, rgba(126, 183, 127, 0.9), rgba(77, 140, 158, 0.95));
     color: #fff;
-    padding: 8px 24px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    font-family: 'Garamond', 'Georgia', serif;
+    padding: 8px 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
     border: none !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition:
-      transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-      opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      transform 0.3s cubic-bezier(0.2, 1, 0.3, 1),
+      box-shadow 0.3s cubic-bezier(0.2, 1, 0.3, 1);
 
     &:before {
-      border-radius: 24px !important;
+      border-radius: 12px !important;
     }
 
     &:hover {
-      transform: scale(1.05);
-      opacity: 0.95;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(126, 183, 127, 0.25);
     }
 
     &.q-btn--flat {
       background: transparent;
       color: var(--primary-color);
+      box-shadow: none;
 
       &:hover {
-        background: rgba(134, 180, 156, 0.08);
+        background: rgba(126, 183, 127, 0.1);
       }
     }
   }
 
-  // Form fields with organic shapes
+  // Modern form fields
   .q-input,
   .q-select {
     .q-field__control {
-      border-radius: 24px !important;
-      border: 2px solid var(--tertiary-color) !important;
-      background: transparent;
-      height: 48px;
-      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      border-radius: 12px !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      background: rgba(0, 0, 0, 0.2);
+      height: 56px;
+      transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+
+      &:hover {
+        border-color: rgba(126, 183, 127, 0.3) !important;
+      }
 
       &:focus-within {
-        border-color: var(--secondary-color) !important;
-        box-shadow: 0 0 0 3px rgba(134, 180, 156, 0.2);
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 0 0 3px rgba(126, 183, 127, 0.15);
       }
 
       &:before,
@@ -116,108 +135,113 @@ body.theme3 {
     }
 
     .q-field__label {
-      font-family: 'Garamond', 'Georgia', serif;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
       left: 18px;
+      color: var(--text-secondary);
 
       &--floating {
-        background-color: #f9f7f3;
+        background-color: var(--card-color);
         padding: 0 8px;
         font-size: 14px;
-        color: var(--secondary-color);
-        letter-spacing: 0.5px;
+        color: var(--primary-color);
+        letter-spacing: 0;
       }
     }
 
-    .q-field__native {
-      font-family: 'Garamond', 'Georgia', serif;
+    .q-field__native,
+    .q-field__input {
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
       padding-left: 18px;
       font-size: 16px;
-      color: #333;
+      color: var(--text-primary);
     }
   }
 
-  // Organic table design
+  // Modern table design
   .q-table {
-    border-radius: 24px !important;
+    border-radius: 16px !important;
     overflow: hidden;
-    border: none !important;
-    background: white;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+    background: var(--card-color);
     box-shadow: var(--clay-shadow);
 
     th {
-      background-color: var(--tertiary-color) !important;
-      color: #333;
-      font-weight: 500;
+      background-color: rgba(0, 0, 0, 0.2) !important;
+      color: var(--text-primary);
+      font-weight: 600;
       border-bottom: none !important;
-      font-family: 'Garamond', 'Georgia', serif;
-      font-size: 15px !important;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: 14px !important;
       padding: 16px !important;
     }
 
     tr td {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
       padding: 16px !important;
-      font-family: 'Garamond', 'Georgia', serif;
-      font-size: 15px !important;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: 14px !important;
+      color: var(--text-secondary);
     }
 
     tbody tr:hover {
-      background-color: rgba(134, 180, 156, 0.05) !important;
+      background-color: rgba(126, 183, 127, 0.08) !important;
     }
   }
 
-  // Progress bars with natural flow
+  // Progress bars
   .q-linear-progress {
-    height: 8px !important;
-    border-radius: 4px !important;
-    background: rgba(235, 220, 203, 0.4) !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
 
     &__model {
-      border-radius: 4px !important;
-      background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)) !important;
+      border-radius: 3px !important;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)) !important;
     }
   }
 
-  // Dashboard elements with flowing shapes
+  // Dashboard elements
   .dashboard-header {
-    background-color: #fff;
-    border-radius: 36px !important;
+    background-color: var(--card-color);
+    border-radius: 20px !important;
     overflow: hidden;
     box-shadow: var(--clay-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.03);
 
     h4 {
-      color: var(--primary-color);
-      font-weight: 300;
-      letter-spacing: 1px;
-      font-size: 32px;
+      color: var(--text-primary);
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      font-size: 28px;
     }
 
     p {
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.6;
-      color: #666;
+      color: var(--text-secondary);
     }
   }
 
   .stat-card {
-    background-color: #fff;
-    border-radius: 36px !important;
+    background-color: var(--card-color);
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 
     .text-h4 {
-      font-weight: 400;
-      color: var(--primary-color);
-      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 24px;
     }
 
     .text-subtitle2 {
-      color: #666;
-      font-family: 'Garamond', 'Georgia', serif;
-      font-size: 15px;
-      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0;
     }
   }
 
-  // Chart elements with flowing design
+  // Chart elements
   .chart-card {
     .chart-bars {
       display: flex;
@@ -228,26 +252,28 @@ body.theme3 {
 
     .chart-bar {
       background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
-      border-radius: 24px 24px 0 0 !important;
+      border-radius: 12px 12px 0 0 !important;
       margin: 0 8px;
-      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+      box-shadow: 0 0 20px rgba(126, 183, 127, 0.2);
 
       &:hover {
         transform: scaleY(1.05);
+        box-shadow: 0 0 30px rgba(126, 183, 127, 0.4);
       }
     }
   }
 
   // Enhanced Select styling
   .q-select {
-    --select-border-color: var(--tertiary-color);
-    --select-text-color: #333;
+    --select-border-color: rgba(255, 255, 255, 0.08);
+    --select-text-color: var(--text-primary);
 
     .q-field__control {
-      border-radius: 22px;
-      border: 2px solid var(--select-border-color);
-      background: transparent;
-      min-height: 52px;
+      border-radius: 12px;
+      border: 1px solid var(--select-border-color);
+      background: rgba(0, 0, 0, 0.2);
+      min-height: 56px;
       transition: all 0.3s ease;
       overflow: hidden;
 
@@ -258,7 +284,7 @@ body.theme3 {
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.2));
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.05));
         opacity: 0;
         transition: opacity 0.3s;
       }
@@ -267,13 +293,19 @@ body.theme3 {
         opacity: 1;
       }
 
+      &:hover {
+        border-color: rgba(126, 183, 127, 0.3) !important;
+      }
+
       &:focus-within {
-        border-color: var(--secondary-color);
-        border-width: 2px;
+        border-color: var(--primary-color);
+        border-width: 1px;
+        box-shadow: 0 0 0 3px rgba(126, 183, 127, 0.15);
       }
     }
 
-    .q-field__native {
+    .q-field__native,
+    .q-field__input {
       padding: 0 16px;
       color: var(--select-text-color);
       font-weight: 400;
@@ -281,13 +313,15 @@ body.theme3 {
 
     .q-field__label {
       left: 16px;
-      color: #666;
+      color: var(--text-secondary);
       font-weight: 400;
-      letter-spacing: 0.5px;
+      letter-spacing: 0;
 
       &--floating {
         transform: translateY(-120%) scale(0.85);
-        color: var(--secondary-color);
+        color: var(--primary-color);
+        background-color: var(--card-color);
+        padding: 0 8px;
       }
     }
 
@@ -295,7 +329,7 @@ body.theme3 {
       padding-right: 12px;
 
       .q-icon {
-        color: var(--secondary-color);
+        color: var(--primary-color);
         transition: transform 0.3s;
       }
     }
@@ -305,27 +339,29 @@ body.theme3 {
     }
 
     .q-menu {
-      border-radius: 24px !important;
-      background-color: #fff;
-      box-shadow: var(--clay-shadow);
-      border: 1px solid var(--tertiary-color);
+      border-radius: 16px !important;
+      background-color: var(--card-color);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       padding: 12px;
 
       .q-item {
-        border-radius: 18px !important;
-        padding: 12px 18px;
+        border-radius: 10px !important;
+        padding: 12px 16px;
         min-height: 46px;
-        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
         margin-bottom: 4px;
-        font-family: 'Garamond', 'Georgia', serif;
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        color: var(--text-secondary);
 
         &:hover {
-          background-color: rgba(134, 180, 156, 0.1);
+          background-color: rgba(126, 183, 127, 0.1);
           transform: translateX(5px);
+          color: var(--text-primary);
         }
 
         &--active {
-          background-color: rgba(134, 180, 156, 0.2) !important;
+          background-color: rgba(126, 183, 127, 0.15) !important;
           color: var(--primary-color);
           font-weight: 500;
         }
@@ -333,36 +369,40 @@ body.theme3 {
     }
   }
 
-  // List with flowing items
+  // Modern list
   .q-list {
     padding: 10px;
-    border-radius: 24px !important;
+    border-radius: 16px !important;
     overflow: hidden;
-    background: white;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    background: var(--card-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.03);
 
     .q-item {
-      border-radius: 20px !important;
-      margin-bottom: 8px;
-      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      border-radius: 12px !important;
+      margin-bottom: 6px;
+      transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+      color: var(--text-secondary);
 
       &:hover {
-        background-color: rgba(134, 180, 156, 0.08);
+        background-color: rgba(126, 183, 127, 0.08);
         transform: translateX(5px);
+        color: var(--text-primary);
       }
 
       .q-item__label {
-        font-family: 'Garamond', 'Georgia', serif;
+        font-family: 'Inter', 'Helvetica Neue', sans-serif;
       }
     }
 
     .q-avatar {
-      border-radius: 50% !important;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px !important;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     }
   }
 
-  // Asymmetrical elements
+  // Timeline elements
   .q-timeline__entry {
     &:nth-child(odd) {
       transform: translateX(-5px);
@@ -373,46 +413,77 @@ body.theme3 {
     }
 
     .q-timeline__dot {
-      border-radius: 50%;
+      border-radius: 12px;
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     }
   }
 
-  // Flowing calendar
+  // Calendar styling
   .calendar-today {
     background-color: var(--primary-color);
     color: #fff;
-    border-radius: 50%;
+    border-radius: 12px;
   }
 
   .calendar-event::after {
     background-color: var(--secondary-color);
   }
 
-  // Layout styling
+  // Modern header
   .layout-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-    border-radius: 0 0 30px 30px;
+    background: linear-gradient(135deg, rgba(31, 43, 36, 0.95), rgba(25, 35, 30, 0.98));
+    color: var(--text-primary);
+    border-radius: 0 0 24px 24px;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 
     .q-toolbar {
       height: 70px;
     }
 
     .q-toolbar__title {
-      font-weight: 300;
-      letter-spacing: 1px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
     }
   }
 
   // Avatar styling
   .q-avatar {
-    border-radius: 50%;
+    border-radius: 12px !important;
     overflow: hidden;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
     &.q-avatar--rounded {
-      border-radius: 18px;
+      border-radius: 14px !important;
+    }
+  }
+
+  // Badge styling
+  .q-badge {
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.3px;
+    background-color: rgba(126, 183, 127, 0.15);
+    color: var(--primary-color);
+    border: 1px solid rgba(126, 183, 127, 0.3);
+  }
+
+  // Chip styling
+  .q-chip {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+
+    &--colored {
+      background-color: rgba(126, 183, 127, 0.15);
+      color: var(--primary-color);
+      border: 1px solid rgba(126, 183, 127, 0.3);
     }
   }
 }

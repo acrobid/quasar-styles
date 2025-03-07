@@ -76,8 +76,9 @@ function changeTheme(theme: string) {
   // Set the body class
   document.body.className = theme;
 
-  // Use Quasar's built-in dark mode if "theme1" is dark
-  Dark.set(theme === 'theme1'); // adjust condition if additional themes are dark
+  // Use Quasar's built-in dark mode if theme is dark
+  // Update: theme2 (brutalist) is NOT a dark theme
+  Dark.set(theme === 'theme1' || theme === 'theme3' || theme === 'theme6');
 
   // Save the theme preference
   localStorage.setItem('quasar-theme', theme);
@@ -167,9 +168,18 @@ body.theme2 .theme-selector {
 }
 
 body.theme3 .theme-selector {
-  border: 2px solid var(--tertiary-color);
-  border-radius: 22px !important;
-  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px !important;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  select {
+    color: var(--text-primary);
+  }
+
+  .select-icon {
+    color: var(--primary-color);
+  }
 }
 
 body.theme4 .theme-selector {
