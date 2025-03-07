@@ -1,0 +1,305 @@
+// Modern Linear Theme
+
+:root {
+  --primary-color: #3772ff;
+  --secondary-color: #f038ff;
+  --background-color: #fafafa;
+  --card-bg-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #eeeeee;
+  --accent-color: #36f4b9;
+}
+
+body.theme1 {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family:
+    'Inter',
+    'SF Pro Display',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+
+  // Modern, clean layouts with straight lines
+  .q-card {
+    border-radius: 4px;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    overflow: hidden;
+
+    &:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  // Clean, geometric buttons
+  .q-btn {
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    box-shadow: none;
+    border: 1px solid transparent;
+
+    &.q-btn--standard {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    &.q-btn--flat {
+      color: var(--primary-color);
+      &:hover {
+        background: rgba(55, 114, 255, 0.08);
+      }
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:after {
+      box-shadow: none;
+    }
+  }
+
+  // Form elements with clean lines
+  .q-input,
+  .q-select {
+    .q-field__control {
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background-color: var(--card-bg-color);
+      height: 42px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: #bdbdbd;
+      }
+
+      &:focus-within {
+        border-color: var(--primary-color);
+        border-width: 1px;
+        box-shadow: 0 0 0 2px rgba(55, 114, 255, 0.2);
+      }
+    }
+
+    &.q-field--outlined .q-field__control {
+      background: transparent;
+    }
+  }
+
+  // Select component styling
+  .q-select {
+    .q-field__native {
+      padding-left: 12px;
+    }
+
+    .q-field__label {
+      left: 12px;
+      font-size: 13px;
+      color: #757575;
+
+      &--floating {
+        transform: translateY(-115%) scale(0.87);
+        font-size: 12px;
+        letter-spacing: 0.2px;
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+    }
+
+    .q-field__append {
+      padding-right: 8px;
+    }
+
+    .q-menu {
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+      padding: 4px;
+
+      .q-item {
+        border-radius: 2px;
+        min-height: 38px;
+        padding: 8px 12px;
+
+        &:hover {
+          background-color: rgba(55, 114, 255, 0.05);
+        }
+
+        &--active {
+          background-color: rgba(55, 114, 255, 0.1);
+          color: var(--primary-color);
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  // Tables with clean lines
+  .q-table {
+    border: 1px solid var(--border-color);
+
+    th {
+      background-color: #fafafa;
+      font-weight: 500;
+      color: #616161;
+      border-bottom: 1px solid var(--border-color);
+      height: 48px;
+      font-size: 13px;
+    }
+
+    td {
+      height: 48px;
+      font-size: 14px;
+      color: var(--text-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+  }
+
+  // Progress bars
+  .q-linear-progress {
+    height: 6px;
+    background-color: rgba(55, 114, 255, 0.1);
+
+    &__model {
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    }
+  }
+
+  // Dashboard elements with clean design
+  .dashboard-header {
+    background-color: var(--card-bg-color);
+    border-bottom: 1px solid var(--border-color);
+
+    h4 {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+  }
+
+  .stat-card {
+    background-color: var(--card-bg-color);
+
+    .text-h4 {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .text-subtitle2 {
+      color: #757575;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+    }
+  }
+
+  .chart-bar {
+    background: linear-gradient(to top, var(--primary-color), var(--accent-color));
+    border-radius: 0;
+    margin: 0 2px;
+  }
+
+  // Avatar styling
+  .q-avatar {
+    border-radius: 4px;
+    color: white;
+    background-color: var(--primary-color);
+    overflow: hidden;
+
+    &.q-avatar--rounded {
+      border-radius: 4px;
+    }
+  }
+
+  // List styling
+  .q-list {
+    padding: 8px 0;
+
+    .q-item {
+      min-height: 56px;
+      padding: 8px 16px;
+      transition: background-color 0.2s;
+      border-radius: 4px;
+      margin: 2px 0;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      .q-item__section--avatar {
+        padding-right: 16px;
+        min-width: 56px;
+      }
+
+      .q-item__section--side {
+        padding-left: 16px;
+      }
+    }
+
+    .q-item__label {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+
+      &--caption {
+        font-size: 13px;
+        color: #757575;
+      }
+    }
+  }
+
+  // Timeline styling
+  .q-timeline {
+    .q-timeline__entry {
+      padding-bottom: 24px;
+
+      .q-timeline__dot {
+        background-color: var(--primary-color);
+      }
+
+      .q-timeline__subtitle {
+        font-size: 12px;
+        color: #757575;
+        letter-spacing: 0.2px;
+      }
+    }
+  }
+
+  // Calendar styling
+  .calendar-today {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 2px;
+  }
+
+  .calendar-event::after {
+    background-color: var(--accent-color);
+    border-radius: 0;
+  }
+
+  // Layout styling
+  .layout-header {
+    background: var(--card-bg-color);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    height: 64px;
+
+    .q-toolbar {
+      min-height: 64px;
+      padding: 0 16px;
+    }
+
+    .q-toolbar__title {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+  }
+}

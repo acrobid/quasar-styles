@@ -2,42 +2,24 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-toolbar-title> Quasar Dashboard </q-toolbar-title>
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <q-select
+          v-model="currentTheme"
+          :options="themeOptions"
+          label="Theme"
+          emit-value
+          map-options
+          dense
+          outlined
+          class="q-mr-md"
+          style="min-width: 150px"
+          @update:model-value="changeTheme"
+        />
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -46,57 +28,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import { ref, onMounted } from 'vue';
 
-const linksList: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
+const currentTheme = ref('theme1');
+const themeOptions = [
+  { label: 'Claymorphism', value: 'theme1' },
+  { label: 'Brutalist Digital', value: 'theme2' },
+  { label: 'Organic Minimalism', value: 'theme3' },
+  { label: 'Neo-Skeuomorphism', value: 'theme4' },
+  { label: 'Kinetic Typography', value: 'theme5' },
 ];
 
-const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
+function changeTheme(theme: string) {
+  document.body.className = theme;
+  localStorage.setItem('quasar-theme', theme);
 }
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('quasar-theme');
+  if (savedTheme) {
+    currentTheme.value = savedTheme;
+    changeTheme(savedTheme);
+  } else {
+    changeTheme('theme1');
+  }
+});
 </script>

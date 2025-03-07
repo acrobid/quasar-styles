@@ -1,0 +1,254 @@
+// Organic Minimalism Theme
+
+body.theme3 {
+  --primary-color: #4a6fa5;
+  --secondary-color: #86b49c;
+  --tertiary-color: #ebdccb;
+
+  background-color: #f9f7f3;
+  color: #333;
+
+  // Smooth, organic shapes
+  .q-card {
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
+    padding: 5px;
+  }
+
+  // Flowing buttons
+  .q-btn {
+    border-radius: 22px;
+    background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 8px 24px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+
+    &.q-btn--flat {
+      background: transparent;
+      color: var(--primary-color);
+    }
+  }
+
+  // Smooth form fields
+  .q-input,
+  .q-select {
+    .q-field__control {
+      border-radius: 22px;
+      border: 2px solid var(--tertiary-color);
+      background: transparent;
+
+      &:focus-within {
+        border-color: var(--secondary-color);
+      }
+    }
+  }
+
+  // Clean table with organic touches
+  .q-table {
+    border-radius: 18px;
+    overflow: hidden;
+
+    th {
+      background-color: var(--tertiary-color);
+      color: #333;
+      font-weight: 500;
+    }
+
+    tr td {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  // Dashboard elements with flowing shapes
+  .dashboard-header {
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+
+    h4 {
+      color: var(--primary-color);
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+  }
+
+  .stat-card {
+    background-color: #fff;
+    border-radius: 30px;
+
+    .text-h4 {
+      font-weight: 400;
+      color: var(--primary-color);
+    }
+  }
+
+  .chart-bar {
+    background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
+    border-radius: 18px 18px 0 0;
+  }
+
+  // Asymmetrical elements
+  .q-timeline__entry {
+    &:nth-child(odd) {
+      transform: translateX(-5px);
+    }
+
+    &:nth-child(even) {
+      transform: translateX(5px);
+    }
+
+    .q-timeline__dot {
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+  }
+
+  // Flowing calendar
+  .calendar-today {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .calendar-event::after {
+    background-color: var(--secondary-color);
+  }
+
+  // Layout styling
+  .layout-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    border-radius: 0 0 30px 30px;
+
+    .q-toolbar {
+      height: 70px;
+    }
+
+    .q-toolbar__title {
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+  }
+
+  // Enhanced Select styling for Organic Minimalism
+  .q-select {
+    --select-border-color: var(--tertiary-color);
+    --select-text-color: #333;
+
+    .q-field__control {
+      border-radius: 22px;
+      border: 2px solid var(--select-border-color);
+      background: transparent;
+      min-height: 52px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.2));
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
+
+      &:focus-within {
+        border-color: var(--secondary-color);
+        border-width: 2px;
+      }
+    }
+
+    .q-field__native {
+      padding: 0 16px;
+      color: var(--select-text-color);
+      font-weight: 400;
+    }
+
+    .q-field__label {
+      left: 16px;
+      color: #666;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+
+      &--floating {
+        transform: translateY(-120%) scale(0.85);
+        color: var(--secondary-color);
+      }
+    }
+
+    .q-field__append {
+      padding-right: 12px;
+
+      .q-icon {
+        color: var(--secondary-color);
+        transition: transform 0.3s;
+      }
+    }
+
+    &.q-field--focused .q-field__append .q-icon {
+      transform: rotate(180deg);
+    }
+
+    .q-menu {
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      background: #fff;
+
+      .q-item {
+        border-radius: 16px;
+        min-height: 44px;
+        margin-bottom: 4px;
+        color: var(--select-text-color);
+
+        &:hover {
+          background-color: rgba(134, 180, 156, 0.1);
+        }
+
+        &--active {
+          background-color: rgba(134, 180, 156, 0.2);
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  // List styling
+  .q-list {
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+
+    .q-item {
+      padding: 12px 20px;
+      transition: all 0.3s;
+      margin: 4px;
+      border-radius: 16px;
+
+      &:hover {
+        background-color: rgba(134, 180, 156, 0.08);
+      }
+    }
+  }
+
+  // Avatar styling
+  .q-avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+    &.q-avatar--rounded {
+      border-radius: 18px;
+    }
+  }
+}

@@ -1,0 +1,276 @@
+// Brutalist Digital Theme
+
+body.theme2 {
+  --primary-color: #121212;
+  --secondary-color: #bb86fc;
+
+  background-color: #ffffff;
+  color: #121212;
+  font-family: 'Courier New', monospace;
+
+  * {
+    border-radius: 0 !important;
+  }
+
+  // Typography
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-h5,
+  .text-h6 {
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    letter-spacing: -1px;
+    font-weight: 800;
+  }
+
+  // Cards and elements with harsh borders and random alignment
+  .q-card {
+    background-color: #ffffff;
+    border: 3px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    margin-top: calc(random(10) * 1px);
+    transform: rotate(calc(random(2) - 1) * 0.5deg);
+  }
+
+  .q-btn {
+    background: #ffffff;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #000;
+    }
+  }
+
+  .q-input,
+  .q-select {
+    .q-field__control {
+      border: 2px solid #000;
+      background: transparent;
+    }
+
+    .q-field__label {
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+    }
+  }
+
+  // Raw, unfinished table style
+  .q-table {
+    border: 3px solid #000;
+
+    thead tr {
+      background-color: #000;
+      color: #fff;
+      th {
+        font-family: 'Courier New', monospace;
+        text-transform: uppercase;
+      }
+    }
+
+    tbody tr {
+      &:nth-child(odd) {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+
+  // Dashboard elements
+  .dashboard-header {
+    border: 3px solid #000;
+    background: repeating-linear-gradient(45deg, #fff, #fff 10px, #f0f0f0 10px, #f0f0f0 20px);
+  }
+
+  .stat-card {
+    border: 3px solid #000;
+    background-color: #fff;
+  }
+
+  .chart-bar {
+    background-color: #000;
+    border: 1px solid var(--secondary-color);
+  }
+
+  .q-linear-progress__model {
+    background-color: #000;
+  }
+
+  // Timeline with bold contrast
+  .q-timeline {
+    .q-timeline__entry {
+      .q-timeline__dot {
+        border: 2px solid #000;
+      }
+
+      .q-timeline__subtitle {
+        font-family: 'Courier New', monospace;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  // Calendar with grid emphasis
+  .calendar-placeholder {
+    .calendar-grid {
+      border: 2px solid #000;
+    }
+
+    .calendar-date {
+      border: 1px solid #000;
+    }
+
+    .calendar-today {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .calendar-event::after {
+      background-color: var(--secondary-color);
+    }
+  }
+
+  .layout-header {
+    background-color: #000;
+    color: #fff;
+    border-bottom: none;
+
+    .q-toolbar {
+      border-bottom: 3px solid #fff;
+    }
+
+    .q-toolbar__title {
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+  }
+
+  // Enhanced Select styling for Brutalist Digital
+  .q-select {
+    margin-left: -4px;
+    margin-right: 4px;
+    transform: rotate(-1deg);
+
+    .q-field__control {
+      border: 2px solid #000;
+      background: #fff;
+      height: auto;
+      min-height: 54px;
+    }
+
+    .q-field__native {
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: -0.5px;
+      padding-left: 10px;
+    }
+
+    .q-field__label {
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+      left: 10px;
+
+      &--floating {
+        background-color: #fff;
+        padding: 0 4px;
+        top: -10px;
+        left: 8px;
+      }
+    }
+
+    .q-field__append {
+      height: 100%;
+
+      .q-icon {
+        background: #000;
+        color: #fff;
+        padding: 4px;
+      }
+    }
+
+    .q-menu {
+      border: 2px solid #000;
+      box-shadow: 4px 4px 0 #000;
+      background-color: #fff;
+      margin-top: 4px;
+      padding: 0;
+
+      .q-item {
+        font-family: 'Courier New', monospace;
+        border-bottom: 1px solid #000;
+        min-height: 48px;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+
+        &--active {
+          background-color: #000;
+          color: #fff;
+        }
+      }
+
+      .q-item__section--main {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+  }
+
+  // List styling
+  .q-list {
+    border: 2px solid #000;
+
+    .q-item {
+      border-bottom: 1px solid #000;
+      padding: 16px;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .q-item__section--avatar {
+        padding-right: 20px;
+      }
+
+      .q-item__label {
+        font-family: 'Courier New', monospace;
+        text-transform: uppercase;
+        font-weight: bold;
+
+        &--caption {
+          text-transform: none;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+
+  // Avatar styling
+  .q-avatar {
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+
+    &.q-avatar--rounded {
+      border-radius: 0 !important;
+    }
+  }
+}
