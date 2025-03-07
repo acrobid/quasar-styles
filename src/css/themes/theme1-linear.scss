@@ -13,34 +13,75 @@
 body.theme1 {
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family:
-    'Inter',
-    'SF Pro Display',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: 'SF Mono', 'Roboto Mono', monospace;
+  letter-spacing: -0.015em;
 
-  // Modern, clean layouts with straight lines
+  // Override Material ripples
+  .q-ripple {
+    display: none !important;
+  }
+
+  // Sharper edged cards with border instead of elevation
   .q-card {
-    border-radius: 4px;
+    border-radius: 0;
     background-color: var(--card-bg-color);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
     border: 1px solid var(--border-color);
-    transition: all 0.2s ease;
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease;
     overflow: hidden;
 
     &:hover {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+      border-color: var(--primary-color);
+      box-shadow: none;
     }
   }
 
-  // Clean, geometric buttons
-  .q-btn {
-    border-radius: 4px;
+  // Typography reset with monospace influence
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-h5,
+  .text-h6 {
+    font-family: 'SF Mono', 'Roboto Mono', monospace;
+    letter-spacing: -0.03em;
     font-weight: 500;
-    letter-spacing: 0.3px;
+  }
+
+  // Square buttons with hover lines instead of ripples
+  .q-btn {
+    border-radius: 0;
+    font-weight: 500;
+    letter-spacing: 0;
     box-shadow: none;
     border: 1px solid transparent;
+    transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
 
     &.q-btn--standard {
       background: var(--primary-color);
@@ -50,46 +91,52 @@ body.theme1 {
     &.q-btn--flat {
       color: var(--primary-color);
       &:hover {
-        background: rgba(55, 114, 255, 0.08);
+        background: transparent;
       }
     }
 
     &:active {
       transform: translateY(1px);
     }
-
-    &:after {
-      box-shadow: none;
-    }
   }
 
-  // Form elements with clean lines
+  // Form elements with square corners
   .q-input,
   .q-select {
     .q-field__control {
-      border-radius: 4px;
+      border-radius: 0;
       border: 1px solid var(--border-color);
       background-color: var(--card-bg-color);
       height: 42px;
       transition: all 0.2s ease;
 
       &:hover {
-        border-color: #bdbdbd;
+        border-color: var(--primary-color);
       }
 
       &:focus-within {
         border-color: var(--primary-color);
         border-width: 1px;
-        box-shadow: 0 0 0 2px rgba(55, 114, 255, 0.2);
+        box-shadow: none;
       }
     }
 
     &.q-field--outlined .q-field__control {
       background: transparent;
     }
+
+    .q-field__label {
+      font-family: 'SF Mono', 'Roboto Mono', monospace;
+      font-weight: 400;
+
+      &--floating {
+        background-color: var(--background-color);
+        padding: 0 4px;
+      }
+    }
   }
 
-  // Select component styling
+  // Select component styling with square edges
   .q-select {
     .q-field__native {
       padding-left: 12px;
@@ -114,30 +161,36 @@ body.theme1 {
     }
 
     .q-menu {
-      border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 0;
+      box-shadow: none;
       border: 1px solid var(--border-color);
+      margin-top: 4px;
       padding: 4px;
 
       .q-item {
-        border-radius: 2px;
+        border-radius: 0;
+        border-left: 0px solid var(--primary-color);
         min-height: 38px;
         padding: 8px 12px;
+        transition:
+          border-left 0.2s ease,
+          background-color 0.2s ease;
 
         &:hover {
-          background-color: rgba(55, 114, 255, 0.05);
+          border-left: 4px solid var(--primary-color);
+          background-color: transparent;
         }
 
         &--active {
-          background-color: rgba(55, 114, 255, 0.1);
+          background-color: transparent;
           color: var(--primary-color);
-          font-weight: 500;
+          border-left: 4px solid var(--primary-color);
         }
       }
     }
   }
 
-  // Tables with clean lines
+  // Tables with grid lines
   .q-table {
     border: 1px solid var(--border-color);
 
@@ -148,6 +201,11 @@ body.theme1 {
       border-bottom: 1px solid var(--border-color);
       height: 48px;
       font-size: 13px;
+      border-right: 1px solid var(--border-color);
+
+      &:last-child {
+        border-right: none;
+      }
     }
 
     td {
@@ -155,6 +213,11 @@ body.theme1 {
       font-size: 14px;
       color: var(--text-color);
       border-bottom: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+
+      &:last-child {
+        border-right: none;
+      }
     }
 
     tbody tr:hover {
@@ -162,13 +225,15 @@ body.theme1 {
     }
   }
 
-  // Progress bars
+  // Progress bars with square ends
   .q-linear-progress {
-    height: 6px;
-    background-color: rgba(55, 114, 255, 0.1);
+    height: 4px;
+    border-radius: 0;
+    background-color: var(--border-color);
 
     &__model {
-      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      border-radius: 0;
+      background: var(--primary-color);
     }
   }
 
@@ -206,9 +271,9 @@ body.theme1 {
     margin: 0 2px;
   }
 
-  // Avatar styling
+  // Square avatars
   .q-avatar {
-    border-radius: 4px;
+    border-radius: 0;
     color: white;
     background-color: var(--primary-color);
     overflow: hidden;
@@ -216,6 +281,12 @@ body.theme1 {
     &.q-avatar--rounded {
       border-radius: 4px;
     }
+  }
+
+  // Square badges
+  .q-badge {
+    border-radius: 0;
+    padding: 4px 8px;
   }
 
   // List styling
@@ -288,7 +359,7 @@ body.theme1 {
   .layout-header {
     background: var(--card-bg-color);
     color: var(--text-color);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
     height: 64px;
 
     .q-toolbar {
@@ -310,6 +381,7 @@ body.theme1 {
 
     .theme-selector {
       transition: all 0.2s ease;
+      border-radius: 0;
 
       &:hover {
         border-color: #bdbdbd;

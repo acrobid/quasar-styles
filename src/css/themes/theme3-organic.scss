@@ -4,135 +4,241 @@ body.theme3 {
   --primary-color: #4a6fa5;
   --secondary-color: #86b49c;
   --tertiary-color: #ebdccb;
+  --clay-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
 
   background-color: #f9f7f3;
   color: #333;
+  font-family: 'Garamond', 'Georgia', serif;
 
-  // Smooth, organic shapes
-  .q-card {
-    border-radius: 30px;
-    background-color: #fff;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
-    padding: 5px;
+  // Override Material ripples with organic spread
+  .q-ripple {
+    background-color: rgba(134, 180, 156, 0.2) !important;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
   }
 
-  // Flowing buttons
+  // Override standard transitions
+  * {
+    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+
+  // Clay-like, organic shapes for cards
+  .q-card {
+    border-radius: 36px !important;
+    background-color: #fff;
+    box-shadow: var(--clay-shadow);
+    padding: 5px;
+    border: none !important;
+    transition:
+      transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    & > div:first-child {
+      border-radius: 32px !important;
+      overflow: hidden;
+    }
+  }
+
+  // Organic typography
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-h5,
+  .text-h6 {
+    font-family: 'Garamond', 'Georgia', serif;
+    font-weight: 300;
+    letter-spacing: 0;
+  }
+
+  // Nature-inspired buttons
   .q-btn {
-    border-radius: 22px;
-    background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+    border-radius: 24px !important;
+    background: linear-gradient(145deg, var(--secondary-color), var(--primary-color));
     color: #fff;
     padding: 8px 24px;
     font-weight: 400;
     letter-spacing: 0.5px;
+    font-family: 'Garamond', 'Georgia', serif;
+    border: none !important;
+    transition:
+      transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:before {
+      border-radius: 24px !important;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
 
     &.q-btn--flat {
       background: transparent;
       color: var(--primary-color);
-    }
-  }
 
-  // Smooth form fields
-  .q-input,
-  .q-select {
-    .q-field__control {
-      border-radius: 22px;
-      border: 2px solid var(--tertiary-color);
-      background: transparent;
-
-      &:focus-within {
-        border-color: var(--secondary-color);
+      &:hover {
+        background: rgba(134, 180, 156, 0.08);
       }
     }
   }
 
-  // Clean table with organic touches
+  // Form fields with organic shapes
+  .q-input,
+  .q-select {
+    .q-field__control {
+      border-radius: 24px !important;
+      border: 2px solid var(--tertiary-color) !important;
+      background: transparent;
+      height: 48px;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+      &:focus-within {
+        border-color: var(--secondary-color) !important;
+        box-shadow: 0 0 0 3px rgba(134, 180, 156, 0.2);
+      }
+
+      &:before,
+      &:after {
+        display: none !important;
+      }
+    }
+
+    .q-field__label {
+      font-family: 'Garamond', 'Georgia', serif;
+      left: 18px;
+
+      &--floating {
+        background-color: #f9f7f3;
+        padding: 0 8px;
+        font-size: 14px;
+        color: var(--secondary-color);
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .q-field__native {
+      font-family: 'Garamond', 'Georgia', serif;
+      padding-left: 18px;
+      font-size: 16px;
+      color: #333;
+    }
+  }
+
+  // Organic table design
   .q-table {
-    border-radius: 18px;
+    border-radius: 24px !important;
     overflow: hidden;
+    border: none !important;
+    background: white;
+    box-shadow: var(--clay-shadow);
 
     th {
-      background-color: var(--tertiary-color);
+      background-color: var(--tertiary-color) !important;
       color: #333;
       font-weight: 500;
+      border-bottom: none !important;
+      font-family: 'Garamond', 'Georgia', serif;
+      font-size: 15px !important;
+      padding: 16px !important;
     }
 
     tr td {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      padding: 16px !important;
+      font-family: 'Garamond', 'Georgia', serif;
+      font-size: 15px !important;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(134, 180, 156, 0.05) !important;
+    }
+  }
+
+  // Progress bars with natural flow
+  .q-linear-progress {
+    height: 8px !important;
+    border-radius: 4px !important;
+    background: rgba(235, 220, 203, 0.4) !important;
+
+    &__model {
+      border-radius: 4px !important;
+      background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)) !important;
     }
   }
 
   // Dashboard elements with flowing shapes
   .dashboard-header {
     background-color: #fff;
-    border-radius: 30px;
+    border-radius: 36px !important;
     overflow: hidden;
+    box-shadow: var(--clay-shadow);
 
     h4 {
       color: var(--primary-color);
       font-weight: 300;
       letter-spacing: 1px;
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #666;
     }
   }
 
   .stat-card {
     background-color: #fff;
-    border-radius: 30px;
+    border-radius: 36px !important;
 
     .text-h4 {
       font-weight: 400;
       color: var(--primary-color);
+      font-size: 28px;
+    }
+
+    .text-subtitle2 {
+      color: #666;
+      font-family: 'Garamond', 'Georgia', serif;
+      font-size: 15px;
+      letter-spacing: 0.5px;
     }
   }
 
-  .chart-bar {
-    background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
-    border-radius: 18px 18px 0 0;
-  }
-
-  // Asymmetrical elements
-  .q-timeline__entry {
-    &:nth-child(odd) {
-      transform: translateX(-5px);
+  // Chart elements with flowing design
+  .chart-card {
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      height: 220px;
+      padding: 20px 10px;
     }
 
-    &:nth-child(even) {
-      transform: translateX(5px);
-    }
+    .chart-bar {
+      background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
+      border-radius: 24px 24px 0 0 !important;
+      margin: 0 8px;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 
-    .q-timeline__dot {
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    }
-  }
-
-  // Flowing calendar
-  .calendar-today {
-    background-color: var(--primary-color);
-    color: #fff;
-    border-radius: 50%;
-  }
-
-  .calendar-event::after {
-    background-color: var(--secondary-color);
-  }
-
-  // Layout styling
-  .layout-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-    border-radius: 0 0 30px 30px;
-
-    .q-toolbar {
-      height: 70px;
-    }
-
-    .q-toolbar__title {
-      font-weight: 300;
-      letter-spacing: 1px;
+      &:hover {
+        transform: scaleY(1.05);
+      }
     }
   }
 
-  // Enhanced Select styling for Organic Minimalism
+  // Enhanced Select styling
   .q-select {
     --select-border-color: var(--tertiary-color);
     --select-text-color: #333;
@@ -199,45 +305,103 @@ body.theme3 {
     }
 
     .q-menu {
-      border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      background: #fff;
+      border-radius: 24px !important;
+      background-color: #fff;
+      box-shadow: var(--clay-shadow);
+      border: 1px solid var(--tertiary-color);
+      padding: 12px;
 
       .q-item {
-        border-radius: 16px;
-        min-height: 44px;
+        border-radius: 18px !important;
+        padding: 12px 18px;
+        min-height: 46px;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         margin-bottom: 4px;
-        color: var(--select-text-color);
+        font-family: 'Garamond', 'Georgia', serif;
 
         &:hover {
           background-color: rgba(134, 180, 156, 0.1);
+          transform: translateX(5px);
         }
 
         &--active {
-          background-color: rgba(134, 180, 156, 0.2);
+          background-color: rgba(134, 180, 156, 0.2) !important;
           color: var(--primary-color);
+          font-weight: 500;
         }
       }
     }
   }
 
-  // List styling
+  // List with flowing items
   .q-list {
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 24px !important;
     overflow: hidden;
     background: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
 
     .q-item {
-      padding: 12px 20px;
-      transition: all 0.3s;
-      margin: 4px;
-      border-radius: 16px;
+      border-radius: 20px !important;
+      margin-bottom: 8px;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 
       &:hover {
         background-color: rgba(134, 180, 156, 0.08);
+        transform: translateX(5px);
       }
+
+      .q-item__label {
+        font-family: 'Garamond', 'Georgia', serif;
+      }
+    }
+
+    .q-avatar {
+      border-radius: 50% !important;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Asymmetrical elements
+  .q-timeline__entry {
+    &:nth-child(odd) {
+      transform: translateX(-5px);
+    }
+
+    &:nth-child(even) {
+      transform: translateX(5px);
+    }
+
+    .q-timeline__dot {
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+  }
+
+  // Flowing calendar
+  .calendar-today {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .calendar-event::after {
+    background-color: var(--secondary-color);
+  }
+
+  // Layout styling
+  .layout-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    border-radius: 0 0 30px 30px;
+
+    .q-toolbar {
+      height: 70px;
+    }
+
+    .q-toolbar__title {
+      font-weight: 300;
+      letter-spacing: 1px;
     }
   }
 

@@ -65,8 +65,22 @@ body.theme6 {
   background-color: var(--background);
   color: var(--foreground);
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+
+  // Remove Material Design ripples completely
+  .q-ripple {
+    display: none !important;
+  }
+
+  // Override all built-in animations
+  * {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
 
   // Subtle animations
   @keyframes enter {
@@ -118,7 +132,8 @@ body.theme6 {
     color: var(--foreground);
     font-weight: 600;
     letter-spacing: -0.025em;
-    line-height: 1.2;
+    line-height: 1.25;
+    font-family: Inter, sans-serif;
   }
 
   // Card styling - minimalist with subtle border
@@ -126,19 +141,24 @@ body.theme6 {
     border-radius: var(--radius);
     background-color: var(--card);
     color: var(--card-foreground);
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.05),
-      0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
     border: 1px solid var(--border);
     overflow: hidden;
     transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
+      border-color 0.15s,
+      box-shadow 0.15s;
 
     &:hover {
-      box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.05),
-        0 1px 3px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    // Remove default Quasar padding
+    > div:first-child {
+      padding: 24px;
+    }
+
+    .q-card__actions {
+      padding: 16px 24px;
     }
   }
 
@@ -150,12 +170,21 @@ body.theme6 {
     line-height: 1;
     min-width: 88px;
     padding: 0 16px;
-    transition:
-      background-color 0.2s ease,
-      border-color 0.2s ease,
-      color 0.2s ease,
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
+    font-family: Inter, sans-serif;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+
+    // Remove Material ripple effect entirely
+    .q-ripple,
+    .q-focus-helper {
+      display: none !important;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
 
     // Primary button
     &.q-btn--standard {
@@ -165,10 +194,11 @@ body.theme6 {
 
       &:hover {
         background-color: color-mix(in srgb, var(--primary) 90%, black);
+        transform: translateY(-1px);
       }
 
       &:active {
-        transform: translateY(1px);
+        transform: translateY(0);
       }
     }
 
@@ -204,10 +234,11 @@ body.theme6 {
       }
     }
 
-    // Button focus state
+    // Button focus state - replace Material focus with clean outline
     &:focus-visible {
       outline: 2px solid var(--ring);
       outline-offset: 2px;
+      box-shadow: none;
     }
   }
 
@@ -219,9 +250,18 @@ body.theme6 {
       border: 1px solid var(--input);
       background-color: transparent;
       height: 40px;
+      min-height: 40px;
+      padding-left: 8px;
+      padding-right: 8px;
       transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color 0.15s,
+        box-shadow 0.15s;
+
+      // Remove material design underline/details
+      &:before,
+      &:after {
+        display: none !important;
+      }
 
       &:hover {
         border-color: color-mix(in srgb, var(--input) 80%, black);
@@ -229,7 +269,7 @@ body.theme6 {
 
       &:focus-within {
         border-color: var(--ring);
-        box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 30%, transparent);
+        box-shadow: 0 0 0 1px var(--ring);
       }
     }
 
@@ -310,6 +350,31 @@ body.theme6 {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden;
+    box-shadow: none;
+
+    .q-table__card {
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    thead tr,
+    tfoot tr {
+      height: 48px;
+    }
+
+    tbody tr {
+      height: 52px;
+    }
+
+    // Remove Material hover effect
+    tbody tr:hover {
+      background-color: var(--accent);
+    }
+
+    th,
+    td {
+      border-color: var(--border) !important;
+    }
 
     table {
       border-collapse: separate;
