@@ -1,0 +1,271 @@
+// Neo-Skeuomorphism Theme
+
+body.theme4 {
+  --primary-color: #2979ff;
+  --secondary-color: #ff4081;
+  --surface-color: #f5f5f5;
+  --text-color: #1d1d1d;
+  --highlight-color: #e0e0e0;
+  --shadow-light: rgba(255, 255, 255, 0.9);
+  --shadow-dark: rgba(0, 0, 0, 0.2);
+
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+
+  // Cards with skeuomorphic design
+  .q-card {
+    border-radius: 16px;
+    background-color: var(--surface-color);
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+    padding: 16px;
+    border: none;
+  }
+
+  // Buttons with 3D effect
+  .q-btn {
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow:
+      5px 5px 10px var(--shadow-dark),
+      -5px -5px 10px var(--shadow-light);
+    border: none;
+    background-color: var(--surface-color);
+    color: var(--primary-color);
+    transition: all 0.2s;
+
+    &:hover {
+      box-shadow:
+        7px 7px 14px var(--shadow-dark),
+        -7px -7px 14px var(--shadow-light);
+    }
+
+    &:active {
+      box-shadow:
+        inset 5px 5px 10px var(--shadow-dark),
+        inset -5px -5px 10px var(--shadow-light);
+    }
+
+    &.q-btn--flat {
+      box-shadow: none;
+      background-color: transparent;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  // Form elements with inset style
+  .q-input,
+  .q-select {
+    .q-field__control {
+      border-radius: 10px;
+      border: none;
+      background-color: var(--surface-color);
+      box-shadow:
+        inset 3px 3px 6px var(--shadow-dark),
+        inset -3px -3px 6px var(--shadow-light);
+      height: 46px;
+
+      &:focus-within {
+        box-shadow:
+          inset 4px 4px 8px var(--shadow-dark),
+          inset -4px -4px 8px var(--shadow-light);
+      }
+    }
+
+    .q-field__native {
+      padding-left: 16px;
+      color: var(--text-color);
+    }
+
+    .q-field__label {
+      left: 16px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  // Tables with soft skeuomorphic design
+  .q-table {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+
+    th {
+      background-color: var(--highlight-color);
+      color: var(--text-color);
+      font-weight: 600;
+      padding: 12px 16px;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    tbody tr:hover {
+      background-color: rgba(41, 121, 255, 0.05);
+    }
+  }
+
+  // Dashboard elements
+  .dashboard-header {
+    border-radius: 16px;
+    background-color: var(--surface-color);
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+  }
+
+  .stat-card {
+    border-radius: 16px;
+    background-color: var(--surface-color);
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+
+    .text-h4 {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .q-linear-progress {
+      height: 8px;
+      border-radius: 4px;
+      background-color: var(--highlight-color);
+      box-shadow:
+        inset 2px 2px 4px var(--shadow-dark),
+        inset -2px -2px 4px var(--shadow-light);
+
+      .q-linear-progress__model {
+        border-radius: 4px;
+      }
+    }
+  }
+
+  // Chart elements with 3D effect
+  .chart-card {
+    .chart-bars {
+      padding: 16px;
+    }
+
+    .chart-bar {
+      background: var(--primary-color);
+      border-radius: 8px 8px 0 0;
+      box-shadow: 3px 3px 6px var(--shadow-dark);
+      margin: 0 10px;
+    }
+  }
+
+  // Timeline with 3D elements
+  .q-timeline {
+    .q-timeline__entry {
+      .q-timeline__dot {
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        box-shadow:
+          3px 3px 6px var(--shadow-dark),
+          -3px -3px 6px var(--shadow-light);
+      }
+    }
+  }
+
+  // Calendar with skeuomorphic design
+  .calendar-placeholder {
+    padding: 16px;
+
+    .calendar-today {
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      box-shadow: 3px 3px 6px var(--shadow-dark);
+    }
+  }
+
+  // Avatars with 3D effect
+  .q-avatar {
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow:
+      3px 3px 6px var(--shadow-dark),
+      -3px -3px 6px var(--shadow-light);
+  }
+
+  // List styling
+  .q-list {
+    border-radius: 16px;
+    background-color: var(--surface-color);
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+
+    .q-item {
+      border-radius: 12px;
+      margin: 8px;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: var(--highlight-color);
+        box-shadow:
+          2px 2px 4px var(--shadow-dark),
+          -2px -2px 4px var(--shadow-light);
+      }
+    }
+  }
+
+  // Layout styling
+  .layout-header {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 10px var(--shadow-dark);
+
+    .q-toolbar__title {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+  }
+
+  // Select styling for Skeuomorphic design
+  .q-select {
+    .q-field__control {
+      border-radius: 10px;
+      box-shadow:
+        inset 3px 3px 6px var(--shadow-dark),
+        inset -3px -3px 6px var(--shadow-light);
+    }
+
+    .q-menu {
+      border-radius: 16px;
+      background-color: var(--surface-color);
+      box-shadow:
+        8px 8px 16px var(--shadow-dark),
+        -8px -8px 16px var(--shadow-light);
+      padding: 8px;
+
+      .q-item {
+        border-radius: 10px;
+        margin: 4px 0;
+
+        &:hover {
+          background-color: var(--highlight-color);
+        }
+
+        &--active {
+          background-color: rgba(41, 121, 255, 0.2);
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}

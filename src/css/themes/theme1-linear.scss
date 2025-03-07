@@ -301,5 +301,33 @@ body.theme1 {
       font-weight: 500;
       letter-spacing: 0.2px;
     }
+
+    .app-title {
+      font-weight: 600;
+      color: var(--text-color);
+      letter-spacing: 0.2px;
+    }
+
+    .theme-selector {
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: #bdbdbd;
+      }
+
+      select {
+        color: var(--text-color);
+        font-family:
+          'Inter',
+          'SF Pro Display',
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+
+      .select-icon {
+        color: var(--primary-color);
+      }
+    }
   }
 }

@@ -1,0 +1,517 @@
+// Shadcn-inspired Theme
+
+body.theme6 {
+  --background: #ffffff;
+  --foreground: #020817;
+
+  --card: #ffffff;
+  --card-foreground: #020817;
+
+  --popover: #ffffff;
+  --popover-foreground: #020817;
+
+  --primary: #18181b;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f1f5f9;
+  --secondary-foreground: #18181b;
+
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+
+  --accent: #f1f5f9;
+  --accent-foreground: #18181b;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #020817;
+
+  --radius: 0.5rem;
+
+  // For dark mode support
+  &.dark-mode {
+    --background: #020817;
+    --foreground: #f8fafc;
+
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
+
+    --popover: #1e293b;
+    --popover-foreground: #f8fafc;
+
+    --primary: #f8fafc;
+    --primary-foreground: #020817;
+
+    --secondary: #1e293b;
+    --secondary-foreground: #f8fafc;
+
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+
+    --accent: #1e293b;
+    --accent-foreground: #f8fafc;
+
+    --destructive: #7f1d1d;
+    --destructive-foreground: #f8fafc;
+
+    --border: #1e293b;
+    --input: #1e293b;
+    --ring: #cbd5e1;
+  }
+
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  // Subtle animations
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Clean typography
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-h5,
+  .text-h6 {
+    color: var(--foreground);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  // Card styling - minimalist with subtle border
+  .q-card {
+    border-radius: var(--radius);
+    background-color: var(--card);
+    color: var(--card-foreground);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Buttons with subtle interactions
+  .q-btn {
+    border-radius: var(--radius);
+    font-weight: 500;
+    height: 40px;
+    line-height: 1;
+    min-width: 88px;
+    padding: 0 16px;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+
+    // Primary button
+    &.q-btn--standard {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border: 1px solid transparent;
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--primary) 90%, black);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+
+    // Secondary button
+    &.q-btn--outline {
+      background-color: transparent;
+      color: var(--foreground);
+      border: 1px solid var(--border);
+
+      &:hover {
+        border-color: color-mix(in srgb, var(--border) 80%, black);
+        background-color: color-mix(in srgb, var(--secondary) 50%, transparent);
+      }
+    }
+
+    // Flat button
+    &.q-btn--flat {
+      background-color: transparent;
+      color: var(--foreground);
+
+      &:hover {
+        background-color: var(--secondary);
+      }
+    }
+
+    // Destructive button
+    &.q-btn--negative {
+      background-color: var(--destructive);
+      color: var(--destructive-foreground);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--destructive) 90%, black);
+      }
+    }
+
+    // Button focus state
+    &:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
+  }
+
+  // Form inputs with clean styling
+  .q-input,
+  .q-select {
+    .q-field__control {
+      border-radius: var(--radius);
+      border: 1px solid var(--input);
+      background-color: transparent;
+      height: 40px;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+      &:hover {
+        border-color: color-mix(in srgb, var(--input) 80%, black);
+      }
+
+      &:focus-within {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 30%, transparent);
+      }
+    }
+
+    .q-field__label {
+      color: var(--muted-foreground);
+      font-weight: 400;
+      font-size: 0.875rem;
+      left: 12px;
+
+      &--floating {
+        transform: translateY(-140%) scale(0.85);
+        color: var(--foreground);
+      }
+    }
+
+    .q-field__native {
+      padding-left: 12px;
+      color: var(--foreground);
+      font-size: 0.875rem;
+    }
+
+    &.q-field--error .q-field__control {
+      border-color: var(--destructive);
+    }
+  }
+
+  // Select component styling
+  .q-select {
+    .q-field__append {
+      padding-right: 12px;
+
+      .q-icon {
+        color: var(--muted-foreground);
+        transition: transform 0.2s ease;
+      }
+    }
+
+    &.q-field--focused .q-field__append .q-icon {
+      transform: rotate(180deg);
+    }
+
+    .q-menu {
+      animation: slide-up 0.15s ease;
+      background-color: var(--popover);
+      border-radius: var(--radius);
+      box-shadow:
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+      padding: 4px;
+
+      .q-item {
+        border-radius: calc(var(--radius) - 2px);
+        padding: 8px 12px;
+        min-height: 36px;
+        font-size: 0.875rem;
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease;
+        color: var(--popover-foreground);
+
+        &:hover {
+          background-color: var(--accent);
+          color: var(--accent-foreground);
+        }
+
+        &--active {
+          background-color: var(--accent);
+          color: var(--accent-foreground);
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  // Tables with clean styling
+  .q-table {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    thead tr {
+      background-color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--muted-foreground);
+      font-weight: 500;
+      text-align: left;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px;
+
+      &:first-child {
+        border-top-left-radius: var(--radius);
+      }
+
+      &:last-child {
+        border-top-right-radius: var(--radius);
+      }
+    }
+
+    td {
+      padding: 12px;
+      font-size: 0.875rem;
+      color: var(--foreground);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--muted);
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+
+  // Progress indicator
+  .q-linear-progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--secondary);
+
+    &__model {
+      border-radius: 4px;
+      background-color: var(--primary);
+    }
+  }
+
+  // Dashboard elements
+  .dashboard-header {
+    h4 {
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    p {
+      color: var(--muted-foreground);
+    }
+  }
+
+  .stat-card {
+    .text-h4 {
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    .text-subtitle2 {
+      color: var(--muted-foreground);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  }
+
+  // Chart styling
+  .chart-card {
+    .chart-placeholder {
+      padding: 1rem;
+    }
+
+    .chart-bars {
+      align-items: flex-end;
+    }
+
+    .chart-bar {
+      background-color: var(--primary);
+      border-radius: 3px 3px 0 0;
+      transition:
+        opacity 0.2s ease,
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      &:hover {
+        opacity: 0.8;
+        transform: scaleY(1.03);
+      }
+    }
+  }
+
+  // List styling
+  .q-list {
+    padding: 0.5rem;
+
+    .q-item {
+      border-radius: var(--radius);
+      padding: 12px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--secondary);
+      }
+    }
+
+    .q-item__section--avatar {
+      .q-avatar {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+      }
+    }
+
+    .q-item__label {
+      font-weight: 500;
+      color: var(--foreground);
+
+      &--caption {
+        color: var(--muted-foreground);
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.25rem;
+      }
+    }
+  }
+
+  // Badge styling
+  .q-badge {
+    font-weight: 500;
+    font-size: 0.75rem;
+    border-radius: 999px;
+    padding: 0.125rem 0.5rem;
+    height: 1.25rem;
+
+    &.bg-accent {
+      background-color: var(--accent);
+      color: var(--accent-foreground);
+    }
+  }
+
+  // Layout styling
+  .layout-header {
+    background-color: var(--background);
+    color: var(--foreground);
+    border-bottom: 1px solid var(--border);
+
+    .app-title {
+      font-weight: 600;
+      color: var(--foreground);
+      letter-spacing: -0.025em;
+    }
+
+    .theme-selector {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.2s ease;
+      background-color: transparent;
+
+      &:hover {
+        border-color: color-mix(in srgb, var(--border) 80%, black);
+      }
+
+      &:focus-within {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 30%, transparent);
+      }
+
+      select {
+        color: var(--foreground);
+        font-weight: 400;
+        font-size: 0.875rem;
+      }
+
+      .select-icon {
+        color: var(--muted-foreground);
+      }
+    }
+
+    .version-text {
+      color: var(--muted-foreground);
+      font-size: 0.75rem;
+    }
+  }
+}

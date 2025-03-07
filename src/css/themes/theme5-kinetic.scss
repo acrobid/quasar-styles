@@ -1,0 +1,639 @@
+// Kinetic Typography Theme
+
+body.theme5 {
+  --primary-color: #1e3a8a;
+  --accent-color: #dc2626;
+  --secondary-color: #00c853;
+  --tertiary-color: #448aff;
+  --background-color: #ffffff;
+  --surface-color: #ffffff;
+  --text-color: #333;
+  --muted-color: rgba(0, 0, 0, 0.6);
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'system-ui', sans-serif;
+
+  @keyframes textWave {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-2px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(2px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes textExpand {
+    0% {
+      letter-spacing: normal;
+    }
+    50% {
+      letter-spacing: 1px;
+    }
+    100% {
+      letter-spacing: normal;
+    }
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes selectFocus {
+    0% {
+      border-color: var(--primary-color);
+    }
+    50% {
+      border-color: var(--accent-color);
+    }
+    100% {
+      border-color: var(--primary-color);
+    }
+  }
+
+  @keyframes optionPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  // Dynamic typography focus
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-h5,
+  .text-h6 {
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+
+    &:hover {
+      letter-spacing: 0.5px;
+      color: var(--primary-color);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    &:hover:after {
+      width: 100%;
+    }
+  }
+
+  // Cards with typography emphasis
+  .q-card {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+
+      .text-h6,
+      .text-subtitle2 {
+        animation: textExpand 2s infinite;
+      }
+    }
+  }
+
+  // Interactive buttons
+  .q-btn {
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 0.3s ease;
+      z-index: 0;
+    }
+
+    &:hover:before {
+      width: 100%;
+    }
+
+    .q-btn__content {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover .q-btn__content {
+      animation: textWave 2s infinite;
+    }
+
+    &.q-btn--flat {
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  // Interactive form fields
+  .q-input,
+  .q-select {
+    .q-field__control {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: transparent;
+      transition: all 0.3s;
+
+      &:hover {
+        border-color: #999;
+      }
+
+      &:focus-within {
+        animation: selectFocus 4s infinite;
+        border-width: 2px;
+      }
+    }
+
+    .q-field__label {
+      transition: all 0.3s ease;
+      color: var(--muted-color);
+
+      &--floating {
+        transform: translateY(-140%) scale(0.85);
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+    }
+
+    .q-field__native,
+    .q-field__input {
+      color: var(--text-color);
+      padding: 0 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      font-size: 1.05rem;
+    }
+
+    &:hover .q-field__label {
+      letter-spacing: 0.5px;
+      color: var(--primary-color);
+    }
+  }
+
+  // Table with typographic emphasis
+  .q-table {
+    background-color: var(--surface-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+
+    th {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.02);
+      color: var(--text-color);
+      padding: 12px 16px;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--accent-color);
+        transition: width 0.3s ease;
+      }
+
+      &:hover:after {
+        width: 100%;
+      }
+    }
+
+    td {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+
+      &:hover {
+        letter-spacing: 0.3px;
+      }
+    }
+
+    tbody tr {
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: rgba(30, 58, 138, 0.05);
+        td {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  // Progress bars with animation
+  .q-linear-progress {
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.1);
+
+    &__model {
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      background-size: 200% 100%;
+      animation: gradientMove 2s ease infinite;
+    }
+  }
+
+  // Dashboard elements emphasizing text
+  .dashboard-header {
+    h4 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+      color: var(--text-color);
+      font-weight: 700;
+
+      &:hover {
+        animation: textWave 2s infinite;
+      }
+    }
+
+    p {
+      color: var(--muted-color);
+      font-weight: 400;
+      max-width: 60ch;
+      line-height: 1.6;
+      transition: all 0.3s ease;
+
+      &:hover {
+        letter-spacing: 0.3px;
+      }
+    }
+  }
+
+  .stat-card {
+    .text-subtitle2 {
+      color: var(--muted-color);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .text-h4 {
+      font-size: 2rem;
+      transition: all 0.3s ease;
+      color: var(--text-color);
+      font-weight: 700;
+
+      &:hover {
+        transform: scale(1.1);
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  // Chart elements with animation
+  .chart-card {
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      height: 200px;
+    }
+
+    .chart-bar {
+      flex: 1;
+      background-color: var(--primary-color);
+      border-radius: 4px 4px 0 0;
+      margin: 0 3px;
+      position: relative;
+      transition: all 0.3s ease;
+      border: 1px solid white;
+
+      &:hover {
+        transform: scaleY(1.05);
+      }
+
+      &::after {
+        content: attr(data-value);
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--surface-color);
+        color: var(--text-color);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+
+      &:hover::after {
+        opacity: 1;
+        top: -30px;
+      }
+    }
+  }
+
+  // Timeline with typographic focus
+  .q-timeline {
+    &__entry {
+      transition: all 0.3s;
+
+      &:hover {
+        transform: translateX(5px);
+      }
+
+      .q-timeline__dot {
+        background-color: var(--primary-color);
+        transition: all 0.3s;
+      }
+
+      .q-timeline__title,
+      .q-timeline__subtitle {
+        transition: all 0.3s ease;
+
+        &:hover {
+          animation: textWave 2s infinite;
+          color: var(--primary-color);
+        }
+      }
+
+      &:hover .q-timeline__dot {
+        transform: scale(1.2);
+        background-color: var(--accent-color);
+      }
+    }
+  }
+
+  // Calendar with hover effects
+  .calendar-placeholder {
+    .calendar-date {
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+        color: var(--primary-color);
+      }
+    }
+
+    .calendar-today {
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 50%;
+        border: 1px solid var(--primary-color);
+        animation: pulse 1.5s infinite;
+      }
+    }
+  }
+
+  // List with hover effects
+  .q-list {
+    .q-item {
+      transition: all 0.2s ease;
+      border-radius: 4px;
+      margin: 4px 0;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+        transform: translateX(5px);
+      }
+    }
+
+    .q-avatar {
+      transition: all 0.3s;
+
+      &:hover {
+        transform: rotate(10deg);
+      }
+    }
+
+    .q-item__label {
+      transition: all 0.3s;
+
+      &:hover {
+        letter-spacing: 0.3px;
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  // Select with animations
+  .q-select {
+    .q-field__control {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: transparent;
+      min-height: 54px;
+      transition: all 0.3s;
+
+      &:hover {
+        border-color: #999;
+      }
+
+      &:focus-within {
+        animation: selectFocus 4s infinite;
+        border-width: 2px;
+      }
+    }
+
+    .q-field__native {
+      padding: 0 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      font-size: 1.05rem;
+    }
+
+    .q-field__label {
+      left: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+
+      &--floating {
+        transform: translateY(-140%) scale(0.85);
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+    }
+
+    .q-field__append {
+      padding-right: 10px;
+
+      .q-icon {
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+    }
+
+    &.q-field--focused .q-field__append .q-icon {
+      transform: rotate(180deg);
+    }
+
+    .q-menu {
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      padding: 6px;
+      background: white;
+
+      .q-item {
+        border-radius: 6px;
+        margin: 4px 0;
+        min-height: 48px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--accent-color);
+          transition: width 0.3s ease;
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.03);
+          letter-spacing: 0.3px;
+
+          &::after {
+            width: 100%;
+          }
+        }
+
+        &--active {
+          background: rgba(30, 58, 138, 0.05);
+          font-weight: 600;
+
+          &::after {
+            width: 100%;
+            height: 3px;
+          }
+
+          &:hover {
+            animation: optionPulse 2s infinite;
+          }
+        }
+      }
+    }
+
+    // Add hover effects to focused field
+    &.q-field--focused:hover .q-field__label--floating {
+      animation: textWave 2s infinite;
+    }
+  }
+
+  // Layout styling for kinetic theme
+  .layout-header {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+
+    .app-title {
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      position: relative;
+      padding-bottom: 2px;
+      transition: all 0.3s ease;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--accent-color);
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        letter-spacing: 0.5px;
+        color: var(--primary-color);
+
+        &:after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
