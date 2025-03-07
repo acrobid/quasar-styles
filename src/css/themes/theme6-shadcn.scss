@@ -1,5 +1,3 @@
-// Shadcn-inspired Dark Theme
-
 body.theme6 {
   // Dark mode colors as default
   --background: #020817;
@@ -597,7 +595,7 @@ body.theme6 {
   .q-dialog {
     .q-card {
       background-color: var(--card);
-      color: var(--card-foreground);
+      color: var (--card-foreground);
     }
   }
 

@@ -1,12 +1,12 @@
-// Modern Linear Theme
+/* Modern Linear Theme */
 
 :root {
   --primary-color: #3772ff;
   --secondary-color: #f038ff;
-  --background-color: #121212; // changed from #fafafa to dark background
-  --card-bg-color: #1e1e1e; // changed from #ffffff to dark card background
-  --text-color: #e0e0e0; // changed from #333333 to light text for dark mode
-  --border-color: #333333; // changed from #eeeeee to darker border for dark mode
+  --background-color: #121212; /* changed from #fafafa to dark background */
+  --card-bg-color: #1e1e1e; /* changed from #ffffff to dark card background */
+  --text-color: #e0e0e0; /* changed from #333333 to light text for dark mode */
+  --border-color: #333333; /* changed from #eeeeee to darker border for dark mode */
   --accent-color: #36f4b9;
 }
 
@@ -16,20 +16,18 @@ body.theme1 {
   font-family: 'SF Mono', 'Roboto Mono', monospace;
   letter-spacing: -0.015em;
 
-  // Override Material ripples
+  /* Override Material ripples */
   .q-ripple {
     display: none !important;
   }
 
-  // Sharper edged cards with border instead of elevation
+  /* Sharper edged cards with border instead of elevation */
   .q-card {
     border-radius: 0;
     background-color: var(--card-bg-color);
     box-shadow: none;
     border: 1px solid var(--border-color);
-    transition:
-      transform 0.3s ease,
-      border-color 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
     overflow: hidden;
 
     &:hover {
@@ -39,7 +37,7 @@ body.theme1 {
     }
   }
 
-  // Typography reset with monospace influence
+  /* Typography reset with monospace influence */
   h1,
   h2,
   h3,
@@ -55,9 +53,10 @@ body.theme1 {
     font-family: 'SF Mono', 'Roboto Mono', monospace;
     letter-spacing: -0.03em;
     font-weight: 500;
+    color: var(--text-color); /* Adjust text color for readability in dark mode */
   }
 
-  // Square buttons with hover lines instead of ripples
+  /* Square buttons with hover lines instead of ripples */
   .q-btn {
     border-radius: 0;
     font-weight: 500;
@@ -98,9 +97,14 @@ body.theme1 {
     &:active {
       transform: translateY(1px);
     }
+
+    &:focus {
+      outline: 2px solid var(--primary-color); /* Add focus state for buttons */
+      outline-offset: 2px;
+    }
   }
 
-  // Form elements with square corners
+  /* Form elements with square corners */
   .q-input,
   .q-select {
     .q-field__control {
@@ -134,9 +138,14 @@ body.theme1 {
         padding: 0 4px;
       }
     }
+
+    &:focus-within {
+      outline: 2px solid var(--primary-color); /* Add focus state for input fields */
+      outline-offset: 2px;
+    }
   }
 
-  // Select component styling with square edges
+  /* Select component styling with square edges */
   .q-select {
     .q-field__native {
       padding-left: 12px;
@@ -172,9 +181,7 @@ body.theme1 {
         border-left: 0px solid var(--primary-color);
         min-height: 38px;
         padding: 8px 12px;
-        transition:
-          border-left 0.2s ease,
-          background-color 0.2s ease;
+        transition: border-left 0.2s ease, background-color 0.2s ease;
 
         &:hover {
           border-left: 4px solid var(--primary-color);
@@ -190,7 +197,7 @@ body.theme1 {
     }
   }
 
-  // Tables with grid lines
+  /* Tables with grid lines */
   .q-table {
     border: 1px solid var(--border-color);
 
@@ -225,7 +232,7 @@ body.theme1 {
     }
   }
 
-  // Progress bars with square ends
+  /* Progress bars with square ends */
   .q-linear-progress {
     height: 4px;
     border-radius: 0;
@@ -237,7 +244,7 @@ body.theme1 {
     }
   }
 
-  // Dashboard elements with clean design
+  /* Dashboard elements with clean design */
   .dashboard-header {
     background-color: var(--card-bg-color);
     border-bottom: 1px solid var(--border-color);
@@ -271,7 +278,7 @@ body.theme1 {
     margin: 0 2px;
   }
 
-  // Square avatars
+  /* Square avatars */
   .q-avatar {
     border-radius: 0;
     color: white;
@@ -283,13 +290,13 @@ body.theme1 {
     }
   }
 
-  // Square badges
+  /* Square badges */
   .q-badge {
     border-radius: 0;
     padding: 4px 8px;
   }
 
-  // List styling
+  /* List styling */
   .q-list {
     padding: 8px 0;
 
@@ -326,7 +333,7 @@ body.theme1 {
     }
   }
 
-  // Timeline styling
+  /* Timeline styling */
   .q-timeline {
     .q-timeline__entry {
       padding-bottom: 24px;
@@ -343,7 +350,7 @@ body.theme1 {
     }
   }
 
-  // Calendar styling
+  /* Calendar styling */
   .calendar-today {
     background-color: var(--primary-color);
     color: white;
@@ -355,7 +362,7 @@ body.theme1 {
     border-radius: 0;
   }
 
-  // Layout styling
+  /* Layout styling */
   .layout-header {
     background: var(--card-bg-color);
     color: var(--text-color);
@@ -389,12 +396,7 @@ body.theme1 {
 
       select {
         color: var(--text-color);
-        font-family:
-          'Inter',
-          'SF Pro Display',
-          -apple-system,
-          BlinkMacSystemFont,
-          sans-serif;
+        font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
       }
 
       .select-icon {
@@ -403,7 +405,7 @@ body.theme1 {
     }
   }
 
-  // Force dark colors for all cards
+  /* Force dark colors for all cards */
   .q-card {
     background-color: var(--card-bg-color) !important;
     color: var(--text-color) !important;

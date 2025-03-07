@@ -1,14 +1,12 @@
-// Kinetic Typography Theme
-
 body.theme5 {
   --primary-color: #1e3a8a;
   --accent-color: #dc2626;
   --secondary-color: #00c853;
   --tertiary-color: #448aff;
-  --background-color: #ffffff;
-  --surface-color: #ffffff;
-  --text-color: #333;
-  --muted-color: rgba(0, 0, 0, 0.6);
+  --background-color: #1d1d1d; /* Adjusted for dark mode */
+  --surface-color: #1e1e1e; /* Adjusted for dark mode */
+  --text-color: #e0e0e0; /* Adjusted for readability in dark mode */
+  --muted-color: rgba(255, 255, 255, 0.6); /* Adjusted for dark mode */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -188,6 +186,11 @@ body.theme5 {
         background: rgba(0, 0, 0, 0.05);
       }
     }
+
+    &:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
   }
 
   // Interactive form fields
@@ -233,6 +236,11 @@ body.theme5 {
     &:hover .q-field__label {
       letter-spacing: 0.5px;
       color: var(--primary-color);
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
     }
   }
 
