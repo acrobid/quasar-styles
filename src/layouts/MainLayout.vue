@@ -35,7 +35,7 @@
 import { ref, onMounted, watch } from 'vue';
 import { Dark } from 'quasar'; // added for built-in dark mode support
 
-const currentTheme = ref('theme1');
+const currentTheme = ref('theme4');
 const themeOptions = [
   { label: 'Modern Linear', value: 'theme1' },
   { label: 'Brutalist Digital', value: 'theme2' },
