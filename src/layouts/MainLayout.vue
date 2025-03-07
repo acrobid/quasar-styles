@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
+import { Dark } from 'quasar'; // added for built-in dark mode support
 
 const currentTheme = ref('theme1');
 const themeOptions = [
@@ -74,6 +75,9 @@ function changeTheme(theme: string) {
 
   // Set the body class
   document.body.className = theme;
+
+  // Use Quasar's built-in dark mode if "theme1" is dark
+  Dark.set(theme === 'theme1'); // adjust condition if additional themes are dark
 
   // Save the theme preference
   localStorage.setItem('quasar-theme', theme);
@@ -180,6 +184,11 @@ body.theme5 .theme-selector {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px !important;
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Force dark background for the q-layout container */
+::v-deep q-layout {
+  background-color: var(--background-color) !important;
 }
 
 /* Responsive adjustments */

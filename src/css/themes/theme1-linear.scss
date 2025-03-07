@@ -3,10 +3,10 @@
 :root {
   --primary-color: #3772ff;
   --secondary-color: #f038ff;
-  --background-color: #fafafa;
-  --card-bg-color: #ffffff;
-  --text-color: #333333;
-  --border-color: #eeeeee;
+  --background-color: #121212; // changed from #fafafa to dark background
+  --card-bg-color: #1e1e1e; // changed from #ffffff to dark card background
+  --text-color: #e0e0e0; // changed from #333333 to light text for dark mode
+  --border-color: #333333; // changed from #eeeeee to darker border for dark mode
   --accent-color: #36f4b9;
 }
 
@@ -401,5 +401,11 @@ body.theme1 {
         color: var(--primary-color);
       }
     }
+  }
+
+  // Force dark colors for all cards
+  .q-card {
+    background-color: var(--card-bg-color) !important;
+    color: var(--text-color) !important;
   }
 }

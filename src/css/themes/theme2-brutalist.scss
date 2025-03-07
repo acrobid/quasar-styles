@@ -1,12 +1,29 @@
 // Brutalist Digital Theme
 
 body.theme2 {
+  // Light theme colors
   --primary-color: #121212;
-  --secondary-color: #bb86fc;
+  --secondary-color: #ff5252;
+  --accent-color: #ffeb3b;
+  --background-color: #ffffff;
+  --card-bg-color: #ffffff;
+  --text-color: #121212;
+  --border-color: #000000;
 
-  background-color: #ffffff;
-  color: #121212;
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-family: 'Courier New', monospace;
+
+  // Dark mode overrides
+  &.dark-mode {
+    --primary-color: #ffffff;
+    --secondary-color: #ff5252;
+    --accent-color: #ffeb3b;
+    --background-color: #121212;
+    --card-bg-color: #1e1e1e;
+    --text-color: #ffffff;
+    --border-color: #ffffff;
+  }
 
   * {
     border-radius: 0 !important;
@@ -29,50 +46,65 @@ body.theme2 {
     font-family: 'Courier New', monospace;
     letter-spacing: -1px;
     font-weight: 800;
+    color: var(--text-color);
   }
 
   // Cards and elements with harsh borders and random alignment
   .q-card {
-    background-color: #ffffff;
-    border: 3px solid #000;
-    box-shadow: 8px 8px 0 #000;
+    background-color: var(--card-bg-color);
+    border: 3px solid var(--border-color);
+    box-shadow: 8px 8px 0 var(--border-color);
     margin-top: calc(random(10) * 1px);
     transform: rotate(calc(random(2) - 1) * 0.5deg);
   }
 
   .q-btn {
-    background: #ffffff;
-    border: 2px solid #000;
-    box-shadow: 4px 4px 0 #000;
+    background: var(--card-bg-color);
+    border: 2px solid var(--border-color);
+    box-shadow: 4px 4px 0 var(--border-color);
     font-weight: bold;
     text-transform: uppercase;
+    color: var(--text-color);
 
     &:active {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 #000;
+      box-shadow: 2px 2px 0 var(--border-color);
+    }
+
+    &.q-btn--standard {
+      background-color: var(--secondary-color);
+      color: var(--background-color);
     }
   }
 
   .q-input,
   .q-select {
     .q-field__control {
-      border: 2px solid #000;
-      background: transparent;
+      border: 2px solid var(--border-color);
+      background: var(--card-bg-color);
     }
 
     .q-field__label {
       font-family: 'Courier New', monospace;
       text-transform: uppercase;
+      color: var(--text-color);
+    }
+
+    .q-field__native,
+    .q-field__input {
+      color: var(--text-color);
     }
   }
 
   // Raw, unfinished table style
   .q-table {
-    border: 3px solid #000;
+    border: 3px solid var(--border-color);
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
 
     thead tr {
-      background-color: #000;
-      color: #fff;
+      background-color: var(--border-color);
+      color: var(--background-color);
       th {
         font-family: 'Courier New', monospace;
         text-transform: uppercase;
@@ -80,80 +112,71 @@ body.theme2 {
     }
 
     tbody tr {
+      color: var(--text-color);
+
       &:nth-child(odd) {
-        background-color: #f0f0f0;
+        background-color: rgba(0, 0, 0, 0.05);
       }
+
+      &.dark-mode:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    td {
+      border-bottom: 1px dashed var(--border-color);
     }
   }
 
   // Dashboard elements
   .dashboard-header {
-    border: 3px solid #000;
-    background: repeating-linear-gradient(45deg, #fff, #fff 10px, #f0f0f0 10px, #f0f0f0 20px);
+    border: 3px solid var(--border-color);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--card-bg-color),
+      var(--card-bg-color) 10px,
+      rgba(0, 0, 0, 0.05) 10px,
+      rgba(0, 0, 0, 0.05) 20px
+    );
+
+    &.dark-mode {
+      background: repeating-linear-gradient(
+        45deg,
+        var(--card-bg-color),
+        var(--card-bg-color) 10px,
+        rgba(255, 255, 255, 0.05) 10px,
+        rgba(255, 255, 255, 0.05) 20px
+      );
+    }
   }
 
   .stat-card {
-    border: 3px solid #000;
-    background-color: #fff;
+    border: 3px solid var(--border-color);
+    background-color: var(--card-bg-color);
+
+    .text-subtitle2 {
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+
+    .text-h4 {
+      color: var (--secondary-color);
+    }
   }
 
   .chart-bar {
-    background-color: #000;
-    border: 1px solid var(--secondary-color);
+    background-color: var(--secondary-color);
+    border: 1px solid var(--accent-color);
   }
 
   .q-linear-progress__model {
-    background-color: #000;
+    background-color: var(--secondary-color);
   }
 
-  // Timeline with bold contrast
-  .q-timeline {
-    .q-timeline__entry {
-      .q-timeline__dot {
-        border: 2px solid #000;
-      }
-
-      .q-timeline__subtitle {
-        font-family: 'Courier New', monospace;
-        text-transform: uppercase;
-      }
-    }
-  }
-
-  // Calendar with grid emphasis
-  .calendar-placeholder {
-    .calendar-grid {
-      border: 2px solid #000;
-    }
-
-    .calendar-date {
-      border: 1px solid #000;
-    }
-
-    .calendar-today {
-      background-color: #000;
-      color: #fff;
-    }
-
-    .calendar-event::after {
-      background-color: var(--secondary-color);
-    }
-  }
-
-  .layout-header {
-    background-color: #000;
-    color: #fff;
-    border-bottom: none;
-
-    .q-toolbar {
-      border-bottom: 3px solid #fff;
-    }
-
-    .q-toolbar__title {
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-    }
+  .q-linear-progress {
+    height: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg-color);
   }
 
   // Enhanced Select styling for Brutalist Digital
@@ -163,8 +186,8 @@ body.theme2 {
     transform: rotate(-1deg);
 
     .q-field__control {
-      border: 2px solid #000;
-      background: #fff;
+      border: 2px solid var(--border-color);
+      background: var(--card-bg-color);
       height: auto;
       min-height: 54px;
     }
@@ -175,18 +198,21 @@ body.theme2 {
       font-weight: bold;
       letter-spacing: -0.5px;
       padding-left: 10px;
+      color: var(--text-color);
     }
 
     .q-field__label {
       font-family: 'Courier New', monospace;
       text-transform: uppercase;
       left: 10px;
+      color: var(--text-color);
 
       &--floating {
-        background-color: #fff;
+        background-color: var(--card-bg-color);
         padding: 0 4px;
         top: -10px;
         left: 8px;
+        color: var(--secondary-color);
       }
     }
 
@@ -194,35 +220,40 @@ body.theme2 {
       height: 100%;
 
       .q-icon {
-        background: #000;
-        color: #fff;
+        background: var(--border-color);
+        color: var(--card-bg-color);
         padding: 4px;
       }
     }
 
     .q-menu {
-      border: 2px solid #000;
-      box-shadow: 4px 4px 0 #000;
-      background-color: #fff;
+      border: 2px solid var(--border-color);
+      box-shadow: 4px 4px 0 var(--border-color);
+      background-color: var(--card-bg-color);
       margin-top: 4px;
       padding: 0;
 
       .q-item {
         font-family: 'Courier New', monospace;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid var(--border-color);
         min-height: 48px;
+        color: var(--text-color);
 
         &:last-child {
           border-bottom: none;
         }
 
         &:hover {
-          background-color: #f0f0f0;
+          background-color: rgba(0, 0, 0, 0.05);
+
+          .dark-mode & {
+            background-color: rgba(255, 255, 255, 0.05);
+          }
         }
 
         &--active {
-          background-color: #000;
-          color: #fff;
+          background-color: var(--border-color);
+          color: var(--background-color);
         }
       }
 
@@ -233,44 +264,55 @@ body.theme2 {
     }
   }
 
-  // List styling
-  .q-list {
-    border: 2px solid #000;
+  // Layout styling
+  .layout-header {
+    background-color: var(--border-color);
+    color: var(--background-color);
+    border-bottom: 3px solid var(--secondary-color);
 
-    .q-item {
-      border-bottom: 1px solid #000;
-      padding: 16px;
+    .app-title {
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
 
-      &:last-child {
-        border-bottom: none;
-      }
+    .theme-selector {
+      border: 2px solid var(--background-color);
+      transform: rotate(-1deg);
 
-      .q-item__section--avatar {
-        padding-right: 20px;
-      }
-
-      .q-item__label {
+      select {
+        color: var(--background-color);
         font-family: 'Courier New', monospace;
         text-transform: uppercase;
         font-weight: bold;
-
-        &--caption {
-          text-transform: none;
-          font-weight: normal;
-        }
       }
+
+      .select-icon {
+        color: var(--background-color);
+      }
+    }
+
+    .mode-toggle .q-icon {
+      color: var(--background-color);
+    }
+
+    .version-text {
+      color: var(--background-color);
+      opacity: 0.7;
     }
   }
 
-  // Avatar styling
-  .q-avatar {
-    border: 2px solid #000;
-    background: #fff;
-    color: #000;
-    font-weight: bold;
+  // In dark mode, adjust contrast for selected elements
+  &.dark-mode {
+    .q-select .q-menu .q-item--active {
+      background-color: var(--border-color);
+      color: var(--card-bg-color);
+    }
 
-    &.q-avatar--rounded {
-      border-radius: 0 !important;
+    .q-btn.q-btn--standard {
+      background-color: var(--secondary-color);
+      color: var(--background-color);
+      border-color: var(--border-color);
     }
   }
 }

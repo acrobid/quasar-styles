@@ -1,144 +1,103 @@
-// Neo-Skeuomorphism Theme
+// Modern iOS-Inspired Theme (2024)
 
 body.theme4 {
-  --primary-color: #2979ff;
-  --secondary-color: #ff4081;
-  --surface-color: #f5f5f5;
+  --primary-color: #0071e3;
+  --secondary-color: #06c;
+  --surface-color: #ffffff;
   --text-color: #1d1d1d;
-  --highlight-color: #e0e0e0;
-  --shadow-light: rgba(255, 255, 255, 0.9);
-  --shadow-dark: rgba(0, 0, 0, 0.2);
+  --text-secondary: #6e6e73;
+  --background-color: #f5f5f7;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  --shadow-subtle: rgba(0, 0, 0, 0.05);
+  --highlight-color: rgba(0, 0, 0, 0.03);
+  --card-bg-color: rgba(255, 255, 255, 0.8);
 
-  // Add light texture pattern
-  --texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z' fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-
-  background-color: var(--surface-color);
-  background-image: var(--texture);
+  background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'SF Pro Display', 'Roboto', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
 
-  // Remove Material ripple effects
-  .q-ripple,
-  .q-focus-helper {
-    display: none !important;
-  }
-
-  // Cards with extreme skeuomorphic design
+  // Cards with iOS-style design
   .q-card {
-    border-radius: 16px;
-    background-color: var(--surface-color);
-    box-shadow:
-      8px 8px 16px var(--shadow-dark),
-      -8px -8px 16px var(--shadow-light);
-    padding: 20px;
-    border: none;
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      background-image: var(--texture);
-      opacity: 0.05;
-      pointer-events: none;
-    }
-
-    // Add pressed effect on click
-    &:active {
-      box-shadow:
-        4px 4px 8px var(--shadow-dark),
-        -4px -4px 8px var(--shadow-light);
-      transform: translateY(2px);
-    }
-
-    // Add inner stroke detail
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 2px;
-      border-radius: 14px;
-      box-shadow: inset 1px 1px 2px var(--shadow-light);
-      pointer-events: none;
-      z-index: 1;
-    }
-  }
-
-  // Buttons with enhanced 3D effect
-  .q-btn {
-    border-radius: 10px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    box-shadow:
-      5px 5px 10px var(--shadow-dark),
-      -5px -5px 10px var(--shadow-light);
-    border: none;
-    background-color: var(--surface-color);
-    color: var(--primary-color);
-    transition: all 0.2s;
-    position: relative;
-    overflow: visible;
-
-    // Add 3D element to buttons
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 10px;
-      background: linear-gradient(145deg, var(--shadow-light), rgba(255, 255, 255, 0.5));
-      opacity: 0.8;
-      z-index: -1;
-    }
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg-color);
+    box-shadow: 0 1px 3px var(--shadow-subtle);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    overflow: hidden;
 
     &:hover {
-      box-shadow:
-        7px 7px 14px var(--shadow-dark),
-        -7px -7px 14px var(--shadow-light);
-
-      &::before {
-        opacity: 1;
-      }
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
-    &:active {
-      box-shadow:
-        inset 5px 5px 10px var(--shadow-dark),
-        inset -5px -5px 10px var(--shadow-light);
-      background-color: var(--surface-color);
-      color: var(--primary-color);
-
-      &::before {
-        opacity: 0;
-      }
+    .q-card__section {
+      padding: 16px 20px;
     }
 
-    // Remove the material design lines
-    &::after {
-      display: none !important;
+    // Card title styling
+    .text-h6 {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-color);
+    }
+  }
+
+  // iOS style buttons
+  .q-btn {
+    border-radius: 18px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 0 16px;
+    height: 36px;
+    min-height: 36px;
+
+    &.q-btn--standard {
+      background-color: var(--primary-color);
+      color: white;
+
+      &:hover {
+        background-color: darken(#0071e3, 5%);
+        box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+      }
+
+      &:active {
+        transform: scale(0.98);
+        background-color: darken(#0071e3, 8%);
+      }
     }
 
     &.q-btn--flat {
-      box-shadow: none;
-      background-color: transparent;
+      color: var(--primary-color);
+
       &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: rgba(0, 113, 227, 0.1);
       }
+    }
+
+    &.q-btn--outline {
+      border: 1px solid var(--border-color);
+      background: var(--surface-color);
     }
   }
 
-  // Form elements with enhanced inset style
+  // Form elements with iOS style
   .q-input,
   .q-select {
     .q-field__control {
       border-radius: 10px;
-      border: none;
-      background-color: var(--surface-color);
-      box-shadow:
-        inset 3px 3px 6px var(--shadow-dark),
-        inset -3px -3px 6px var(--shadow-light);
+      border: 1px solid var(--border-color);
+      background-color: rgba(250, 250, 252, 0.8);
       height: 46px;
       position: relative;
-      overflow: visible;
+      transition: all 0.2s ease;
 
       // Remove material lines
       &::before,
@@ -146,125 +105,203 @@ body.theme4 {
         display: none !important;
       }
 
-      // Add subtle inner glow
-      &::before {
-        content: '';
-        position: absolute;
-        inset: 3px;
-        border-radius: 7px;
-        background: linear-gradient(145deg, rgba(0, 0, 0, 0.03), transparent);
-        pointer-events: none;
+      &:hover {
+        border-color: rgba(0, 0, 0, 0.2);
       }
 
       &:focus-within {
-        box-shadow:
-          inset 4px 4px 8px var(--shadow-dark),
-          inset -4px -4px 8px var(--shadow-light);
-
-        // Add glowing outline on focus
-        &::after {
-          content: '';
-          position: absolute;
-          inset: -3px;
-          border-radius: 13px;
-          box-shadow: 0 0 8px rgba(41, 121, 255, 0.5);
-          opacity: 0.6;
-          z-index: -1;
-          display: block !important;
-        }
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
       }
     }
 
     .q-field__native {
       padding-left: 16px;
       color: var(--text-color);
+      font-size: 15px;
     }
 
     .q-field__label {
       left: 16px;
-      color: rgba(0, 0, 0, 0.6);
+      color: var(--text-secondary);
+      font-size: 14px;
     }
   }
 
-  // Tables with enhanced skeuomorphic design
+  // Tables with iOS aesthetic
   .q-table {
-    border-radius: 16px;
+    border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow:
-      8px 8px 16px var(--shadow-dark),
-      -8px -8px 16px var(--shadow-light);
+    box-shadow: 0 1px 3px var(--shadow-subtle);
     background-color: var(--surface-color);
-    border: none;
-    position: relative;
-
-    // Add texture overlay
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: var(--texture);
-      opacity: 0.05;
-      pointer-events: none;
-      z-index: 0;
-    }
+    border: 1px solid var(--border-color);
 
     th {
-      background-color: var(--highlight-color);
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
-      color: var(--text-color);
+      background-color: var(--background-color);
+      color: var(--text-secondary);
       font-weight: 600;
-      border-radius: 12px;
-      margin: 8px;
-      transition: all 0.2s;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 12px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+
+    tbody tr {
+      transition: background-color 0.2s;
 
       &:hover {
         background-color: var(--highlight-color);
-        box-shadow:
-          2px 2px 4px var(--shadow-dark),
-          -2px -2px 4px var(--shadow-light);
       }
     }
   }
 
-  // Layout styling
+  // Layout styling for iOS look
   .layout-header {
-    background-color: var(--surface-color);
-    color: var(--text-color);
-    box-shadow: 0 2px 10px var(--shadow-dark);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
 
-    .q-toolbar__title {
-      color: var(--primary-color);
-      font-weight: 600;
+    .app-title {
+      color: var(--text-color);
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
   }
 
-  // Select styling for Skeuomorphic design
-  .q-select {
-    .q-field__control {
-      border-radius: 10px;
-      box-shadow:
-        inset 3px 3px 6px var(--shadow-dark),
-        inset -3px -3px 6px var(--shadow-light);
+  // Progress indicators
+  .q-linear-progress {
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+
+    &__model {
+      border-radius: 3px;
+    }
+  }
+
+  // iOS style chips
+  .q-chip {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 10px;
+    height: 24px;
+    border-radius: 12px;
+  }
+
+  // Stats cards
+  .stat-card {
+    .text-subtitle2 {
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
     }
 
+    .text-h4 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      font-size: 28px;
+    }
+  }
+
+  // Chart styling
+  .chart-card {
+    .chart-placeholder {
+      .chart-bars {
+        .chart-bar {
+          background: linear-gradient(to top, var(--primary-color), lighten(#0071e3, 15%));
+          opacity: 0.8;
+          border-radius: 6px 6px 0 0;
+
+          &::after {
+            content: attr(data-value) + '%';
+            position: absolute;
+            top: -25px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+
+          &:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+            transition: all 0.2s ease;
+          }
+        }
+      }
+    }
+  }
+
+  // Avatars
+  .q-avatar {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  // iOS style list items
+  .q-item {
+    min-height: 56px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 2px 0;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--highlight-color);
+    }
+
+    .q-item__label {
+      color: var(--text-color);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .q-item__label--caption {
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+  }
+
+  // Forms
+  .q-form {
+    .q-input + .q-input,
+    .q-input + .q-select,
+    .q-select + .q-input,
+    .q-select + .q-select {
+      margin-top: 16px;
+    }
+  }
+
+  // Select styling
+  .q-select {
     .q-menu {
-      border-radius: 16px;
-      background-color: var(--surface-color);
-      box-shadow:
-        8px 8px 16px var(--shadow-dark),
-        -8px -8px 16px var(--shadow-light);
-      padding: 8px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      padding: 6px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-color);
 
       .q-item {
-        border-radius: 10px;
-        margin: 4px 0;
-
-        &:hover {
-          background-color: var(--highlight-color);
-        }
+        border-radius: 8px;
+        padding: 8px 12px;
 
         &--active {
-          background-color: rgba(41, 121, 255, 0.2);
+          background-color: rgba(0, 113, 227, 0.1);
           color: var(--primary-color);
         }
       }
