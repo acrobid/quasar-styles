@@ -1,4 +1,4 @@
-import { defineRouter } from '#q-app/wrappers';
+import { defineRouter } from '#q-app';
 import {
   createMemoryHistory,
   createRouter,
@@ -6,7 +6,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 import routes from './routes';
-import { applyTheme } from 'src/themes';
+import { applyTheme } from '@/themes';
 
 /*
  * If not building with SSR mode, you can

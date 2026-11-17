@@ -321,8 +321,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
-import AppBackLink from 'components/AppBackLink.vue';
-import { uid, useStoredRef } from 'src/composables/useStoredRef';
+import AppBackLink from '@/components/AppBackLink.vue';
+import { uid, useStoredRef } from '@/composables/useStoredRef';
 import {
   categories,
   category,

@@ -46,8 +46,8 @@
 </template>
 
 <script setup lang="ts">
-import AppPreview, { type PreviewApp } from 'components/AppPreview.vue';
-import { themes, type ThemeId } from 'src/themes';
+import AppPreview, { type PreviewApp } from '@/components/AppPreview.vue';
+import { themes, type ThemeId } from '@/themes';
 
 const apps: {
   id: PreviewApp;

@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { themeClass, type ThemeId } from 'src/themes';
+import { themeClass, type ThemeId } from '@/themes';
 
 export type PreviewApp = 'chat' | 'issues' | 'tracker' | 'focus' | 'inspect';
 

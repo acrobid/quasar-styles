@@ -332,8 +332,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { useQuasar, type QForm } from 'quasar';
-import AppBackLink from 'components/AppBackLink.vue';
-import { uid, useStoredRef } from 'src/composables/useStoredRef';
+import AppBackLink from '@/components/AppBackLink.vue';
+import { uid, useStoredRef } from '@/composables/useStoredRef';
 import SignaturePad from './SignaturePad.vue';
 
 type Result = 'pass' | 'fail' | 'na';

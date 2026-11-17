@@ -391,8 +391,8 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import { useQuasar, type QForm, type QInput } from 'quasar';
-import AppBackLink from 'components/AppBackLink.vue';
-import { useStoredRef } from 'src/composables/useStoredRef';
+import AppBackLink from '@/components/AppBackLink.vue';
+import { useStoredRef } from '@/composables/useStoredRef';
 import IssueGlyph from './IssueGlyph.vue';
 import {
   compare,

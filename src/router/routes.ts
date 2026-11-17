@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
-import type { ThemeId } from 'src/themes';
+import type { ThemeId } from '@/themes';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -11,39 +11,39 @@ declare module 'vue-router' {
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('pages/LauncherPage.vue'),
+    component: () => import('@/pages/LauncherPage.vue'),
     meta: { theme: 'launcher' },
   },
   {
     path: '/chat',
-    component: () => import('src/apps/chat/ChatApp.vue'),
+    component: () => import('@/apps/chat/ChatApp.vue'),
     meta: { theme: 'editorial' },
   },
   {
     path: '/issues',
-    component: () => import('src/apps/issues/IssuesApp.vue'),
+    component: () => import('@/apps/issues/IssuesApp.vue'),
     meta: { theme: 'precision' },
   },
   {
     path: '/tracker',
-    component: () => import('src/apps/tracker/TrackerApp.vue'),
+    component: () => import('@/apps/tracker/TrackerApp.vue'),
     meta: { theme: 'bento' },
   },
   {
     path: '/focus',
-    component: () => import('src/apps/focus/FocusApp.vue'),
+    component: () => import('@/apps/focus/FocusApp.vue'),
     meta: { theme: 'glass' },
   },
   {
     path: '/inspect',
-    component: () => import('src/apps/inspect/InspectApp.vue'),
+    component: () => import('@/apps/inspect/InspectApp.vue'),
     meta: { theme: 'industrial' },
   },
 
   // Always leave this as last one
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('@/pages/ErrorNotFound.vue'),
     meta: { theme: 'launcher' },
   },
 ];

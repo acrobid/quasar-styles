@@ -180,8 +180,8 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref } from 'vue';
 import { copyToClipboard, useQuasar } from 'quasar';
-import AppBackLink from 'components/AppBackLink.vue';
-import { uid, useStoredRef } from 'src/composables/useStoredRef';
+import AppBackLink from '@/components/AppBackLink.vue';
+import { uid, useStoredRef } from '@/composables/useStoredRef';
 import { findModel, models, pickReply, suggestions, type ModelId } from './replies';
 
 interface Message {

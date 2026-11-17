@@ -168,8 +168,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useQuasar } from 'quasar';
-import AppBackLink from 'components/AppBackLink.vue';
-import { useStoredRef } from 'src/composables/useStoredRef';
+import AppBackLink from '@/components/AppBackLink.vue';
+import { useStoredRef } from '@/composables/useStoredRef';
 import { AmbientEngine, channels, type ChannelId } from './ambient';
 
 type Mode = 'focus' | 'short' | 'long';
@@ -192,11 +192,8 @@ const today = new Date().toDateString();
 const settings = useStoredRef(
   'focus',
   () => ({
-    volumes: { rain: 60, waves: 0, cafe: 25, wind: 0, white: 0 } as Mix,
-    muted: { rain: false, waves: false, cafe: false, wind: false, white: false } as Record<
-      ChannelId,
-      boolean
-    >,
+    volumes: { rain: 60, waves: 0, cafe: 25, wind: 0, white: 0 },
+    muted: { rain: false, waves: false, cafe: false, wind: false, white: false },
     master: 70,
     sessions: { day: today, count: 0 },
   }),
