@@ -1,8 +1,8 @@
 {
   "name": "quasar-styles",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar styles demonstrator",
+  "description": "Five sample apps showing different ways to style Quasar",
+  "productName": "Quasar styles",
   "author": "acrobid <116527022+acrobid@users.noreply.github.com>",
   "type": "module",
   "private": true,

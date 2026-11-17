@@ -1,15 +1,12 @@
-# Quasar, five ways
+# Quasar styles
 
-A showcase of what Quasar is _for_: five small, working front-end apps, each a
-different kind of thing people build, each in its own visual style, all from
-one Quasar 2 + Vue 3 + TypeScript codebase that can ship as an SPA, PWA,
-Capacitor mobile app or Electron desktop app.
+Five small sample apps built from standard Quasar 2 components, each styled a
+different way. The launcher at `/` links to each one.
 
-The launcher at `/` previews every app in its own style. Everything runs on fake
-data in the browser (state lives in `localStorage`); there are no network calls
-besides Google Fonts.
+Everything runs in the browser on sample data; state is kept in `localStorage`.
+The only network requests are for Google Fonts.
 
-| Route      | App                        | Style              | Shows off                                                                     |
+| Route      | App                        | Style              | Features                                                                      |
 | ---------- | -------------------------- | ------------------ | ----------------------------------------------------------------------------- |
 | `/chat`    | Quill, AI chat assistant   | Calm editorial     | Drawer layout, simulated streaming with stop, model picker, copy, auto-grow   |
 | `/issues`  | Northwind Issues           | Precision dark     | Search/filter/sort, right-drawer detail editing, create dialog, `c / j k esc` |

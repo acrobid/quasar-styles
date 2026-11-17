@@ -13,7 +13,7 @@ export const findModel = (id: string) => models.find((m) => m.value === id) ?? m
 
 export const suggestions = [
   'Plan a calmer week around two deadlines',
-  'Why would I build an app like this with Quasar?',
+  'How does this demo work?',
   'Write a haiku about shipping on a Friday',
 ];
 
@@ -30,13 +30,9 @@ Friday: no new work. Tidy up, write down what you learned, and leave early if yo
 
 Want me to turn this into calendar blocks?`,
 
-  quasar: `A chat assistant is a good fit for Quasar because the hard parts are layout and reach, not the chat itself.
+  demo: `This is a sample app. The replies are pre-written and typed out word by word to imitate streaming.
 
-The drawer, header and footer here are plain q-layout pieces: the conversation list sits beside the thread on a wide screen and folds into a swipeable drawer on a phone, with no separate mobile codebase.
-
-The same source builds as a website, an installable PWA (so it opens offline with your saved conversations), a Capacitor app for the stores, or an Electron app with a menu-bar shortcut.
-
-In a real product you would swap this file of canned replies for a streaming API call; the composer, stop button and message list would stay exactly as they are.`,
+The layout uses q-layout with a q-drawer for the conversation list, which collapses on narrow screens. Conversations are saved in your browser's localStorage.`,
 
   haiku: `Green checks at four-oh-five,
 the deploy bar inches on.
@@ -63,15 +59,15 @@ I'm a simulated assistant in a demo, so this reply is canned, but the streaming,
 
 There are usually two paths: do the thing properly once, or do it quickly now and come back later. If it is something you will touch every day, the first is cheaper in the long run. If you're still exploring, the second is kinder.
 
-(Replies here are pre-written; try asking about planning your week, Quasar, a haiku, or an email.)`,
+(Replies here are pre-written; try asking about planning your week, a haiku, an email, or how this demo works.)`,
   ],
 };
 
 export function pickReply(prompt: string, turn: number): string {
   const p = prompt.toLowerCase();
-  if (/quasar|pwa|electron|capacitor|build|framework/.test(p)) return replies.quasar;
   if (/plan|week|schedule|deadline|calendar/.test(p)) return replies.plan;
   if (/haiku|poem|verse/.test(p)) return replies.haiku;
   if (/email|e-mail|reply to|draft/.test(p)) return replies.email;
+  if (/demo|quasar|how does this/.test(p)) return replies.demo;
   return replies.generic[turn % replies.generic.length]!;
 }

@@ -5,23 +5,17 @@
         <header class="launcher__top">
           <span class="launcher__brand">
             <span class="launcher__mark" aria-hidden="true">Q</span>
-            Quasar, five ways
+            Quasar styles
           </span>
           <span class="launcher__version">Quasar v{{ $q.version }}</span>
         </header>
 
         <section class="launcher__hero" aria-labelledby="launcher-title">
-          <h1 id="launcher-title">Five working apps. One framework, every platform.</h1>
+          <h1 id="launcher-title">Quasar styles</h1>
           <p class="launcher__lede">
-            Quasar is for building applications that do things. Each app below is small but real
-            (data, state, keyboard and touch), and each could ship from the same source as a web
-            app, an installable PWA, a Capacitor mobile app or an Electron desktop app.
+            Five small sample apps built from standard Quasar components, each styled a different
+            way.
           </p>
-          <ul class="launcher__targets" aria-label="Build targets">
-            <li v-for="target in targets" :key="target.label">
-              <q-icon :name="target.icon" aria-hidden="true" />{{ target.label }}
-            </li>
-          </ul>
         </section>
 
         <ol class="launcher__grid">
@@ -31,7 +25,7 @@
               <span class="app-card__body">
                 <span class="app-card__kind">{{ app.kind }}</span>
                 <span class="app-card__name">{{ app.name }}</span>
-                <span class="app-card__why">{{ app.why }}</span>
+                <span class="app-card__uses">{{ app.uses }}</span>
                 <span class="app-card__foot">
                   <span class="app-card__style">{{ themes[app.theme].label }}</span>
                   <span class="app-card__open">
@@ -44,8 +38,7 @@
         </ol>
 
         <footer class="launcher__foot">
-          Front-end only: every app runs on fake data and keeps its state in your browser's
-          localStorage. Nothing is sent anywhere.
+          Sample data only. Each app keeps its state in your browser.
         </footer>
       </q-page>
     </q-page-container>
@@ -56,20 +49,13 @@
 import AppPreview, { type PreviewApp } from 'components/AppPreview.vue';
 import { themes, type ThemeId } from 'src/themes';
 
-const targets = [
-  { icon: 'language', label: 'SPA' },
-  { icon: 'install_mobile', label: 'PWA' },
-  { icon: 'phone_iphone', label: 'iOS & Android' },
-  { icon: 'desktop_windows', label: 'Desktop' },
-];
-
 const apps: {
   id: PreviewApp;
   to: string;
   theme: ThemeId;
   kind: string;
   name: string;
-  why: string;
+  uses: string;
 }[] = [
   {
     id: 'chat',
@@ -77,7 +63,7 @@ const apps: {
     theme: 'editorial',
     kind: 'AI chat assistant',
     name: 'Quill',
-    why: 'q-layout drawers collapse from desktop to phone, so one codebase becomes an installable PWA.',
+    uses: 'q-drawer, q-list, q-input, q-select',
   },
   {
     id: 'issues',
@@ -85,7 +71,7 @@ const apps: {
     theme: 'precision',
     kind: 'Issue tracker',
     name: 'Northwind Issues',
-    why: 'Dense lists, a right-drawer detail panel and keyboard shortcuts: a desktop tool that builds as an Electron app.',
+    uses: 'q-drawer, q-select, q-dialog, q-form',
   },
   {
     id: 'tracker',
@@ -93,7 +79,7 @@ const apps: {
     theme: 'bento',
     kind: 'Spending & habit tracker',
     name: 'Pocket',
-    why: 'q-footer tabs, swipeable q-slide-item rows and offline storage: phone-first, shippable via Capacitor.',
+    uses: 'q-tabs, q-tab-panels, q-slide-item, q-dialog',
   },
   {
     id: 'focus',
@@ -101,7 +87,7 @@ const apps: {
     theme: 'glass',
     kind: 'Focus timer & sound mixer',
     name: 'Drift',
-    why: 'q-knob and q-circular-progress over the Web Audio API: an Electron-ready desktop utility.',
+    uses: 'q-circular-progress, q-knob, q-slider, q-btn-toggle',
   },
   {
     id: 'inspect',
@@ -109,7 +95,7 @@ const apps: {
     theme: 'industrial',
     kind: 'Field inspection checklist',
     name: 'Field Inspect',
-    why: 'q-stepper with validation rules, q-file photo previews and an offline queue, built for a tablet on site.',
+    uses: 'q-stepper, q-form, q-file, q-select',
   },
 ];
 </script>
@@ -181,32 +167,6 @@ const apps: {
   font-size: 1.0625rem;
   line-height: 1.6;
   text-wrap: pretty;
-}
-
-.launcher__targets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
-
-  li {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px 6px 10px;
-    border: 1px solid var(--t-border);
-    border-radius: var(--t-radius-pill);
-    background: var(--t-surface);
-    font-size: 13px;
-    font-weight: 500;
-  }
-
-  .q-icon {
-    color: var(--t-muted);
-    font-size: 16px;
-  }
 }
 
 // Six-column grid: two wide cards, then three.
@@ -307,9 +267,10 @@ const apps: {
   letter-spacing: -0.02em;
 }
 
-.app-card__why {
+.app-card__uses {
   color: var(--t-muted);
-  font-size: 14px;
+  font-family: var(--t-font-mono);
+  font-size: 13px;
   line-height: 1.5;
 }
 
