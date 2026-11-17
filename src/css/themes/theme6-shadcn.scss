@@ -1,618 +1,188 @@
-// Shadcn-inspired Dark Theme
+// Theme 6 — Shadcn-inspired (dark)
+// shadcn/ui's zinc palette: near-white primary, quiet 1px borders, Geist and
+// Geist Mono, outline badges, h-9 controls with a soft 3px focus ring.
 
 body.theme6 {
-  // Dark mode colors as default
-  --background: #020817;
-  --foreground: #f8fafc;
+  --t-bg: #09090b;
+  --t-surface: #111113;
+  --t-surface-2: rgb(39 39 42 / 0.5);
+  --t-header-bg: rgb(9 9 11 / 0.8);
+  --t-border: #27272a;
+  --t-border-strong: #3f3f46;
+  --t-border-width: 1px;
+  --t-grid: #1f1f23;
+  --t-track: #27272a;
+  --t-text: #fafafa;
+  --t-muted: #a1a1aa;
+  --t-primary: #fafafa;
+  --t-on-primary: #18181b;
+  --t-accent: #a1a1aa;
+  --t-positive: #22c55e;
+  --t-warning: #f59e0b;
+  --t-negative: #ef4444;
+  --t-info: #3b82f6;
+  --t-neutral: #71717a;
+  --t-chart: #3f3f46;
+  --t-ring: #71717a;
+  --t-input-bg: rgb(255 255 255 / 0.03);
+  --t-radius: 14px;
+  --t-radius-sm: 8px;
+  --t-radius-pill: 6px;
+  --t-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  --t-shadow-pop: 0 10px 30px -10px rgb(0 0 0 / 0.8);
+  --t-font-body: 'Geist', system-ui, sans-serif;
+  --t-font-display: 'Geist', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 600;
+  --t-display-tracking: -0.025em;
+  --t-duration: 150ms;
 
-  --card: #1e293b;
-  --card-foreground: #f8fafc;
+  font-size: 14px;
 
-  --popover: #1e293b;
-  --popover-foreground: #f8fafc;
-
-  --primary: #f8fafc;
-  --primary-foreground: #020817;
-
-  --secondary: #1e293b;
-  --secondary-foreground: #f8fafc;
-
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
-
-  --destructive: #7f1d1d;
-  --destructive-foreground: #f8fafc;
-
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #cbd5e1;
-
-  // For light mode support (opt-in)
-  &.light-mode {
-    --background: #ffffff;
-    --foreground: #020817;
-
-    --card: #ffffff;
-    --card-foreground: #020817;
-
-    --popover: #ffffff;
-    --popover-foreground: #020817;
-
-    --primary: #18181b;
-    --primary-foreground: #ffffff;
-
-    --secondary: #f1f5f9;
-    --secondary-foreground: #18181b;
-
-    --muted: #f1f5f9;
-    --muted-foreground: #64748b;
-
-    --accent: #f1f5f9;
-    --accent-foreground: #18181b;
-
-    --destructive: #ef4444;
-    --destructive-foreground: #f8fafc;
-
-    --border: #e2e8f0;
-    --input: #e2e8f0;
-    --ring: #020817;
+  .app-header {
+    backdrop-filter: blur(12px);
   }
 
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
-
-  // Remove Material Design ripples completely
-  .q-ripple {
-    display: none !important;
+  .brand__mark {
+    border-radius: 6px;
+    background:
+      linear-gradient(#18181b, #18181b) 50% 50% / 10px 10px no-repeat,
+      #fafafa;
   }
 
-  // Override all built-in animations
-  * {
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  .brand__name {
+    font-size: 15px;
   }
 
-  // Subtle animations
-  @keyframes enter {
-    from {
-      opacity: 0;
-      transform: translateY(2px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .theme-picker__select {
+    border-color: var(--t-border);
+    font-size: 13px;
   }
 
-  @keyframes slide-down {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  // Clean typography
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  .text-h1,
-  .text-h2,
-  .text-h3,
-  .text-h4,
-  .text-h5,
-  .text-h6 {
-    color: var(--foreground);
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.25;
-    font-family: Inter, sans-serif;
-  }
-
-  // Card styling - minimalist with subtle border
-  .q-card {
-    border-radius: var(--radius);
-    background-color: var(--card);
-    color: var(--card-foreground);
+  // Page heading sits on the canvas, not in a card.
+  .hero {
+    padding: 8px 0 4px;
+    border: 0;
+    background: none;
     box-shadow: none;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    transition:
-      border-color 0.15s,
-      box-shadow 0.15s;
-
-    &:hover {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    // Remove default Quasar padding
-    > div:first-child {
-      padding: 24px;
-    }
-
-    .q-card__actions {
-      padding: 16px 24px;
-    }
   }
 
-  // Buttons with subtle interactions
-  .q-btn {
-    border-radius: var(--radius);
+  .hero__title {
+    font-size: clamp(1.75rem, 1.25rem + 2vw, 2.25rem);
+  }
+
+  .hero__lede {
+    font-size: 14px;
+  }
+
+  .panel__title {
+    font-size: 15px;
+  }
+
+  .stat__value {
+    font-size: clamp(1.75rem, 1.5rem + 0.75vw, 2rem);
+  }
+
+  // Badges: the "outline" variant — neutral text, coloured indicator.
+  .delta,
+  .q-chip.status {
+    gap: 6px;
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--t-border);
+    color: var(--t-text);
     font-weight: 500;
-    height: 40px;
-    line-height: 1;
-    min-width: 88px;
-    padding: 0 16px;
-    font-family: Inter, sans-serif;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-    transform-origin: center;
-
-    // Remove Material ripple effect entirely
-    .q-ripple,
-    .q-focus-helper {
-      display: none !important;
-    }
-
-    &:active {
-      transform: scale(0.98);
-    }
-
-    // Primary button
-    &.q-btn--standard {
-      background-color: var(--primary);
-      color: var(--primary-foreground);
-      border: 1px solid transparent;
-
-      &:hover {
-        background-color: color-mix(in srgb, var(--primary) 90%, #ffffff);
-        transform: translateY(-1px);
-      }
-
-      &:active {
-        transform: translateY(0);
-      }
-    }
-
-    // Secondary button
-    &.q-btn--outline {
-      background-color: transparent;
-      color: var(--foreground);
-      border: 1px solid var(--border);
-
-      &:hover {
-        border-color: color-mix(in srgb, var(--border) 80%, #ffffff);
-        background-color: color-mix(in srgb, var(--secondary) 50%, transparent);
-      }
-    }
-
-    // Flat button
-    &.q-btn--flat {
-      background-color: transparent;
-      color: var(--foreground);
-
-      &:hover {
-        background-color: var(--secondary);
-      }
-    }
-
-    // Destructive button
-    &.q-btn--negative {
-      background-color: var(--destructive);
-      color: var(--destructive-foreground);
-
-      &:hover {
-        background-color: color-mix(in srgb, var(--destructive) 90%, #ffffff);
-      }
-    }
-
-    // Button focus state - replace Material focus with clean outline
-    &:focus-visible {
-      outline: 2px solid var(--ring);
-      outline-offset: 2px;
-      box-shadow: none;
-    }
   }
 
-  // Form inputs with clean styling
-  .q-input,
-  .q-select {
-    .q-field__control {
-      border-radius: var(--radius);
-      border: 1px solid var(--input);
-      background-color: transparent;
-      height: 40px;
-      min-height: 40px;
-      padding-left: 8px;
-      padding-right: 8px;
-      transition:
-        border-color 0.15s,
-        box-shadow 0.15s;
-
-      // Remove material design underline/details
-      &:before,
-      &:after {
-        display: none !important;
-      }
-
-      &:hover {
-        border-color: color-mix(in srgb, var(--input) 80%, #ffffff);
-      }
-
-      &:focus-within {
-        border-color: var(--ring);
-        box-shadow: 0 0 0 1px var(--ring);
-      }
-    }
-
-    .q-field__label {
-      color: var(--muted-foreground);
-      font-weight: 400;
-      font-size: 0.875rem;
-      left: 12px;
-
-      &--floating {
-        transform: translateY(-140%) scale(0.85);
-        color: var(--foreground);
-      }
-    }
-
-    .q-field__native,
-    .q-field__input {
-      padding-left: 12px;
-      color: var(--foreground);
-      font-size: 0.875rem;
-    }
-
-    &.q-field--error .q-field__control {
-      border-color: var(--destructive);
-    }
+  .delta .q-icon {
+    color: var(--tone);
   }
 
-  // Select component styling
-  .q-select {
-    .q-field__append {
-      padding-right: 12px;
-
-      .q-icon {
-        color: var(--muted-foreground);
-        transition: transform 0.2s ease;
-      }
-    }
-
-    &.q-field--focused .q-field__append .q-icon {
-      transform: rotate(180deg);
-    }
-
-    .q-menu {
-      animation: slide-up 0.15s ease;
-      background-color: var(--popover);
-      border-radius: var(--radius);
-      box-shadow:
-        0 10px 15px -3px rgba(0, 0, 0, 0.3),
-        0 4px 6px -4px rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border);
-      padding: 4px;
-
-      .q-item {
-        border-radius: calc(var(--radius) - 2px);
-        padding: 8px 12px;
-        min-height: 36px;
-        font-size: 0.875rem;
-        transition:
-          background-color 0.2s ease,
-          color 0.2s ease;
-        color: var(--popover-foreground);
-
-        &:hover {
-          background-color: var(--accent);
-          color: var(--accent-foreground);
-        }
-
-        &--active {
-          background-color: var(--accent);
-          color: var(--accent-foreground);
-          font-weight: 500;
-        }
-      }
-    }
+  .q-chip.status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--tone);
   }
 
-  // Tables with clean styling
-  .q-table {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: none;
-    background-color: var(--card);
-    color: var(--card-foreground);
-
-    .q-table__card {
-      box-shadow: none;
-      border-radius: 0;
-    }
-
-    thead tr,
-    tfoot tr {
-      height: 48px;
-    }
-
-    tbody tr {
-      height: 52px;
-    }
-
-    // Remove Material hover effect
-    tbody tr:hover {
-      background-color: var(--accent);
-    }
-
-    th,
-    td {
-      border-color: var(--border) !important;
-    }
-
-    table {
-      border-collapse: separate;
-      border-spacing: 0;
-    }
-
-    thead tr {
-      background-color: var(--muted);
-      border-bottom: 1px solid var(--border);
-    }
-
-    th {
-      color: var(--muted-foreground);
-      font-weight: 500;
-      text-align: left;
-      font-size: 0.75rem;
-      line-height: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 12px;
-
-      &:first-child {
-        border-top-left-radius: var(--radius);
-      }
-
-      &:last-child {
-        border-top-right-radius: var(--radius);
-      }
-    }
-
-    td {
-      padding: 12px;
-      font-size: 0.875rem;
-      color: var(--foreground);
-      border-bottom: 1px solid var(--border);
-    }
-
-    tbody tr {
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        background-color: color-mix(in srgb, var(--muted) 90%, transparent);
-      }
-
-      &:last-child td {
-        border-bottom: none;
-      }
-    }
+  .q-badge.badge-new {
+    border-radius: 6px;
+    font-weight: 500;
   }
 
-  // Progress indicator
+  .q-avatar.avatar {
+    background: #27272a;
+    color: var(--t-text);
+    font-weight: 500;
+  }
+
   .q-linear-progress {
     height: 8px;
-    border-radius: 4px;
-    background-color: var(--secondary);
-
-    &__model {
-      border-radius: 4px;
-      background-color: var(--primary);
-    }
   }
 
-  // Dashboard elements
-  .dashboard-header {
-    h4 {
-      font-weight: 600;
-      color: var(--foreground);
-    }
-
-    p {
-      color: var(--muted-foreground);
-    }
+  .chart__value,
+  .cell-progress__pct,
+  .app-header__version {
+    font-family: var(--t-font-mono);
   }
 
-  .stat-card {
-    .text-h4 {
-      font-weight: 600;
-      color: var(--foreground);
-    }
-
-    .text-subtitle2 {
-      color: var(--muted-foreground);
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
+  .chart__plot {
+    border-bottom-color: var(--t-border);
   }
 
-  // Chart styling
-  .chart-card {
-    .chart-placeholder {
-      padding: 1rem;
-    }
-
-    .chart-bars {
-      align-items: flex-end;
-    }
-
-    .chart-bar {
-      background-color: var(--primary);
-      border-radius: 3px 3px 0 0;
-      transition:
-        opacity 0.2s ease,
-        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-      &:hover {
-        opacity: 0.8;
-        transform: scaleY(1.03);
-      }
-    }
+  .chart__bar {
+    border-radius: 6px 6px 0 0;
   }
 
-  // List styling
-  .q-list {
-    padding: 0.5rem;
-    background-color: var(--card);
+  .chart__col:hover .chart__bar {
+    background: #52525b;
+  }
 
-    .q-item {
-      border-radius: var(--radius);
-      padding: 12px;
-      transition: background-color 0.2s ease;
-      color: var(--card-foreground);
+  .chart__col.is-current:hover .chart__bar {
+    background: #e4e4e7;
+  }
 
-      &:hover {
-        background-color: var(--secondary);
-      }
-    }
-
-    .q-item__section--avatar {
-      .q-avatar {
-        color: var(--primary-foreground);
-        background-color: var(--primary);
-      }
-    }
-
-    .q-item__label {
+  .q-table {
+    td:first-child {
       font-weight: 500;
-      color: var(--foreground);
+    }
 
-      &--caption {
-        color: var(--muted-foreground);
-        font-size: 0.875rem;
-        font-weight: 400;
-        line-height: 1.25rem;
-      }
+    tbody tr:hover td {
+      background: var(--t-surface-2);
+    }
+
+    tbody td::before {
+      background: none;
     }
   }
 
-  // Badge styling
-  .q-badge {
+  .q-btn.btn-primary,
+  .q-btn.btn-ghost {
     font-weight: 500;
-    font-size: 0.75rem;
-    border-radius: 999px;
-    padding: 0.125rem 0.5rem;
-    height: 1.25rem;
+  }
 
-    &.bg-accent {
-      background-color: var(--accent);
-      color: var(--accent-foreground);
+  .q-btn.btn-primary {
+    min-height: 36px;
+
+    &:hover {
+      background: #e4e4e7;
     }
   }
 
-  // Layout styling
-  .layout-header {
-    background-color: var(--background);
-    color: var(--foreground);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-    .app-title {
-      font-weight: 600;
-      color: var(--foreground);
-      letter-spacing: -0.025em;
-    }
-
-    .theme-selector {
-      position: relative;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: border-color 0.2s ease;
-      background-color: var(--card);
-
-      &:hover {
-        border-color: color-mix(in srgb, var(--border) 80%, #ffffff);
-      }
-
-      &:focus-within {
-        border-color: var(--ring);
-        box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 30%, transparent);
-      }
-
-      select {
-        color: var(--foreground);
-        font-weight: 400;
-        font-size: 0.875rem;
-      }
-
-      .select-icon {
-        color: var(--muted-foreground);
-      }
-    }
-
-    .version-text {
-      color: var (--muted-foreground);
-      font-size: 0.75rem;
-    }
+  .q-btn.btn-ghost {
+    box-shadow: inset 0 0 0 1px var(--t-border);
   }
 
-  // Menu
-  .q-menu {
-    background-color: var(--popover);
-    color: var(--popover-foreground);
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  .q-field--outlined .q-field__control::before {
+    border-color: var(--t-border);
   }
 
-  // Dialog
-  .q-dialog {
-    .q-card {
-      background-color: var(--card);
-      color: var(--card-foreground);
-    }
+  .q-field--outlined .q-field__control:hover::before {
+    border-color: var(--t-border-strong);
   }
 
-  // Separator
-  .q-separator {
-    background-color: var(--border);
-  }
-
-  // Fix for dark mode input autofill
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-text-fill-color: var(--foreground) !important;
-    -webkit-box-shadow: 0 0 0 30px var(--card) inset !important;
-    transition: background-color 5000s ease-in-out 0s;
+  .q-field--outlined.q-field--highlighted .q-field__control::after {
+    border-color: var(--t-ring);
+    box-shadow: 0 0 0 3px rgb(113 113 122 / 0.5);
   }
 }

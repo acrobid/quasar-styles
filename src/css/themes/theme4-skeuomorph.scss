@@ -1,310 +1,238 @@
-// Modern iOS-Inspired Theme (2024)
+// Theme 4 — Neo-Skeuomorphism (light)
+// Soft UI: surfaces share the canvas colour and are shaped by paired light/dark
+// shadows — raised for things you press, inset for things you fill in. Text,
+// labels and focus rings are kept at full contrast, since depth alone isn't.
 
 body.theme4 {
-  --primary-color: #0071e3;
-  --secondary-color: #06c;
-  --surface-color: #ffffff;
-  --text-color: #1d1d1d;
-  --text-secondary: #6e6e73;
-  --background-color: #f5f5f7;
-  --border-color: rgba(0, 0, 0, 0.1);
-  --border-radius: 12px;
-  --shadow-subtle: rgba(0, 0, 0, 0.05);
-  --highlight-color: rgba(0, 0, 0, 0.03);
-  --card-bg-color: rgba(255, 255, 255, 0.8);
+  --hi: rgb(255 255 255 / 0.9);
+  --lo: rgb(150 164 186 / 0.55);
+  --raised: 8px 8px 18px var(--lo), -8px -8px 18px var(--hi);
+  --raised-sm: 4px 4px 9px var(--lo), -4px -4px 9px var(--hi);
+  --inset: inset 3px 3px 7px var(--lo), inset -3px -3px 7px var(--hi);
 
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
+  --t-bg: #e4e9f0;
+  --t-surface: #e4e9f0;
+  --t-surface-2: #dde3eb;
+  --t-header-bg: rgb(228 233 240 / 0.88);
+  --t-border: rgb(255 255 255 / 0.55);
+  --t-border-strong: #76839a; // 3:1 against the canvas, for field edges
+  --t-border-width: 1px;
+  --t-grid: rgb(150 164 186 / 0.28);
+  --t-track: #dae0e8;
+  --t-text: #1e2633;
+  --t-muted: #4f5a6b;
+  --t-primary: #4553d4;
+  --t-on-primary: #ffffff;
+  --t-accent: #8a5cd6;
+  --t-positive: #17784b;
+  --t-warning: #9a5a00;
+  --t-negative: #b42318;
+  --t-info: #23629f;
+  --t-neutral: #66707f;
+  --t-chart: linear-gradient(180deg, #b4bfd0, #9eabbf);
+  --t-ring: #4553d4;
+  --t-input-bg: #e4e9f0;
+  --t-radius: 24px;
+  --t-radius-sm: 14px;
+  --t-radius-pill: 999px;
+  --t-shadow: var(--raised);
+  --t-shadow-hover: 12px 12px 24px var(--lo), -12px -12px 24px var(--hi);
+  --t-shadow-pop: var(--raised);
+  --t-field-shadow: var(--inset);
+  --t-font-body: 'Nunito', system-ui, sans-serif;
+  --t-font-display: 'Nunito', system-ui, sans-serif;
+  --t-font-mono: 'Nunito', system-ui, sans-serif;
+  --t-display-weight: 800;
+  --t-display-tracking: -0.01em;
+  --t-gap: 24px;
+  --t-pad: 24px;
+  --t-duration: 220ms;
 
-  // Cards with iOS-style design
+  :focus-visible {
+    outline: 3px solid var(--t-ring);
+    outline-offset: 3px;
+  }
+
+  // Header -----------------------------------------------------------------
+  .app-header {
+    border-bottom: 0;
+    box-shadow: 0 6px 18px -10px var(--lo);
+    backdrop-filter: blur(10px);
+  }
+
+  .brand__mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--t-primary) 0 5px, transparent 6px), var(--t-surface);
+    box-shadow: var(--raised-sm);
+  }
+
+  .theme-picker__select {
+    height: 40px;
+    border-radius: var(--t-radius-pill);
+    padding-left: 16px;
+  }
+
+  // Panels -----------------------------------------------------------------
   .q-card {
-    border-radius: var(--border-radius);
-    background-color: var(--card-bg-color);
-    box-shadow: 0 1px 3px var(--shadow-subtle);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-    overflow: hidden;
+    border-color: rgb(255 255 255 / 0.45);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .q-card__section {
-      padding: 16px 20px;
-    }
-
-    // Card title styling
-    .text-h6 {
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--text-color);
+      box-shadow: var(--t-shadow-hover);
     }
   }
 
-  // iOS style buttons
-  .q-btn {
-    border-radius: 18px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    transition: all 0.2s ease;
-    position: relative;
-    padding: 0 16px;
-    height: 36px;
-    min-height: 36px;
-
-    &.q-btn--standard {
-      background-color: var(--primary-color);
-      color: white;
-
-      &:hover {
-        background-color: darken(#0071e3, 5%);
-        box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
-      }
-
-      &:active {
-        transform: scale(0.98);
-        background-color: darken(#0071e3, 8%);
-      }
-    }
-
-    &.q-btn--flat {
-      color: var(--primary-color);
-
-      &:hover {
-        background-color: rgba(0, 113, 227, 0.1);
-      }
-    }
-
-    &.q-btn--outline {
-      border: 1px solid var(--border-color);
-      background: var(--surface-color);
-    }
+  .hero__title,
+  .panel__title,
+  .stat__value,
+  .brand__name {
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.8);
   }
 
-  // Form elements with iOS style
-  .q-input,
-  .q-select {
-    .q-field__control {
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      background-color: rgba(250, 250, 252, 0.8);
-      height: 46px;
-      position: relative;
-      transition: all 0.2s ease;
-
-      // Remove material lines
-      &::before,
-      &::after {
-        display: none !important;
-      }
-
-      &:hover {
-        border-color: rgba(0, 0, 0, 0.2);
-      }
-
-      &:focus-within {
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
-      }
-    }
-
-    .q-field__native {
-      padding-left: 16px;
-      color: var(--text-color);
-      font-size: 15px;
-    }
-
-    .q-field__label {
-      left: 16px;
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
+  .eyebrow {
+    font-weight: 700;
   }
 
-  // Tables with iOS aesthetic
-  .q-table {
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 1px 3px var(--shadow-subtle);
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
-
-    th {
-      background-color: var(--background-color);
-      color: var(--text-secondary);
-      font-weight: 600;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    td {
-      padding: 12px 16px;
-      font-size: 14px;
-      border-bottom: 1px solid var(--border-color);
-      color: var(--text-color);
-    }
-
-    tbody tr {
-      transition: background-color 0.2s;
-
-      &:hover {
-        background-color: var(--highlight-color);
-      }
-    }
+  .delta {
+    background: var(--t-surface);
+    box-shadow: var(--raised-sm);
   }
 
-  // Layout styling for iOS look
-  .layout-header {
-    background-color: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-
-    .app-title {
-      color: var(--text-color);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-  }
-
-  // Progress indicators
+  // Progress: an inset groove holding a glossy raised fill.
   .q-linear-progress {
-    height: 6px;
-    border-radius: 3px;
-    background: rgba(0, 0, 0, 0.05);
+    height: 10px;
+    background: var(--t-surface);
+    box-shadow: var(--inset);
+  }
 
-    &__model {
-      border-radius: 3px;
+  .q-linear-progress__track {
+    background: transparent;
+  }
+
+  .q-linear-progress__model {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, currentColor 75%, #ffffff),
+      currentColor
+    );
+    box-shadow: 1px 1px 3px var(--lo);
+  }
+
+  .cell-progress .q-linear-progress {
+    height: 8px;
+  }
+
+  // Chart: raised bars standing in an inset tray.
+  .chart__plot {
+    border-bottom: 0;
+  }
+
+  .chart__cols {
+    padding: 12px 8px 0;
+    border-radius: var(--t-radius-sm);
+    box-shadow: var(--inset);
+  }
+
+  .chart__bar {
+    border-radius: 12px 12px 4px 4px;
+    box-shadow:
+      3px 3px 6px var(--lo),
+      -2px -2px 5px var(--hi);
+  }
+
+  .chart__col.is-current .chart__bar {
+    background: linear-gradient(180deg, #6571ec, var(--t-primary));
+  }
+
+  .chart__label {
+    padding-bottom: 10px;
+  }
+
+  // List, table, chips: raised pills.
+  .q-avatar.avatar {
+    background: var(--t-surface);
+    box-shadow: var(--raised-sm);
+    font-weight: 800;
+  }
+
+  .q-chip.status {
+    gap: 6px;
+    background: var(--t-surface);
+    box-shadow: var(--raised-sm);
+    font-weight: 700;
+
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--tone);
     }
   }
 
-  // iOS style chips
-  .q-chip {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 0 10px;
-    height: 24px;
-    border-radius: 12px;
+  .q-badge.badge-new {
+    box-shadow:
+      2px 2px 5px var(--lo),
+      -2px -2px 5px var(--hi);
   }
 
-  // Stats cards
-  .stat-card {
-    .text-subtitle2 {
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      margin-bottom: 4px;
+  .q-table {
+    th {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
-    .text-h4 {
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-      font-size: 28px;
+    th,
+    td {
+      border-bottom-color: rgb(150 164 186 / 0.35);
+      box-shadow: 0 1px 0 rgb(255 255 255 / 0.7);
+    }
+
+    tbody tr:last-child td {
+      box-shadow: none;
     }
   }
 
-  // Chart styling
-  .chart-card {
-    .chart-placeholder {
-      .chart-bars {
-        .chart-bar {
-          background: linear-gradient(to top, var(--primary-color), lighten(#0071e3, 15%));
-          opacity: 0.8;
-          border-radius: 6px 6px 0 0;
+  // Buttons + form: raised by default, pressed in when active.
+  .q-btn.btn-primary,
+  .q-btn.btn-ghost {
+    border-radius: var(--t-radius-pill);
+    padding-inline: 18px;
+    box-shadow: var(--raised-sm);
 
-          &::after {
-            content: attr(data-value) + '%';
-            position: absolute;
-            top: -25px;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-
-          &:hover {
-            opacity: 1;
-            transform: translateY(-3px);
-            transition: all 0.2s ease;
-          }
-        }
-      }
+    &:active {
+      box-shadow: var(--inset);
     }
   }
 
-  // Avatars
-  .q-avatar {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
+  .q-btn.btn-primary {
+    min-height: 48px;
+    background: linear-gradient(145deg, #5562e6, #3a46bf);
+    box-shadow:
+      6px 6px 14px var(--lo),
+      -6px -6px 14px var(--hi),
+      inset 0 1px 0 rgb(255 255 255 / 0.3);
 
-  // iOS style list items
-  .q-item {
-    min-height: 56px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin: 2px 0;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: var(--highlight-color);
-    }
-
-    .q-item__label {
-      color: var(--text-color);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-
-    .q-item__label--caption {
-      color: var(--text-secondary);
-      font-size: 13px;
-      margin-top: 2px;
+    &:active {
+      box-shadow: inset 3px 3px 8px rgb(20 28 90 / 0.5);
     }
   }
 
-  // Forms
-  .q-form {
-    .q-input + .q-input,
-    .q-input + .q-select,
-    .q-select + .q-input,
-    .q-select + .q-select {
-      margin-top: 16px;
+  .field__label {
+    padding-left: 6px;
+    font-weight: 700;
+  }
+
+  .q-field--outlined {
+    .q-field__control {
+      height: 44px;
+      border-radius: var(--t-radius-sm);
     }
   }
 
-  // Select styling
-  .q-select {
-    .q-menu {
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-      padding: 6px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--border-color);
-
-      .q-item {
-        border-radius: 8px;
-        padding: 8px 12px;
-
-        &--active {
-          background-color: rgba(0, 113, 227, 0.1);
-          color: var(--primary-color);
-        }
-      }
-    }
+  .q-field--outlined.q-textarea .q-field__control {
+    height: auto;
   }
 }

@@ -1,489 +1,209 @@
-// Modern Organic Dark Theme - 2024 Edition
+// Theme 3 — Organic Minimalism (light)
+// Warm editorial: grain-textured paper, terracotta + sage, generous radii and
+// air, Fraunces (soft, optical-size aware) for display, italic accents.
+
+$grain: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .14 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E";
 
 body.theme3 {
-  --primary-color: #7eb77f;
-  --secondary-color: #4d8c9e;
-  --tertiary-color: #31403b;
-  --accent-color: #9fc6b7;
-  --background-color: #171f1a;
-  --surface-color: #1e2922;
-  --card-color: #243029;
-  --text-primary: #e9efec;
-  --text-secondary: #b0c1b5;
-  --clay-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-  --q-primary-rgb: 126, 183, 127;
+  --clay: #a64b29;
+  --sage: #5e7356;
 
-  background-color: var(--background-color);
-  color: var(--text-primary);
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  --t-bg: #f3ede2;
+  --t-bg-image:
+    url('#{$grain}'),
+    radial-gradient(circle at 8% 0%, rgb(94 115 86 / 0.14), transparent 38%) fixed,
+    radial-gradient(circle at 100% 100%, rgb(166 75 41 / 0.1), transparent 42%) fixed;
+  --t-surface: #fbf8f2;
+  --t-surface-2: #f4eee3;
+  --t-header-bg: transparent;
+  --t-border: #e6dccb;
+  --t-border-strong: #d3c5ae;
+  --t-border-width: 1px;
+  --t-grid: rgb(120 100 70 / 0.12);
+  --t-track: #ebe3d4;
+  --t-text: #2a2520;
+  --t-muted: #6a6054;
+  --t-primary: var(--clay);
+  --t-on-primary: #fffaf3;
+  --t-accent: var(--sage);
+  --t-positive: #4c7a46;
+  --t-warning: #a8660c;
+  --t-negative: #a8382a;
+  --t-info: #3f6a86;
+  --t-neutral: #857a6b;
+  --t-chart: #b7c3a8;
+  --t-ring: var(--clay);
+  --t-input-bg: #fffdf9;
+  --t-radius: 28px;
+  --t-radius-sm: 14px;
+  --t-radius-pill: 999px;
+  --t-shadow: 0 1px 1px rgb(73 52 30 / 0.04), 0 18px 40px -24px rgb(73 52 30 / 0.22);
+  --t-shadow-pop: 0 24px 48px -16px rgb(73 52 30 / 0.28);
+  --t-font-body: 'Inter', system-ui, sans-serif;
+  --t-font-display: 'Fraunces', Georgia, serif;
+  --t-font-mono: 'Inter', system-ui, sans-serif;
+  --t-display-weight: 400;
+  --t-display-tracking: -0.015em;
+  --t-gap: 20px;
+  --t-pad: 28px;
+  --t-ease: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-duration: 320ms;
 
-  // Modern, subtle ripples
-  .q-ripple {
-    background-color: rgba(126, 183, 127, 0.15) !important;
-    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1) !important;
+  // Fraunces: soften the terminals everywhere it's used.
+  .brand__name,
+  .hero__title,
+  .panel__title,
+  .stat__value {
+    font-variation-settings: 'SOFT' 100;
   }
 
-  // Smooth transitions
-  * {
-    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1) !important;
+  // Header -----------------------------------------------------------------
+  .app-header {
+    border-bottom-color: transparent;
   }
 
-  // Modern cards with subtle glow
-  .q-card {
-    border-radius: 20px !important;
-    background-color: var(--card-color);
-    box-shadow:
-      0 8px 24px rgba(0, 0, 0, 0.2),
-      0 1px 3px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    transition:
-      transform 0.3s cubic-bezier(0.2, 1, 0.3, 1),
-      box-shadow 0.3s cubic-bezier(0.2, 1, 0.3, 1);
-    overflow: hidden;
-
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.25),
-        0 8px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    & > div:first-child {
-      border-radius: 16px !important;
-      overflow: hidden;
-    }
+  .brand__mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+    background: radial-gradient(circle at 30% 30%, #c66a43, var(--clay) 60%, #7d3518);
   }
 
-  // Contemporary typography
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  .text-h1,
-  .text-h2,
-  .text-h3,
-  .text-h4,
-  .text-h5,
-  .text-h6 {
-    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  .brand__name {
+    font-size: 1.25rem;
+    font-style: italic;
+  }
+
+  .theme-picker__select {
+    border-color: var(--t-border-strong);
+    border-radius: var(--t-radius-pill);
+    background: rgb(255 253 249 / 0.7);
+    padding-left: 16px;
+  }
+
+  // Panels -----------------------------------------------------------------
+  .hero {
+    padding-block: clamp(28px, 6vw, 56px);
+    background:
+      radial-gradient(circle 260px at 96% 8%, rgb(94 115 86 / 0.16), transparent),
+      radial-gradient(circle 180px at 80% 120%, rgb(166 75 41 / 0.1), transparent), var(--t-surface);
+  }
+
+  .hero__title {
+    font-size: clamp(2.25rem, 1rem + 4.5vw, 4rem);
+    font-weight: 350;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .hero__word:last-child {
+    color: var(--clay);
+    font-style: italic;
+  }
+
+  .hero__lede {
+    font-family: var(--t-font-display);
+    font-size: 1.125rem;
+    font-style: italic;
+  }
+
+  .eyebrow {
+    color: var(--sage);
     font-weight: 600;
-    letter-spacing: -0.5px;
-    color: var(--text-primary);
+    letter-spacing: 0.14em;
   }
 
-  // Modern buttons
-  .q-btn {
-    border-radius: 12px !important;
-    background: linear-gradient(135deg, rgba(126, 183, 127, 0.9), rgba(77, 140, 158, 0.95));
-    color: #fff;
-    padding: 8px 20px;
-    font-weight: 500;
-    letter-spacing: 0;
-    font-family: 'Inter', 'Helvetica Neue', sans-serif;
-    border: none !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition:
-      transform 0.3s cubic-bezier(0.2, 1, 0.3, 1),
-      box-shadow 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+  .panel__title {
+    font-size: 1.375rem;
+    font-weight: 450;
+  }
 
-    &:before {
-      border-radius: 12px !important;
+  .stat__value {
+    font-size: 2.5rem;
+    font-weight: 380;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  .stat__label {
+    font-weight: 500;
+  }
+
+  .q-linear-progress {
+    height: 8px;
+  }
+
+  // Chart: pebble-shaped bars on dotted guides.
+  .chart__plot {
+    border-bottom-style: dotted;
+    background: radial-gradient(circle at 50% 1px, var(--t-border-strong) 1px, transparent 1.5px) 0
+      0 / 7px 25%;
+  }
+
+  .chart__bar {
+    width: min(48%, 40px);
+    border-radius: 999px 999px 10px 10px;
+  }
+
+  .chart__col.is-current .chart__bar {
+    background: linear-gradient(180deg, #c06640, var(--clay));
+  }
+
+  .chart__value {
+    font-variant-numeric: tabular-nums;
+  }
+
+  // List, table, chips -----------------------------------------------------
+  .q-avatar.avatar {
+    font-family: var(--t-font-display);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .q-badge.badge-new {
+    background: var(--sage);
+    font-family: var(--t-font-display);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .q-table {
+    th {
+      font-size: 13px;
     }
+
+    td:first-child {
+      font-family: var(--t-font-display);
+      font-size: 1rem;
+    }
+
+    tbody td::before {
+      background: rgb(166 75 41 / 0.04);
+    }
+  }
+
+  // Buttons + form ---------------------------------------------------------
+  .q-btn.btn-primary,
+  .q-btn.btn-ghost {
+    border-radius: var(--t-radius-pill);
+    padding-inline: 18px;
+  }
+
+  .q-btn.btn-primary {
+    min-height: 46px;
+    font-weight: 500;
+    box-shadow: 0 10px 24px -12px rgb(166 75 41 / 0.7);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(126, 183, 127, 0.25);
-    }
-
-    &.q-btn--flat {
-      background: transparent;
-      color: var(--primary-color);
-      box-shadow: none;
-
-      &:hover {
-        background: rgba(126, 183, 127, 0.1);
-      }
+      background: #94401f;
     }
   }
 
-  // Modern form fields
-  .q-input,
-  .q-select {
-    .q-field__control {
-      border-radius: 12px !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      background: rgba(0, 0, 0, 0.2);
-      height: 56px;
-      transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
-
-      &:hover {
-        border-color: rgba(126, 183, 127, 0.3) !important;
-      }
-
-      &:focus-within {
-        border-color: var(--primary-color) !important;
-        box-shadow: 0 0 0 3px rgba(126, 183, 127, 0.15);
-      }
-
-      &:before,
-      &:after {
-        display: none !important;
-      }
-    }
-
-    .q-field__label {
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      left: 18px;
-      color: var(--text-secondary);
-
-      &--floating {
-        background-color: var(--card-color);
-        padding: 0 8px;
-        font-size: 14px;
-        color: var(--primary-color);
-        letter-spacing: 0;
-      }
-    }
-
-    .q-field__native,
-    .q-field__input {
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      padding-left: 18px;
-      font-size: 16px;
-      color: var(--text-primary);
-    }
-  }
-
-  // Modern table design
-  .q-table {
-    border-radius: 16px !important;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    background: var(--card-color);
-    box-shadow: var(--clay-shadow);
-
-    th {
-      background-color: rgba(0, 0, 0, 0.2) !important;
-      color: var(--text-primary);
-      font-weight: 600;
-      border-bottom: none !important;
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      font-size: 14px !important;
-      padding: 16px !important;
-    }
-
-    tr td {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-      padding: 16px !important;
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      font-size: 14px !important;
-      color: var(--text-secondary);
-    }
-
-    tbody tr:hover {
-      background-color: rgba(126, 183, 127, 0.08) !important;
-    }
-  }
-
-  // Progress bars
-  .q-linear-progress {
-    height: 6px !important;
-    border-radius: 3px !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-
-    &__model {
-      border-radius: 3px !important;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)) !important;
-    }
-  }
-
-  // Dashboard elements
-  .dashboard-header {
-    background-color: var(--card-color);
-    border-radius: 20px !important;
-    overflow: hidden;
-    box-shadow: var(--clay-shadow);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-
-    h4 {
-      color: var(--text-primary);
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      font-size: 28px;
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--text-secondary);
-    }
-  }
-
-  .stat-card {
-    background-color: var(--card-color);
-    border-radius: 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-
-    .text-h4 {
-      font-weight: 600;
-      color: var(--text-primary);
-      font-size: 24px;
-    }
-
-    .text-subtitle2 {
-      color: var(--text-secondary);
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0;
-    }
-  }
-
-  // Chart elements
-  .chart-card {
-    .chart-bars {
-      display: flex;
-      align-items: flex-end;
-      height: 220px;
-      padding: 20px 10px;
-    }
-
-    .chart-bar {
-      background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
-      border-radius: 12px 12px 0 0 !important;
-      margin: 0 8px;
-      transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
-      box-shadow: 0 0 20px rgba(126, 183, 127, 0.2);
-
-      &:hover {
-        transform: scaleY(1.05);
-        box-shadow: 0 0 30px rgba(126, 183, 127, 0.4);
-      }
-    }
-  }
-
-  // Enhanced Select styling
-  .q-select {
-    --select-border-color: rgba(255, 255, 255, 0.08);
-    --select-text-color: var(--text-primary);
-
-    .q-field__control {
-      border-radius: 12px;
-      border: 1px solid var(--select-border-color);
-      background: rgba(0, 0, 0, 0.2);
-      min-height: 56px;
-      transition: all 0.3s ease;
-      overflow: hidden;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.05));
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-
-      &:hover::before {
-        opacity: 1;
-      }
-
-      &:hover {
-        border-color: rgba(126, 183, 127, 0.3) !important;
-      }
-
-      &:focus-within {
-        border-color: var(--primary-color);
-        border-width: 1px;
-        box-shadow: 0 0 0 3px rgba(126, 183, 127, 0.15);
-      }
-    }
-
-    .q-field__native,
-    .q-field__input {
-      padding: 0 16px;
-      color: var(--select-text-color);
-      font-weight: 400;
-    }
-
-    .q-field__label {
-      left: 16px;
-      color: var(--text-secondary);
-      font-weight: 400;
-      letter-spacing: 0;
-
-      &--floating {
-        transform: translateY(-120%) scale(0.85);
-        color: var(--primary-color);
-        background-color: var(--card-color);
-        padding: 0 8px;
-      }
-    }
-
-    .q-field__append {
-      padding-right: 12px;
-
-      .q-icon {
-        color: var(--primary-color);
-        transition: transform 0.3s;
-      }
-    }
-
-    &.q-field--focused .q-field__append .q-icon {
-      transform: rotate(180deg);
-    }
-
-    .q-menu {
-      border-radius: 16px !important;
-      background-color: var(--card-color);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 12px;
-
-      .q-item {
-        border-radius: 10px !important;
-        padding: 12px 16px;
-        min-height: 46px;
-        transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
-        margin-bottom: 4px;
-        font-family: 'Inter', 'Helvetica Neue', sans-serif;
-        color: var(--text-secondary);
-
-        &:hover {
-          background-color: rgba(126, 183, 127, 0.1);
-          transform: translateX(5px);
-          color: var(--text-primary);
-        }
-
-        &--active {
-          background-color: rgba(126, 183, 127, 0.15) !important;
-          color: var(--primary-color);
-          font-weight: 500;
-        }
-      }
-    }
-  }
-
-  // Modern list
-  .q-list {
-    padding: 10px;
-    border-radius: 16px !important;
-    overflow: hidden;
-    background: var(--card-color);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-
-    .q-item {
-      border-radius: 12px !important;
-      margin-bottom: 6px;
-      transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
-      color: var(--text-secondary);
-
-      &:hover {
-        background-color: rgba(126, 183, 127, 0.08);
-        transform: translateX(5px);
-        color: var(--text-primary);
-      }
-
-      .q-item__label {
-        font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      }
-    }
-
-    .q-avatar {
-      border-radius: 12px !important;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    }
-  }
-
-  // Timeline elements
-  .q-timeline__entry {
-    &:nth-child(odd) {
-      transform: translateX(-5px);
-    }
-
-    &:nth-child(even) {
-      transform: translateX(5px);
-    }
-
-    .q-timeline__dot {
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    }
-  }
-
-  // Calendar styling
-  .calendar-today {
-    background-color: var(--primary-color);
-    color: #fff;
-    border-radius: 12px;
-  }
-
-  .calendar-event::after {
-    background-color: var(--secondary-color);
-  }
-
-  // Modern header
-  .layout-header {
-    background: linear-gradient(135deg, rgba(31, 43, 36, 0.95), rgba(25, 35, 30, 0.98));
-    color: var(--text-primary);
-    border-radius: 0 0 24px 24px;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-
-    .q-toolbar {
-      height: 70px;
-    }
-
-    .q-toolbar__title {
-      font-weight: 600;
-      letter-spacing: -0.5px;
-    }
-  }
-
-  // Avatar styling
-  .q-avatar {
-    border-radius: 12px !important;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border: 2px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-    &.q-avatar--rounded {
-      border-radius: 14px !important;
-    }
-  }
-
-  // Badge styling
-  .q-badge {
-    border-radius: 8px;
-    padding: 4px 8px;
+  .q-btn.btn-ghost {
+    border: 1px solid var(--t-border-strong);
     font-weight: 500;
-    font-size: 0.65rem;
-    letter-spacing: 0.3px;
-    background-color: rgba(126, 183, 127, 0.15);
-    color: var(--primary-color);
-    border: 1px solid rgba(126, 183, 127, 0.3);
   }
 
-  // Chip styling
-  .q-chip {
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    color: var(--text-secondary);
-
-    &--colored {
-      background-color: rgba(126, 183, 127, 0.15);
-      color: var(--primary-color);
-      border: 1px solid rgba(126, 183, 127, 0.3);
-    }
+  .q-field--outlined .q-field__control {
+    border-radius: 16px;
   }
 }

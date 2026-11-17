@@ -1,411 +1,142 @@
-// Modern Linear Theme
-
-:root {
-  --primary-color: #3772ff;
-  --secondary-color: #f038ff;
-  --background-color: #121212; // changed from #fafafa to dark background
-  --card-bg-color: #1e1e1e; // changed from #ffffff to dark card background
-  --text-color: #e0e0e0; // changed from #333333 to light text for dark mode
-  --border-color: #333333; // changed from #eeeeee to darker border for dark mode
-  --accent-color: #36f4b9;
-}
+// Theme 1 — Modern Linear (dark)
+// Near-black canvas with an indigo haze, hairline borders, layered translucent
+// surfaces, Inter at Linear's in-between weights, gradient display type.
 
 body.theme1 {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: 'SF Mono', 'Roboto Mono', monospace;
-  letter-spacing: -0.015em;
+  --t-bg: #08090a;
+  --t-bg-image: radial-gradient(
+      ellipse 70% 420px at 50% -120px,
+      rgb(94 106 210 / 0.22),
+      transparent 70%
+    )
+    no-repeat;
+  --t-surface: #0f1012;
+  --t-surface-2: rgb(255 255 255 / 0.03);
+  --t-header-bg: rgb(8 9 10 / 0.72);
+  --t-border: rgb(255 255 255 / 0.08);
+  --t-border-strong: rgb(255 255 255 / 0.14);
+  --t-border-width: 1px;
+  --t-grid: rgb(255 255 255 / 0.05);
+  --t-track: rgb(255 255 255 / 0.07);
+  --t-text: #f7f8f8;
+  --t-muted: #8a8f98;
+  --t-primary: #5e6ad2;
+  --t-on-primary: #ffffff;
+  --t-accent: #8e7cf0;
+  --t-positive: #4cb782;
+  --t-warning: #f2994a;
+  --t-negative: #eb5757;
+  --t-info: #4ea7fc;
+  --t-neutral: #8a8f98;
+  --t-chart: rgb(94 106 210 / 0.3);
+  --t-ring: #7c86e6;
+  --t-input-bg: rgb(255 255 255 / 0.02);
+  --t-radius: 12px;
+  --t-radius-sm: 8px;
+  --t-radius-pill: 999px;
+  --t-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(0 0 0 / 0.4);
+  --t-shadow-hover: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 8px 32px -8px rgb(0 0 0 / 0.6);
+  --t-shadow-pop: 0 0 0 1px rgb(255 255 255 / 0.04), 0 16px 48px -8px rgb(0 0 0 / 0.7);
+  --t-font-body: 'Inter', system-ui, sans-serif;
+  --t-font-display: 'Inter', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 590;
+  --t-display-tracking: -0.022em;
+  --t-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  // Override Material ripples
-  .q-ripple {
-    display: none !important;
+  font-feature-settings: 'cv01', 'ss03';
+
+  .app-header {
+    backdrop-filter: blur(16px) saturate(1.5);
   }
 
-  // Sharper edged cards with border instead of elevation
+  .brand__mark {
+    border-radius: 7px;
+    background: linear-gradient(135deg, #8e97ff, #5e6ad2 55%, #3b3f9c);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25);
+  }
+
+  .theme-picker__select {
+    border-color: var(--t-border);
+    border-radius: var(--t-radius-pill);
+    background: rgb(255 255 255 / 0.04);
+  }
+
   .q-card {
-    border-radius: 0;
-    background-color: var(--card-bg-color);
-    box-shadow: none;
-    border: 1px solid var(--border-color);
-    transition:
-      transform 0.3s ease,
-      border-color 0.3s ease;
-    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.025), transparent 40%), var(--t-surface);
 
     &:hover {
-      transform: translateY(-2px);
-      border-color: var(--primary-color);
-      box-shadow: none;
+      border-color: var(--t-border-strong);
+      box-shadow: var(--t-shadow-hover);
     }
   }
 
-  // Typography reset with monospace influence
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  .text-h1,
-  .text-h2,
-  .text-h3,
-  .text-h4,
-  .text-h5,
-  .text-h6 {
-    font-family: 'SF Mono', 'Roboto Mono', monospace;
-    letter-spacing: -0.03em;
-    font-weight: 500;
+  // Signature: soft gradient type, like Linear's marketing headings.
+  .hero__title {
+    background: linear-gradient(100deg, #f7f8f8 40%, rgb(247 248 248 / 0.45));
+    background-clip: text;
+    color: transparent;
   }
 
-  // Square buttons with hover lines instead of ripples
-  .q-btn {
-    border-radius: 0;
-    font-weight: 500;
+  .eyebrow {
+    color: #a5abf0;
+    text-transform: none;
     letter-spacing: 0;
-    box-shadow: none;
-    border: 1px solid transparent;
-    transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-    position: relative;
-    overflow: hidden;
+  }
 
-    &::after {
+  .delta,
+  .q-chip.status {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--t-border-strong);
+  }
+
+  // Status as a coloured dot, Linear-style.
+  .q-chip.status {
+    gap: 6px;
+    border-radius: 6px;
+    color: var(--t-text);
+    font-weight: 500;
+
+    &::before {
       content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: currentColor;
-      transition: width 0.3s ease;
-    }
-
-    &:hover::after {
-      width: 100%;
-    }
-
-    &.q-btn--standard {
-      background: var(--primary-color);
-      color: white;
-    }
-
-    &.q-btn--flat {
-      color: var(--primary-color);
-      &:hover {
-        background: transparent;
-      }
-    }
-
-    &:active {
-      transform: translateY(1px);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--tone);
+      box-shadow: 0 0 8px var(--tone);
     }
   }
 
-  // Form elements with square corners
-  .q-input,
-  .q-select {
-    .q-field__control {
-      border-radius: 0;
-      border: 1px solid var(--border-color);
-      background-color: var(--card-bg-color);
-      height: 42px;
-      transition: all 0.2s ease;
+  .chart__bar {
+    background: linear-gradient(180deg, rgb(94 106 210 / 0.45), rgb(94 106 210 / 0.08));
+    box-shadow: inset 0 1px 0 rgb(165 171 240 / 0.5);
+  }
 
-      &:hover {
-        border-color: var(--primary-color);
-      }
+  .chart__col.is-current .chart__bar {
+    background: linear-gradient(180deg, #7c86e6, rgb(94 106 210 / 0.35));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.5),
+      0 0 24px rgb(94 106 210 / 0.45);
+  }
 
-      &:focus-within {
-        border-color: var(--primary-color);
-        border-width: 1px;
-        box-shadow: none;
-      }
-    }
+  .q-table th {
+    font-weight: 510;
+  }
 
-    &.q-field--outlined .q-field__control {
-      background: transparent;
-    }
+  .q-btn.btn-primary {
+    font-weight: 510;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.2),
+      0 0 0 1px rgb(94 106 210 / 0.6);
 
-    .q-field__label {
-      font-family: 'SF Mono', 'Roboto Mono', monospace;
-      font-weight: 400;
-
-      &--floating {
-        background-color: var(--background-color);
-        padding: 0 4px;
-      }
+    &:hover {
+      background: #6c78e0;
     }
   }
 
-  // Select component styling with square edges
-  .q-select {
-    .q-field__native {
-      padding-left: 12px;
-    }
-
-    .q-field__label {
-      left: 12px;
-      font-size: 13px;
-      color: #757575;
-
-      &--floating {
-        transform: translateY(-115%) scale(0.87);
-        font-size: 12px;
-        letter-spacing: 0.2px;
-        color: var(--primary-color);
-        font-weight: 500;
-      }
-    }
-
-    .q-field__append {
-      padding-right: 8px;
-    }
-
-    .q-menu {
-      border-radius: 0;
-      box-shadow: none;
-      border: 1px solid var(--border-color);
-      margin-top: 4px;
-      padding: 4px;
-
-      .q-item {
-        border-radius: 0;
-        border-left: 0px solid var(--primary-color);
-        min-height: 38px;
-        padding: 8px 12px;
-        transition:
-          border-left 0.2s ease,
-          background-color 0.2s ease;
-
-        &:hover {
-          border-left: 4px solid var(--primary-color);
-          background-color: transparent;
-        }
-
-        &--active {
-          background-color: transparent;
-          color: var(--primary-color);
-          border-left: 4px solid var(--primary-color);
-        }
-      }
-    }
-  }
-
-  // Tables with grid lines
-  .q-table {
-    border: 1px solid var(--border-color);
-
-    th {
-      background-color: #fafafa;
-      font-weight: 500;
-      color: #616161;
-      border-bottom: 1px solid var(--border-color);
-      height: 48px;
-      font-size: 13px;
-      border-right: 1px solid var(--border-color);
-
-      &:last-child {
-        border-right: none;
-      }
-    }
-
-    td {
-      height: 48px;
-      font-size: 14px;
-      color: var(--text-color);
-      border-bottom: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
-
-      &:last-child {
-        border-right: none;
-      }
-    }
-
-    tbody tr:hover {
-      background-color: rgba(0, 0, 0, 0.02);
-    }
-  }
-
-  // Progress bars with square ends
-  .q-linear-progress {
-    height: 4px;
-    border-radius: 0;
-    background-color: var(--border-color);
-
-    &__model {
-      border-radius: 0;
-      background: var(--primary-color);
-    }
-  }
-
-  // Dashboard elements with clean design
-  .dashboard-header {
-    background-color: var(--card-bg-color);
-    border-bottom: 1px solid var(--border-color);
-
-    h4 {
-      font-weight: 600;
-      color: var(--text-color);
-    }
-  }
-
-  .stat-card {
-    background-color: var(--card-bg-color);
-
-    .text-h4 {
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-
-    .text-subtitle2 {
-      color: #757575;
-      font-weight: 500;
-      font-size: 13px;
-      letter-spacing: 0.2px;
-      text-transform: uppercase;
-    }
-  }
-
-  .chart-bar {
-    background: linear-gradient(to top, var(--primary-color), var(--accent-color));
-    border-radius: 0;
-    margin: 0 2px;
-  }
-
-  // Square avatars
-  .q-avatar {
-    border-radius: 0;
-    color: white;
-    background-color: var(--primary-color);
-    overflow: hidden;
-
-    &.q-avatar--rounded {
-      border-radius: 4px;
-    }
-  }
-
-  // Square badges
-  .q-badge {
-    border-radius: 0;
-    padding: 4px 8px;
-  }
-
-  // List styling
-  .q-list {
-    padding: 8px 0;
-
-    .q-item {
-      min-height: 56px;
-      padding: 8px 16px;
-      transition: background-color 0.2s;
-      border-radius: 4px;
-      margin: 2px 0;
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.02);
-      }
-
-      .q-item__section--avatar {
-        padding-right: 16px;
-        min-width: 56px;
-      }
-
-      .q-item__section--side {
-        padding-left: 16px;
-      }
-    }
-
-    .q-item__label {
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1.4;
-
-      &--caption {
-        font-size: 13px;
-        color: #757575;
-      }
-    }
-  }
-
-  // Timeline styling
-  .q-timeline {
-    .q-timeline__entry {
-      padding-bottom: 24px;
-
-      .q-timeline__dot {
-        background-color: var(--primary-color);
-      }
-
-      .q-timeline__subtitle {
-        font-size: 12px;
-        color: #757575;
-        letter-spacing: 0.2px;
-      }
-    }
-  }
-
-  // Calendar styling
-  .calendar-today {
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 2px;
-  }
-
-  .calendar-event::after {
-    background-color: var(--accent-color);
-    border-radius: 0;
-  }
-
-  // Layout styling
-  .layout-header {
-    background: var(--card-bg-color);
-    color: var(--text-color);
-    border-bottom: 2px solid var(--border-color);
-    height: 64px;
-
-    .q-toolbar {
-      min-height: 64px;
-      padding: 0 16px;
-    }
-
-    .q-toolbar__title {
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-    }
-
-    .app-title {
-      font-weight: 600;
-      color: var(--text-color);
-      letter-spacing: 0.2px;
-    }
-
-    .theme-selector {
-      transition: all 0.2s ease;
-      border-radius: 0;
-
-      &:hover {
-        border-color: #bdbdbd;
-      }
-
-      select {
-        color: var(--text-color);
-        font-family:
-          'Inter',
-          'SF Pro Display',
-          -apple-system,
-          BlinkMacSystemFont,
-          sans-serif;
-      }
-
-      .select-icon {
-        color: var(--primary-color);
-      }
-    }
-  }
-
-  // Force dark colors for all cards
-  .q-card {
-    background-color: var(--card-bg-color) !important;
-    color: var(--text-color) !important;
+  .q-btn.btn-ghost {
+    font-weight: 510;
+    box-shadow: inset 0 0 0 1px var(--t-border);
   }
 }

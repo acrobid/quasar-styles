@@ -1,262 +1,400 @@
 <template>
-  <q-page padding>
-    <!-- Header Section -->
-    <div class="row q-col-gutter-md q-mb-md">
-      <div class="col-12">
-        <q-card class="dashboard-header">
-          <q-card-section>
-            <h4 class="text-h4 q-my-none">Dashboard Overview</h4>
-            <p class="text-subtitle1 q-mt-sm">Welcome back! Here's your performance summary</p>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
+  <q-page class="dashboard">
+    <!-- Header -->
+    <q-card class="panel hero">
+      <p class="eyebrow">Workspace · November 2026</p>
+      <h1 class="hero__title">
+        <span v-for="(word, i) in heroWords" :key="word" class="hero__word" :style="{ '--i': i }">
+          {{ word }}
+        </span>
+      </h1>
+      <p class="hero__lede">Welcome back. Here's how the team is tracking this month.</p>
+    </q-card>
 
-    <!-- Stats Cards -->
-    <div class="row q-col-gutter-md q-mb-md">
-      <div class="col-12 col-sm-6 col-md-3">
-        <q-card class="stat-card">
-          <q-card-section>
-            <div class="text-subtitle2">Total Users</div>
-            <div class="text-h4">1,254</div>
-            <q-linear-progress :value="0.7" class="q-mt-sm" />
-          </q-card-section>
-        </q-card>
-      </div>
-      <div class="col-12 col-sm-6 col-md-3">
-        <q-card class="stat-card">
-          <q-card-section>
-            <div class="text-subtitle2">Revenue</div>
-            <div class="text-h4">$24,580</div>
-            <q-linear-progress :value="0.6" color="positive" class="q-mt-sm" />
-          </q-card-section>
-        </q-card>
-      </div>
-      <div class="col-12 col-sm-6 col-md-3">
-        <q-card class="stat-card">
-          <q-card-section>
-            <div class="text-subtitle2">Tasks</div>
-            <div class="text-h4">42/65</div>
-            <q-linear-progress :value="0.42" color="warning" class="q-mt-sm" />
-          </q-card-section>
-        </q-card>
-      </div>
-      <div class="col-12 col-sm-6 col-md-3">
-        <q-card class="stat-card">
-          <q-card-section>
-            <div class="text-subtitle2">Alerts</div>
-            <div class="text-h4">5</div>
-            <q-linear-progress :value="0.2" color="negative" class="q-mt-sm" />
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
+    <!-- Stats -->
+    <section class="stats" aria-label="Key metrics">
+      <q-card v-for="(stat, i) in stats" :key="stat.label" class="panel stat" :style="{ '--i': i }">
+        <div class="stat__head">
+          <span class="stat__label">{{ stat.label }}</span>
+          <span class="delta" :class="`tone--${stat.delta.tone}`">
+            <q-icon :name="stat.delta.icon" aria-hidden="true" />
+            {{ stat.delta.text }}
+          </span>
+        </div>
+        <div class="stat__value">{{ stat.value }}</div>
+        <q-linear-progress
+          :value="stat.progress"
+          :color="stat.color"
+          class="stat__progress"
+          :aria-label="`${stat.label}: ${stat.caption}`"
+        />
+        <div class="stat__foot">{{ stat.caption }}</div>
+      </q-card>
+    </section>
 
-    <!-- Main Content -->
-    <div class="row q-col-gutter-md">
-      <!-- Chart Component -->
-      <div class="col-12 col-md-8">
-        <q-card class="chart-card">
-          <q-card-section>
-            <div class="text-h6">Monthly Performance</div>
-          </q-card-section>
-          <q-separator />
-          <q-card-section>
-            <div class="chart-placeholder">
-              <div class="chart-bars">
-                <div
-                  v-for="n in 6"
-                  :key="`bar-${n}`"
-                  class="chart-bar"
-                  :style="`height: ${Math.random() * 80 + 20}%`"
-                  :data-value="`${Math.floor(Math.random() * 100)}`"
-                ></div>
+    <div class="dashboard__grid">
+      <!-- Chart -->
+      <q-card class="panel chart-panel span-8">
+        <div class="panel__head">
+          <div>
+            <h2 class="panel__title">Monthly revenue</h2>
+            <p class="panel__sub">Jun – Nov 2026 · thousands of USD</p>
+          </div>
+          <q-btn flat no-caps :ripple="false" class="btn-ghost" icon="download" label="Export" />
+        </div>
+        <figure class="chart">
+          <figcaption class="visually-hidden">Monthly revenue, June to November 2026</figcaption>
+          <ol class="chart__cols">
+            <li
+              v-for="(bar, i) in chart"
+              :key="bar.month"
+              class="chart__col"
+              :class="{ 'is-current': i === chart.length - 1 }"
+              :style="{ '--h': `${(bar.value / CHART_MAX) * 100}%`, '--i': i }"
+            >
+              <span class="chart__plot">
+                <span class="chart__bar"></span>
+                <span class="chart__value">${{ bar.value.toFixed(1) }}k</span>
+              </span>
+              <span class="chart__label">{{ bar.month }}</span>
+            </li>
+          </ol>
+        </figure>
+      </q-card>
+
+      <!-- Activity -->
+      <q-card class="panel span-4">
+        <div class="panel__head">
+          <div>
+            <h2 class="panel__title">Recent activity</h2>
+            <p class="panel__sub">Across all projects</p>
+          </div>
+          <q-btn flat no-caps :ripple="false" class="btn-ghost" label="View all" />
+        </div>
+        <q-list class="activity">
+          <q-item v-for="item in activity" :key="item.id" class="activity__item">
+            <q-item-section avatar>
+              <q-avatar size="36px" class="avatar" :class="`tone--${item.tone}`">
+                {{ initials(item.who) }}
+              </q-avatar>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="activity__text">
+                <strong>{{ item.who }}</strong> {{ item.what }}
+              </q-item-label>
+              <q-item-label class="activity__time">{{ item.when }}</q-item-label>
+            </q-item-section>
+            <q-item-section v-if="item.fresh" side>
+              <q-badge class="badge-new">New</q-badge>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card>
+
+      <!-- Table -->
+      <q-card class="panel span-8">
+        <div class="panel__head">
+          <div>
+            <h2 class="panel__title">Project status</h2>
+            <p class="panel__sub">{{ projects.length }} active projects</p>
+          </div>
+        </div>
+        <q-table
+          :rows="projects"
+          :columns="columns"
+          row-key="name"
+          :pagination="{ rowsPerPage: 0 }"
+          hide-pagination
+          flat
+          class="projects"
+        >
+          <template #body-cell-progress="props">
+            <q-td :props="props">
+              <div class="cell-progress">
+                <q-linear-progress
+                  :value="props.value / 100"
+                  :color="props.value === 100 ? 'positive' : 'primary'"
+                  :aria-label="`${props.row.name} progress`"
+                />
+                <span class="cell-progress__pct">{{ props.value }}%</span>
               </div>
-            </div>
-          </q-card-section>
-          <q-separator />
-          <q-card-actions>
-            <q-btn flat label="View Details" />
-            <q-btn flat label="Export" icon="download" />
-          </q-card-actions>
-        </q-card>
-      </div>
+            </q-td>
+          </template>
+          <template #body-cell-status="props">
+            <q-td :props="props">
+              <q-chip
+                dense
+                :ripple="false"
+                class="status"
+                :class="`tone--${statusTone(props.value)}`"
+              >
+                {{ props.value }}
+              </q-chip>
+            </q-td>
+          </template>
+        </q-table>
+      </q-card>
 
-      <!-- Activity List -->
-      <div class="col-12 col-md-4">
-        <q-card class="activity-card">
-          <q-card-section>
-            <div class="text-h6">Recent Activity</div>
-          </q-card-section>
-          <q-separator />
-          <q-list>
-            <q-item v-for="n in 5" :key="`activity-${n}`">
-              <q-item-section avatar>
-                <q-avatar color="primary" text-color="white">{{ n }}</q-avatar>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Activity {{ n }}</q-item-label>
-                <q-item-label caption>Lorem ipsum dolor sit amet</q-item-label>
-              </q-item-section>
-              <q-item-section side>
-                <q-badge color="accent">New</q-badge>
-              </q-item-section>
-            </q-item>
-          </q-list>
-          <q-separator />
-          <q-card-actions align="right">
-            <q-btn flat label="View All" />
-          </q-card-actions>
-        </q-card>
-      </div>
-
-      <!-- Data Table -->
-      <div class="col-12 col-lg-8">
-        <q-card class="table-card">
-          <q-card-section>
-            <div class="text-h6">Project Status</div>
-          </q-card-section>
-          <q-separator />
-          <q-table
-            :rows="tableData"
-            :columns="columns"
-            row-key="name"
-            :pagination="{ rowsPerPage: 5 }"
-            flat
-            bordered
-          >
-            <template v-slot:body-cell-status="props">
-              <q-td :props="props">
-                <q-chip :color="getStatusColor(props.value)" text-color="white">
-                  {{ props.value }}
-                </q-chip>
-              </q-td>
-            </template>
-          </q-table>
-        </q-card>
-      </div>
-
-      <!-- Form Card -->
-      <div class="col-12 col-lg-4">
-        <q-card class="form-card">
-          <q-card-section>
-            <div class="text-h6">Quick Action</div>
-          </q-card-section>
-          <q-separator />
-          <q-card-section>
-            <q-form @submit.prevent="onSubmit" class="q-gutter-md">
-              <q-input v-model="formData.name" label="Name" outlined />
-              <q-input v-model="formData.email" label="Email" type="email" outlined />
-              <q-select
-                v-model="formData.category"
-                :options="['Task', 'Meeting', 'Reminder']"
-                label="Category"
-                outlined
-              />
-              <q-input
-                v-model="formData.description"
-                type="textarea"
-                label="Description"
-                outlined
-              />
-              <div>
-                <q-btn label="Submit" type="submit" color="primary" class="full-width" />
-              </div>
-            </q-form>
-          </q-card-section>
-        </q-card>
-      </div>
+      <!-- Form -->
+      <q-card class="panel span-4">
+        <div class="panel__head">
+          <div>
+            <h2 class="panel__title">Quick action</h2>
+            <p class="panel__sub">Create a task for your team</p>
+          </div>
+        </div>
+        <q-form class="quick-form" @submit="onSubmit">
+          <div class="field">
+            <label class="field__label" for="qa-name">Name</label>
+            <q-input v-model="formData.name" for="qa-name" outlined dense hide-bottom-space />
+          </div>
+          <div class="field">
+            <label class="field__label" for="qa-email">Email</label>
+            <q-input
+              v-model="formData.email"
+              for="qa-email"
+              type="email"
+              outlined
+              dense
+              hide-bottom-space
+            />
+          </div>
+          <div class="field">
+            <label class="field__label" for="qa-category">Category</label>
+            <q-select
+              v-model="formData.category"
+              for="qa-category"
+              :options="categories"
+              outlined
+              dense
+              hide-bottom-space
+            />
+          </div>
+          <div class="field">
+            <label class="field__label" for="qa-description">Description</label>
+            <q-input
+              v-model="formData.description"
+              for="qa-description"
+              type="textarea"
+              rows="3"
+              outlined
+              dense
+              hide-bottom-space
+            />
+          </div>
+          <q-btn
+            type="submit"
+            unelevated
+            no-caps
+            :ripple="false"
+            class="btn-primary full-width"
+            label="Create task"
+          />
+          <p class="quick-form__status" aria-live="polite">{{ status }}</p>
+        </q-form>
+      </q-card>
     </div>
   </q-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { QTableColumn } from 'quasar';
 
-const formData = ref({
-  name: '',
-  email: '',
-  category: 'Task',
-  description: '',
-});
+type Tone = 'primary' | 'positive' | 'warning' | 'negative' | 'info' | 'neutral';
 
-const columns = [
-  { name: 'name', align: 'left' as const, label: 'Project', field: 'name' },
-  { name: 'owner', align: 'left' as const, label: 'Owner', field: 'owner' },
-  { name: 'progress', align: 'center' as const, label: 'Progress', field: 'progress' },
-  { name: 'status', align: 'center' as const, label: 'Status', field: 'status' },
-  { name: 'deadline', align: 'left' as const, label: 'Deadline', field: 'deadline' },
+const heroWords = ['Dashboard', 'Overview'];
+
+const stats = [
+  {
+    label: 'Total users',
+    value: '1,254',
+    delta: { text: '+12.4%', tone: 'positive', icon: 'north_east' },
+    progress: 0.7,
+    color: 'primary',
+    caption: '70% of Q4 goal',
+  },
+  {
+    label: 'Revenue',
+    value: '$24,580',
+    delta: { text: '+8.9%', tone: 'positive', icon: 'north_east' },
+    progress: 0.6,
+    color: 'positive',
+    caption: '60% of Q4 target',
+  },
+  {
+    label: 'Tasks',
+    value: '42/65',
+    delta: { text: '−3', tone: 'warning', icon: 'south_east' },
+    progress: 42 / 65,
+    color: 'warning',
+    caption: '23 open this sprint',
+  },
+  {
+    label: 'Alerts',
+    value: '5',
+    delta: { text: '+2', tone: 'negative', icon: 'north_east' },
+    progress: 0.2,
+    color: 'negative',
+    caption: '2 need attention',
+  },
+] as const;
+
+// Stable demo data, in thousands of USD. The last month is the current one.
+const chart = [
+  { month: 'Jun', value: 18.2 },
+  { month: 'Jul', value: 21.4 },
+  { month: 'Aug', value: 19.8 },
+  { month: 'Sep', value: 23.1 },
+  { month: 'Oct', value: 22.6 },
+  { month: 'Nov', value: 24.6 },
+];
+const CHART_MAX = 30; // top gridline
+
+const activity: {
+  id: number;
+  who: string;
+  what: string;
+  when: string;
+  tone: Tone;
+  fresh: boolean;
+}[] = [
+  {
+    id: 1,
+    who: 'Sarah Johnson',
+    what: 'shipped mobile build 2.4',
+    when: '12 min ago',
+    tone: 'primary',
+    fresh: true,
+  },
+  {
+    id: 2,
+    who: 'Michael Chen',
+    what: 'completed Database Migration',
+    when: '1 hr ago',
+    tone: 'positive',
+    fresh: true,
+  },
+  {
+    id: 3,
+    who: 'Emily Davis',
+    what: 'commented on API Integration',
+    when: '3 hr ago',
+    tone: 'info',
+    fresh: false,
+  },
+  {
+    id: 4,
+    who: 'Robert Wilson',
+    what: 'opened Security Audit',
+    when: 'Yesterday',
+    tone: 'warning',
+    fresh: false,
+  },
+  {
+    id: 5,
+    who: 'Amanda Lee',
+    what: 'drafted the Q1 content calendar',
+    when: 'Mon',
+    tone: 'neutral',
+    fresh: false,
+  },
 ];
 
-const tableData = [
+function initials(name: string) {
+  return name
+    .split(' ')
+    .map((part) => part[0])
+    .join('');
+}
+
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+const columns: QTableColumn[] = [
+  { name: 'name', align: 'left', label: 'Project', field: 'name' },
+  { name: 'owner', align: 'left', label: 'Owner', field: 'owner' },
+  { name: 'progress', align: 'left', label: 'Progress', field: 'progress' },
+  { name: 'status', align: 'left', label: 'Status', field: 'status' },
+  {
+    name: 'deadline',
+    align: 'right',
+    label: 'Deadline',
+    field: 'deadline',
+    format: (value: string) => dateFormat.format(new Date(`${value}T00:00:00Z`)),
+  },
+];
+
+const projects = [
   {
     name: 'Website Redesign',
     owner: 'John Smith',
     progress: 75,
     status: 'In Progress',
-    deadline: '2023-06-30',
+    deadline: '2026-12-04',
   },
   {
     name: 'Mobile App Development',
     owner: 'Sarah Johnson',
     progress: 30,
     status: 'In Progress',
-    deadline: '2023-08-15',
+    deadline: '2027-01-29',
   },
   {
     name: 'Database Migration',
     owner: 'Michael Chen',
     progress: 100,
     status: 'Completed',
-    deadline: '2023-05-01',
+    deadline: '2026-10-30',
   },
   {
     name: 'API Integration',
     owner: 'Emily Davis',
     progress: 60,
     status: 'In Progress',
-    deadline: '2023-06-15',
+    deadline: '2026-12-11',
   },
   {
     name: 'Security Audit',
     owner: 'Robert Wilson',
     progress: 10,
     status: 'Pending',
-    deadline: '2023-07-10',
+    deadline: '2027-01-15',
   },
   {
     name: 'Content Strategy',
     owner: 'Amanda Lee',
     progress: 0,
     status: 'Not Started',
-    deadline: '2023-07-20',
+    deadline: '2027-02-05',
   },
 ];
 
-function getStatusColor(status: string) {
-  switch (status) {
-    case 'Completed':
-      return 'positive';
-    case 'In Progress':
-      return 'primary';
-    case 'Pending':
-      return 'warning';
-    case 'Not Started':
-      return 'grey';
-    default:
-      return 'grey';
-  }
+const statusTones: Record<string, Tone> = {
+  Completed: 'positive',
+  'In Progress': 'info',
+  Pending: 'warning',
+  'Not Started': 'neutral',
+};
+
+function statusTone(status: string): Tone {
+  return statusTones[status] ?? 'neutral';
 }
 
+const categories = ['Task', 'Meeting', 'Reminder'];
+
+const emptyForm = () => ({ name: '', email: '', category: 'Task', description: '' });
+const formData = ref(emptyForm());
+const status = ref('');
+
 function onSubmit() {
-  // Handle form submission
-  console.log('Form submitted:', formData.value);
-  // Reset form after submission
-  formData.value = {
-    name: '',
-    email: '',
-    category: 'Task',
-    description: '',
-  };
+  status.value = `Created ${formData.value.category.toLowerCase()}${
+    formData.value.name ? ` for ${formData.value.name}` : ''
+  }.`;
+  formData.value = emptyForm();
 }
 </script>

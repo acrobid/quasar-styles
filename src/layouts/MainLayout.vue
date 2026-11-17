@@ -1,26 +1,25 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <header class="layout-header">
-      <div class="header-container">
-        <div class="logo-section">
-          <h1 class="app-title">Quasar Dashboard</h1>
-        </div>
+  <q-layout view="hHh lpR fFf">
+    <header class="app-header">
+      <div class="app-header__inner">
+        <a class="brand" href="#/">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__name">Quasar Dashboard</span>
+        </a>
 
-        <div class="theme-selector-section">
-          <div class="theme-selector">
-            <select v-model="currentTheme" @change="changeTheme(currentTheme)">
-              <option v-for="option in themeOptions" :key="option.value" :value="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-            <div class="select-icon">
-              <q-icon name="expand_more" />
-            </div>
-          </div>
-        </div>
-
-        <div class="version-section">
-          <span class="version-text">v{{ $q.version }}</span>
+        <div class="app-header__actions">
+          <label class="theme-picker">
+            <span class="theme-picker__label">Theme</span>
+            <span class="theme-picker__control">
+              <select v-model="currentTheme" class="theme-picker__select">
+                <option v-for="theme in themes" :key="theme.id" :value="theme.id">
+                  {{ theme.label }}
+                </option>
+              </select>
+              <q-icon name="unfold_more" class="theme-picker__icon" aria-hidden="true" />
+            </span>
+          </label>
+          <span class="app-header__version">v{{ $q.version }}</span>
         </div>
       </div>
     </header>
@@ -32,203 +31,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
-import { Dark } from 'quasar'; // added for built-in dark mode support
+import { ref, watch } from 'vue';
+import { Dark } from 'quasar';
+import { DEFAULT_THEME, findTheme, themes, type ThemeId } from 'src/themes';
 
-const currentTheme = ref('theme4');
-const themeOptions = [
-  { label: 'Modern Linear', value: 'theme1' },
-  { label: 'Brutalist Digital', value: 'theme2' },
-  { label: 'Organic Minimalism', value: 'theme3' },
-  { label: 'Neo-Skeuomorphism', value: 'theme4' },
-  { label: 'Kinetic Typography', value: 'theme5' },
-  { label: 'Shadcn-inspired', value: 'theme6' },
-];
+const STORAGE_KEY = 'quasar-theme';
 
-// Determine if we're in development or production
-const isDev = import.meta.env.DEV;
-
-// Define paths for both environments
-const devPaths = {
-  theme1: '/src/css/themes/theme1-linear.scss',
-  theme2: '/src/css/themes/theme2-brutalist.scss',
-  theme3: '/src/css/themes/theme3-organic.scss',
-  theme4: '/src/css/themes/theme4-skeuomorph.scss',
-  theme5: '/src/css/themes/theme5-kinetic.scss',
-  theme6: '/src/css/themes/theme6-shadcn.scss',
-};
-
-const prodPaths = {
-  theme1: './css/themes/theme1-linear.css',
-  theme2: './css/themes/theme2-brutalist.css',
-  theme3: './css/themes/theme3-organic.css',
-  theme4: './css/themes/theme4-skeuomorph.css',
-  theme5: './css/themes/theme5-kinetic.css',
-  theme6: './css/themes/theme6-shadcn.css',
-};
-
-// Use the appropriate paths based on environment
-const themeStylesheets = isDev ? devPaths : prodPaths;
-
-// Keep track of the current stylesheet element
-let currentStylesheetLink: HTMLLinkElement | null = null;
-
-function changeTheme(theme: string) {
-  // Remove the old stylesheet if it exists
-  if (currentStylesheetLink && document.head.contains(currentStylesheetLink)) {
-    document.head.removeChild(currentStylesheetLink);
+function readSavedTheme(): ThemeId {
+  try {
+    return findTheme(localStorage.getItem(STORAGE_KEY))?.id ?? DEFAULT_THEME;
+  } catch {
+    return DEFAULT_THEME; // storage blocked (private mode, sandboxed iframe, …)
   }
-
-  // Create and add the new stylesheet
-  if (themeStylesheets[theme as keyof typeof themeStylesheets]) {
-    const stylesheet = document.createElement('link');
-    stylesheet.rel = 'stylesheet';
-    stylesheet.href = themeStylesheets[theme as keyof typeof themeStylesheets];
-    document.head.appendChild(stylesheet);
-    currentStylesheetLink = stylesheet;
-  }
-
-  // Set the body class
-  document.body.className = theme;
-
-  // Use Quasar's built-in dark mode if theme is dark
-  // Update: theme2 (brutalist) is NOT a dark theme
-  Dark.set(theme === 'theme1' || theme === 'theme3' || theme === 'theme6');
-
-  // Save the theme preference
-  localStorage.setItem('quasar-theme', theme);
 }
 
-watch(currentTheme, (newTheme) => {
-  changeTheme(newTheme);
-});
+function applyTheme(id: ThemeId) {
+  const theme = findTheme(id) ?? themes[0];
+  const { classList } = document.body;
 
-onMounted(() => {
-  const savedTheme = localStorage.getItem('quasar-theme');
-  if (savedTheme) {
-    currentTheme.value = savedTheme;
-    changeTheme(savedTheme);
-  } else {
-    changeTheme('theme4');
+  for (const { id: other } of themes) {
+    classList.toggle(other, other === theme.id);
   }
-});
+  Dark.set(theme.dark);
+  document.documentElement.style.colorScheme = theme.dark ? 'dark' : 'light';
+
+  try {
+    localStorage.setItem(STORAGE_KEY, theme.id);
+  } catch {
+    // Preference just won't persist.
+  }
+}
+
+const currentTheme = ref<ThemeId>(readSavedTheme());
+
+// Applied synchronously during setup so the first paint is already themed.
+watch(currentTheme, applyTheme, { immediate: true });
 </script>
-
-<style lang="scss" scoped>
-.layout-header {
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-container {
-  padding: 0 24px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.app-title {
-  margin: 0;
-  font-size: 24px;
-}
-
-.theme-selector {
-  position: relative;
-  min-width: 180px;
-
-  select {
-    appearance: none;
-    width: 100%;
-    padding: 10px 16px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background: transparent;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-  }
-
-  .select-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-}
-
-.version-text {
-  opacity: 0.7;
-  font-size: 14px;
-}
-
-/* Theme-specific styles will be applied through the body class */
-body.theme1 .theme-selector {
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--card-bg-color);
-}
-
-body.theme2 .theme-selector {
-  border: 2px solid #000;
-  box-shadow: 4px 4px 0 #000;
-  background-color: #fff;
-}
-
-body.theme3 .theme-selector {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px !important;
-  background-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-  select {
-    color: var(--text-primary);
-  }
-
-  .select-icon {
-    color: var(--primary-color);
-  }
-}
-
-body.theme4 .theme-selector {
-  border-radius: 10px !important;
-  background-color: var(--surface-color);
-  box-shadow:
-    inset 3px 3px 6px var(--shadow-dark),
-    inset -3px -3px 6px var(--shadow-light);
-}
-
-body.theme5 .theme-selector {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px !important;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* Force dark background for the q-layout container */
-::v-deep q-layout {
-  background-color: var(--background-color) !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .header-container {
-    padding: 0 16px;
-    height: auto;
-    flex-direction: column;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    gap: 12px;
-  }
-
-  .version-section {
-    display: none;
-  }
-}
-</style>

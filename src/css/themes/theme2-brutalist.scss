@@ -1,320 +1,271 @@
-// Brutalist Digital Theme
+// Theme 2 — Brutalist Digital (light)
+// Neo-brutalism: dotted paper, 3px ink outlines, hard offset shadows, flat
+// saturated fills, Space Grotesk headings and mono labels. Nothing is subtle.
 
 body.theme2 {
-  // Light theme colors
-  --primary-color: #121212;
-  --secondary-color: #ff5252;
-  --accent-color: #ffeb3b;
-  --background-color: #ffffff;
-  --card-bg-color: #ffffff;
-  --text-color: #121212;
-  --border-color: #000000;
+  --ink: #0a0a0a;
+  --yellow: #ffd23f;
+  --pink: #ff90e8;
+  --blue: #2b50ff;
 
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: 'Courier New', monospace;
+  --t-bg: #f4f0e6;
+  --t-bg-image: radial-gradient(rgb(10 10 10 / 0.16) 1.2px, transparent 1.6px) 0 0 / 22px 22px;
+  --t-surface: #ffffff;
+  --t-surface-2: #fff6cc;
+  --t-header-bg: var(--yellow);
+  --t-border: var(--ink);
+  --t-border-strong: var(--ink);
+  --t-border-width: 3px;
+  --t-grid: rgb(10 10 10 / 0.14);
+  --t-track: #ffffff;
+  --t-text: var(--ink);
+  --t-muted: #3d3d3d;
+  --t-primary: var(--blue);
+  --t-on-primary: #ffffff;
+  --t-accent: var(--pink);
+  --t-positive: #00b86b;
+  --t-warning: #ffb000;
+  --t-negative: #ff4a3d;
+  --t-info: #5b8cff;
+  --t-neutral: #b8b8b8;
+  --t-chart: var(--yellow);
+  --t-ring: var(--blue);
+  --t-input-bg: #ffffff;
+  --t-radius: 0;
+  --t-radius-sm: 0;
+  --t-radius-pill: 0;
+  --t-shadow: 6px 6px 0 var(--ink);
+  --t-shadow-hover: 9px 9px 0 var(--ink);
+  --t-shadow-pop: 6px 6px 0 var(--ink);
+  --t-field-shadow: 3px 3px 0 var(--ink);
+  --t-font-body: 'Space Grotesk', system-ui, sans-serif;
+  --t-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 700;
+  --t-display-tracking: -0.03em;
+  --t-gap: 24px;
+  --t-ease: steps(3, end);
+  --t-duration: 90ms;
 
-  // Dark mode overrides
-  &.dark-mode {
-    --primary-color: #ffffff;
-    --secondary-color: #ff5252;
-    --accent-color: #ffeb3b;
-    --background-color: #121212;
-    --card-bg-color: #1e1e1e;
-    --text-color: #ffffff;
-    --border-color: #ffffff;
+  :focus-visible {
+    outline: 3px dashed var(--ink);
+    outline-offset: 4px;
   }
 
-  * {
-    border-radius: 0 !important;
+  // Header -----------------------------------------------------------------
+  .brand__mark {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--ink);
+    background: var(--pink);
+    box-shadow: 3px 3px 0 var(--ink);
+    rotate: -8deg;
   }
 
-  // Typography
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  .text-h1,
-  .text-h2,
-  .text-h3,
-  .text-h4,
-  .text-h5,
-  .text-h6 {
+  .brand__name {
+    font-size: 1.125rem;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
-    letter-spacing: -1px;
-    font-weight: 800;
-    color: var(--text-color);
   }
 
-  // Cards and elements with harsh borders and random alignment
-  .q-card {
-    background-color: var(--card-bg-color);
-    border: 3px solid var(--border-color);
-    box-shadow: 8px 8px 0 var(--border-color);
-    margin-top: calc(random(10) * 1px);
-    transform: rotate(calc(random(2) - 1) * 0.5deg);
-  }
-
-  .q-btn {
-    background: var(--card-bg-color);
-    border: 2px solid var(--border-color);
-    box-shadow: 4px 4px 0 var(--border-color);
-    font-weight: bold;
+  .theme-picker__label,
+  .app-header__version {
+    color: var(--ink);
+    font-family: var(--t-font-mono);
+    font-weight: 600;
     text-transform: uppercase;
-    color: var(--text-color);
+  }
 
-    &:active {
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 var(--border-color);
-    }
+  .theme-picker__select {
+    background: #ffffff;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-weight: 700;
 
-    &.q-btn--standard {
-      background-color: var(--secondary-color);
-      color: var(--background-color);
+    &:hover {
+      border-color: var(--ink);
     }
   }
 
-  .q-input,
-  .q-select {
-    .q-field__control {
-      border: 2px solid var(--border-color);
-      background: var(--card-bg-color);
-    }
-
-    .q-field__label {
-      font-family: 'Courier New', monospace;
-      text-transform: uppercase;
-      color: var(--text-color);
-    }
-
-    .q-field__native,
-    .q-field__input {
-      color: var(--text-color);
-    }
+  .theme-picker__icon {
+    color: var(--ink);
   }
 
-  // Raw, unfinished table style
-  .q-table {
-    border: 3px solid var(--border-color);
-    background-color: var(--card-bg-color);
-    color: var(--text-color);
-
-    thead tr {
-      background-color: var(--border-color);
-      color: var(--background-color);
-      th {
-        font-family: 'Courier New', monospace;
-        text-transform: uppercase;
-      }
-    }
-
-    tbody tr {
-      color: var(--text-color);
-
-      &:nth-child(odd) {
-        background-color: rgba(0, 0, 0, 0.05);
-      }
-
-      &.dark-mode:nth-child(odd) {
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-    }
-
-    td {
-      border-bottom: 1px dashed var(--border-color);
-    }
+  // Panels -----------------------------------------------------------------
+  .q-card:hover {
+    translate: -3px -3px;
+    box-shadow: var(--t-shadow-hover);
   }
 
-  // Dashboard elements
-  .dashboard-header {
-    border: 3px solid var(--border-color);
-    background: repeating-linear-gradient(
-      45deg,
-      var(--card-bg-color),
-      var(--card-bg-color) 10px,
-      rgba(0, 0, 0, 0.05) 10px,
-      rgba(0, 0, 0, 0.05) 20px
-    );
-
-    &.dark-mode {
-      background: repeating-linear-gradient(
-        45deg,
-        var(--card-bg-color),
-        var(--card-bg-color) 10px,
-        rgba(255, 255, 255, 0.05) 10px,
-        rgba(255, 255, 255, 0.05) 20px
-      );
-    }
+  .hero {
+    background: var(--pink);
   }
 
-  .stat-card {
-    border: 3px solid var(--border-color);
-    background-color: var(--card-bg-color);
-
-    .text-subtitle2 {
-      color: var(--text-color);
-      opacity: 0.7;
-    }
-
-    .text-h4 {
-      color: var (--secondary-color);
-    }
+  .hero__title {
+    font-size: clamp(2.25rem, 1rem + 5vw, 4.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
   }
 
-  .chart-bar {
-    background-color: var(--secondary-color);
-    border: 1px solid var(--accent-color);
+  .hero__word:last-child {
+    padding-inline: 0.1em;
+    background: var(--ink);
+    color: var(--yellow);
+  }
+
+  .hero__lede {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 2px solid var(--ink);
+    background: #ffffff;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .panel__head {
+    padding-bottom: 14px;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .panel__title {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+  }
+
+  .panel__sub,
+  .stat__label,
+  .stat__foot,
+  .chart__label,
+  .chart__value,
+  .activity__time {
+    color: var(--ink);
+    font-family: var(--t-font-mono);
+    text-transform: uppercase;
+  }
+
+  .stat__value {
+    font-size: 2.5rem;
+  }
+
+  // Tones become flat pastel fills with an ink outline (black text stays AA).
+  .delta,
+  .q-chip.status,
+  .q-avatar.avatar {
+    border: 2px solid var(--ink);
+    background: color-mix(in srgb, var(--tone) 45%, #ffffff);
+    color: var(--ink);
+  }
+
+  .q-avatar.avatar {
+    font-family: var(--t-font-mono);
+  }
+
+  .q-badge.badge-new {
+    border: 2px solid var(--ink);
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: var(--t-font-mono);
+    text-transform: uppercase;
+    rotate: 4deg;
+  }
+
+  // Progress: chunky bars in an ink frame.
+  .q-linear-progress {
+    height: 14px;
+    border: 2px solid var(--ink);
   }
 
   .q-linear-progress__model {
-    background-color: var(--secondary-color);
+    border-right: 2px solid var(--ink);
   }
 
-  .q-linear-progress {
-    height: 8px;
-    border: 1px solid var(--border-color);
-    background-color: var(--card-bg-color);
+  .cell-progress .q-linear-progress {
+    height: 12px;
   }
 
-  // Enhanced Select styling for Brutalist Digital
-  .q-select {
-    margin-left: -4px;
-    margin-right: 4px;
-    transform: rotate(-1deg);
+  // Chart ------------------------------------------------------------------
+  .chart__plot {
+    border-bottom: 3px solid var(--ink);
+  }
 
-    .q-field__control {
-      border: 2px solid var(--border-color);
-      background: var(--card-bg-color);
-      height: auto;
-      min-height: 54px;
-    }
+  .chart__bar {
+    border: 3px solid var(--ink);
+    border-bottom: 0;
+    box-shadow: 4px 0 0 var(--ink);
+  }
 
-    .q-field__native {
-      font-family: 'Courier New', monospace;
+  .chart__col.is-current .chart__bar {
+    background: var(--blue);
+  }
+
+  // Table ------------------------------------------------------------------
+  .q-table {
+    margin-top: 0;
+
+    th {
+      background: var(--ink);
+      color: #ffffff;
+      font-family: var(--t-font-mono);
+      font-weight: 600;
       text-transform: uppercase;
-      font-weight: bold;
-      letter-spacing: -0.5px;
-      padding-left: 10px;
-      color: var(--text-color);
     }
 
-    .q-field__label {
-      font-family: 'Courier New', monospace;
-      text-transform: uppercase;
-      left: 10px;
-      color: var(--text-color);
-
-      &--floating {
-        background-color: var(--card-bg-color);
-        padding: 0 4px;
-        top: -10px;
-        left: 8px;
-        color: var(--secondary-color);
-      }
+    th,
+    td {
+      border-bottom: 2px solid var(--ink);
     }
 
-    .q-field__append {
-      height: 100%;
-
-      .q-icon {
-        background: var(--border-color);
-        color: var(--card-bg-color);
-        padding: 4px;
-      }
-    }
-
-    .q-menu {
-      border: 2px solid var(--border-color);
-      box-shadow: 4px 4px 0 var(--border-color);
-      background-color: var(--card-bg-color);
-      margin-top: 4px;
-      padding: 0;
-
-      .q-item {
-        font-family: 'Courier New', monospace;
-        border-bottom: 1px solid var(--border-color);
-        min-height: 48px;
-        color: var(--text-color);
-
-        &:last-child {
-          border-bottom: none;
-        }
-
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.05);
-
-          .dark-mode & {
-            background-color: rgba(255, 255, 255, 0.05);
-          }
-        }
-
-        &--active {
-          background-color: var(--border-color);
-          color: var(--background-color);
-        }
-      }
-
-      .q-item__section--main {
-        text-transform: uppercase;
-        font-weight: bold;
-      }
+    td:first-child {
+      font-weight: 700;
     }
   }
 
-  // Layout styling
-  .layout-header {
-    background-color: var(--border-color); // Black background
-    color: var(--background-color); // White text
-    border-bottom: 3px solid var(--secondary-color);
+  .cell-progress__pct {
+    color: var(--ink);
+    font-family: var(--t-font-mono);
+  }
 
-    .app-title {
-      text-transform: uppercase;
-      font-weight: 800;
-      letter-spacing: -1px;
-      color: var(--background-color); // Ensure white text on black header
+  // Buttons + form ---------------------------------------------------------
+  .q-btn.btn-primary,
+  .q-btn.btn-ghost {
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    text-transform: uppercase;
+
+    &:hover {
+      translate: -2px -2px;
+      box-shadow: 6px 6px 0 var(--ink);
     }
 
-    .theme-selector {
-      border: 2px solid var(--background-color);
-      transform: rotate(-1deg);
-      background-color: var(--border-color); // Match header background
-
-      select {
-        color: var(--background-color); // White text for selector
-        font-family: 'Courier New', monospace;
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-
-      .select-icon {
-        color: var(--background-color); // White icon
-      }
-    }
-
-    .mode-toggle .q-icon {
-      color: var(--background-color);
-    }
-
-    .version-text {
-      color: var(--background-color);
-      opacity: 0.7;
+    &:active {
+      translate: 4px 4px;
+      box-shadow: none;
     }
   }
 
-  // In dark mode, adjust contrast for selected elements
-  &.dark-mode {
-    .q-select .q-menu .q-item--active {
-      background-color: var(--border-color);
-      color: var(--card-bg-color);
-    }
+  .q-btn.btn-ghost {
+    background: #ffffff;
+  }
 
-    .q-btn.q-btn--standard {
-      background-color: var(--secondary-color);
-      color: var(--background-color);
-      border-color: var(--border-color);
-    }
+  .q-btn.btn-primary {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+
+  .field__label {
+    font-family: var(--t-font-mono);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .q-field--outlined.q-field--highlighted .q-field__control::after {
+    box-shadow: none;
+  }
+
+  .q-field--outlined.q-field--highlighted .q-field__control {
+    background: #fffbe6;
   }
 }

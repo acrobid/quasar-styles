@@ -1,459 +1,745 @@
-// Add this at the top of the file:
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+// Shared component layer
+// =============================================================================
+// Every theme file (src/css/themes/*) sets this token contract on `body.themeN`;
+// the rules below consume only tokens, so a theme is tokens + its own flourishes.
+// Fonts are loaded in index.html.
+//
+//   Surfaces   --t-bg  --t-bg-image  --t-surface  --t-surface-2  --t-header-bg
+//   Lines      --t-border  --t-border-strong  --t-border-width  --t-grid  --t-track
+//   Text       --t-text  --t-muted
+//   Colour     --t-primary  --t-on-primary  --t-accent  --t-positive  --t-warning
+//              --t-negative  --t-info  --t-neutral  --t-chart  --t-ring
+//   Shape      --t-radius  --t-radius-sm  --t-radius-pill
+//   Depth      --t-shadow  --t-shadow-hover  --t-shadow-pop  --t-field-shadow
+//   Type       --t-font-body  --t-font-display  --t-font-mono
+//              --t-display-weight  --t-display-tracking
+//   Rhythm     --t-gap  --t-pad  --t-ease  --t-duration
+//
+// Component rules are prefixed with `body` so they outrank Quasar's own
+// `.q-*--dark` modifiers without !important; theme files use `body.themeN …`,
+// which outranks these in turn.
 
-// app global css in SCSS form
+// ---------------------------------------------------------------------------
+// Page canvas + Quasar palette hand-off
+// ---------------------------------------------------------------------------
 
-/* Common Elements Styling */
-.chart-placeholder {
-  height: 250px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-around;
-  padding: 10px;
+body {
+  // Optional tokens with neutral defaults.
+  --t-bg-image: none;
+  --t-input-bg: transparent;
+  --t-field-shadow: none;
+  --t-shadow-hover: var(--t-shadow);
+  --t-gap: 16px;
+  --t-pad: 20px;
+  --t-ease: cubic-bezier(0.2, 0, 0, 1);
+  --t-duration: 160ms;
 
-  .chart-bars {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: flex-end;
-    justify-content: space-around;
-  }
-
-  .chart-bar {
-    width: 12%;
-    border-radius: 4px 4px 0 0;
-    transition: all 0.3s;
-  }
+  // Quasar's color props (color="primary", text-primary, …) follow the theme.
+  --q-primary: var(--t-primary);
+  --q-secondary: var(--t-accent);
+  --q-accent: var(--t-accent);
+  --q-positive: var(--t-positive);
+  --q-negative: var(--t-negative);
+  --q-warning: var(--t-warning);
+  --q-info: var(--t-info);
+  --q-dark: var(--t-surface);
+  --q-dark-page: var(--t-bg);
 }
 
-// Modern Avatar Styling
-.q-avatar {
-  border-radius: 14px; // Slightly rounded square for modern look
+// Same specificity as Quasar's `body.body--dark`, declared later, so it wins.
+body.body--light,
+body.body--dark {
+  min-height: 100vh;
+  background: var(--t-bg-image), var(--t-bg);
+  color: var(--t-text);
+  font-family: var(--t-font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body :focus-visible {
+  outline: 2px solid var(--t-ring);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
   overflow: hidden;
-  transition: transform 0.2s ease;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
-  &--bordered {
-    border: 2px solid rgba(var(--q-primary-rgb), 0.2);
-  }
+// ---------------------------------------------------------------------------
+// Header + theme picker
+// ---------------------------------------------------------------------------
 
-  // Hover effect for interactive avatars
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--t-header-bg);
+  border-bottom: var(--t-border-width) solid var(--t-border);
+}
+
+.app-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1280px;
+  height: 64px;
+  margin-inline: auto;
+  padding-inline: var(--t-gap);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--t-radius-sm);
+}
+
+.brand__mark {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--t-radius-sm);
+  background: var(--t-primary);
+}
+
+.brand__name {
+  overflow: hidden;
+  font-family: var(--t-font-display);
+  font-size: 1rem;
+  font-weight: var(--t-display-weight);
+  letter-spacing: var(--t-display-tracking);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.app-header__version {
+  color: var(--t-muted);
+  font-family: var(--t-font-mono);
+  font-size: 12px;
+}
+
+.theme-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.theme-picker__label {
+  color: var(--t-muted);
+  font-size: 13px;
+}
+
+.theme-picker__control {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+.theme-picker__select {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  padding: 0 34px 0 12px;
+  border: var(--t-border-width) solid var(--t-border-strong);
+  border-radius: var(--t-radius-sm);
+  background: var(--t-input-bg);
+  box-shadow: var(--t-field-shadow);
+  color: var(--t-text);
+  font: inherit;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: border-color var(--t-duration) var(--t-ease);
+
   &:hover {
-    transform: translateY(-2px);
-  }
-
-  // Status indicator
-  &__status {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-
-    &--online {
-      background: #34d399;
-    }
-
-    &--away {
-      background: #fbbf24;
-    }
-
-    &--offline {
-      background: #9ca3af;
-    }
+    border-color: var(--t-muted);
   }
 }
 
-// Modern Badge Styling
-.q-badge {
-  border-radius: 6px;
-  padding: 2px 6px;
+.theme-picker__icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  translate: 0 -50%;
+  color: var(--t-muted);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+// ---------------------------------------------------------------------------
+// Page grid
+// ---------------------------------------------------------------------------
+
+.dashboard {
+  display: grid;
+  gap: var(--t-gap);
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: calc(var(--t-gap) * 1.5) var(--t-gap) calc(var(--t-gap) * 3);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--t-gap);
+}
+
+.dashboard__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--t-gap);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .dashboard__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .span-8 {
+    grid-column: span 8;
+  }
+
+  .span-4 {
+    grid-column: span 4;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Panels (q-card)
+// ---------------------------------------------------------------------------
+
+body .q-card {
+  min-width: 0;
+  border: var(--t-border-width) solid var(--t-border);
+  border-radius: var(--t-radius);
+  background: var(--t-surface);
+  box-shadow: var(--t-shadow);
+  color: var(--t-text);
+  transition:
+    box-shadow var(--t-duration) var(--t-ease),
+    border-color var(--t-duration) var(--t-ease),
+    translate var(--t-duration) var(--t-ease);
+}
+
+.panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: var(--t-pad) var(--t-pad) 0;
+}
+
+.panel__title {
+  margin: 0;
+  font-family: var(--t-font-display);
+  font-size: 1rem;
+  font-weight: var(--t-display-weight);
+  line-height: 1.4;
+  letter-spacing: var(--t-display-tracking);
+}
+
+.panel__sub {
+  margin: 2px 0 0;
+  color: var(--t-muted);
+  font-size: 13px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--t-muted);
+  font-family: var(--t-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+// Hero ----------------------------------------------------------------------
+
+.hero {
+  padding: clamp(20px, 4vw, 36px) var(--t-pad);
+}
+
+.hero__title {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.25em;
+  margin: 0;
+  font-family: var(--t-font-display);
+  font-size: clamp(1.75rem, 1rem + 3vw, 2.75rem);
+  font-weight: var(--t-display-weight);
+  line-height: 1.1;
+  letter-spacing: var(--t-display-tracking);
+  text-wrap: balance;
+}
+
+.hero__word {
+  display: inline-block;
+}
+
+.hero__lede {
+  max-width: 52ch;
+  margin: 12px 0 0;
+  color: var(--t-muted);
+  font-size: 1rem;
+  text-wrap: pretty;
+}
+
+// Stat cards ----------------------------------------------------------------
+
+.stat {
+  display: grid;
+  gap: 10px;
+  padding: var(--t-pad);
+}
+
+.stat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stat__label {
+  color: var(--t-muted);
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.3px;
-  font-size: 0.65rem;
+}
+
+.stat__value {
+  font-family: var(--t-font-display);
+  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.125rem);
+  font-weight: var(--t-display-weight);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  letter-spacing: var(--t-display-tracking);
+}
+
+.stat__foot {
+  color: var(--t-muted);
+  font-size: 12px;
+}
+
+.delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 8px 2px 6px;
+  border-radius: var(--t-radius-pill);
+  background: color-mix(in srgb, var(--tone) 14%, transparent);
+  color: var(--tone-text);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+
+  .q-icon {
+    font-size: 14px;
+  }
+}
+
+// Tones: one source for chips, deltas and avatars. Text is nudged toward the
+// theme's text colour so it stays legible on the tinted background.
+.tone--primary {
+  --tone: var(--t-primary);
+}
+.tone--positive {
+  --tone: var(--t-positive);
+}
+.tone--warning {
+  --tone: var(--t-warning);
+}
+.tone--negative {
+  --tone: var(--t-negative);
+}
+.tone--info {
+  --tone: var(--t-info);
+}
+.tone--neutral {
+  --tone: var(--t-neutral);
+}
+[class*='tone--'] {
+  --tone-text: color-mix(in srgb, var(--tone), var(--t-text) 25%);
+}
+
+// Progress (q-linear-progress) ---------------------------------------------
+
+body .q-linear-progress {
+  height: 6px;
+  border-radius: var(--t-radius-pill);
+}
+
+body .q-linear-progress__track {
+  background: var(--t-track);
+  opacity: 1;
+}
+
+body .q-linear-progress__model {
+  border-radius: inherit;
+}
+
+// Chart ---------------------------------------------------------------------
+
+// The chart card stretches to its row; the plot absorbs the extra height.
+.chart-panel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0;
+  padding: var(--t-pad);
+}
+
+.chart__cols {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chart__col {
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.chart__plot {
+  position: relative;
+  display: block;
+  min-height: clamp(160px, 28vw, 240px);
+  border-bottom: 1px solid var(--t-border-strong);
+  // Gridlines at 0/25/50/75% of CHART_MAX.
+  background: linear-gradient(var(--t-grid) 1px, transparent 1px) 0 0 / 100% 25%;
+}
+
+.chart__bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: min(56%, 48px);
+  height: var(--h);
+  translate: -50% 0;
+  border-radius: var(--t-radius-sm) var(--t-radius-sm) 0 0;
+  background: var(--t-chart);
+  transition: background-color var(--t-duration) var(--t-ease);
+}
+
+.chart__value {
+  position: absolute;
+  bottom: calc(var(--h) + 6px);
+  left: 50%;
+  translate: -50% 0;
+  color: var(--t-muted);
+  font-family: var(--t-font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.chart__label {
+  padding-top: 8px;
+  color: var(--t-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.chart__col.is-current {
+  .chart__bar {
+    background: var(--t-primary);
+  }
+
+  .chart__value,
+  .chart__label {
+    color: var(--t-text);
+    font-weight: 600;
+  }
+}
+
+// Activity list -------------------------------------------------------------
+
+.activity {
+  padding: 8px 0;
+}
+
+body .activity__item {
+  min-height: 0;
+  padding: 10px var(--t-pad);
+}
+
+.activity__text {
+  color: var(--t-muted);
+  font-size: 14px;
+  line-height: 1.4;
+
+  strong {
+    color: var(--t-text);
+    font-weight: 600;
+  }
+}
+
+body .activity__time {
+  margin-top: 2px;
+  color: var(--t-muted);
+  font-size: 12px;
+}
+
+body .q-avatar.avatar {
+  border-radius: var(--t-radius-pill);
+  background: color-mix(in srgb, var(--tone) 18%, var(--t-surface));
+  color: var(--tone-text);
+  font-weight: 600;
+
+  .q-avatar__content {
+    font-size: 13px;
+    line-height: 1;
+  }
+}
+
+body .q-badge.badge-new {
+  padding: 2px 8px;
+  border-radius: var(--t-radius-pill);
+  background: var(--t-primary);
+  color: var(--t-on-primary);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+// Table (q-table) -----------------------------------------------------------
+
+body .q-table__card {
+  border-radius: 0 0 var(--t-radius) var(--t-radius);
+  background: transparent;
   box-shadow: none;
-  border: 1px solid transparent;
+  color: inherit;
+}
 
-  // Subtle variant
-  &--subtle {
-    background-color: rgba(var(--q-primary-rgb), 0.12);
-    color: var(--q-primary);
+body .q-table {
+  min-width: 640px;
+  margin-top: 12px;
+  font-variant-numeric: tabular-nums;
+
+  thead tr,
+  tbody td {
+    height: 52px;
   }
 
-  // Outline variant
-  &--outline {
-    background-color: transparent;
-    border-color: currentColor;
+  th,
+  td {
+    padding: 8px 12px;
+    border-color: var(--t-border);
+    font-size: 14px;
+  }
+
+  th:first-child,
+  td:first-child {
+    padding-left: var(--t-pad);
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: var(--t-pad);
+  }
+
+  th {
+    color: var(--t-muted);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  tbody td::before {
+    background: var(--t-surface-2);
   }
 }
 
-// Modern Chip Styling
-.q-chip {
-  border-radius: 8px;
+.cell-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 120px;
+
+  .q-linear-progress {
+    flex: 1;
+  }
+}
+
+.cell-progress__pct {
+  width: 3.5ch;
+  color: var(--t-muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+body .q-chip.status {
+  height: 24px;
+  margin: 0;
+  padding: 0 10px;
+  border-radius: var(--t-radius-pill);
+  background: color-mix(in srgb, var(--tone) 14%, transparent);
+  color: var(--tone-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+// Buttons -------------------------------------------------------------------
+
+body .q-btn.btn-primary,
+body .q-btn.btn-ghost {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--t-radius-sm);
+  font-weight: 600;
+  transition:
+    background-color var(--t-duration) var(--t-ease),
+    box-shadow var(--t-duration) var(--t-ease),
+    translate var(--t-duration) var(--t-ease);
+}
+
+body .q-btn.btn-primary {
+  min-height: 40px;
+  background: var(--t-primary);
+  color: var(--t-on-primary);
+}
+
+body .q-btn.btn-ghost {
+  flex: none;
+  color: var(--t-text);
+  font-size: 13px;
+
+  .q-btn__content {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .q-icon {
+    font-size: 18px;
+  }
+}
+
+// Form (q-input / q-select, outlined + external labels) ---------------------
+
+.quick-form {
+  display: grid;
+  gap: 14px;
+  padding: var(--t-pad);
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 13px;
   font-weight: 500;
-  transition: all 0.2s ease;
+}
 
-  // Softer shadow
-  &--clickable {
-    &:hover {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-      transform: translateY(-1px);
-    }
+.quick-form__status {
+  min-height: 1.5em;
+  margin: -4px 0 0;
+  color: var(--t-muted);
+  font-size: 13px;
+}
 
-    &:active {
-      transform: translateY(0);
-    }
+body .q-field--outlined {
+  .q-field__control {
+    padding-inline: 12px;
+    border-radius: var(--t-radius-sm);
+    background: var(--t-input-bg);
+    box-shadow: var(--t-field-shadow);
   }
 
-  // Modern outline style
-  &--outline {
-    border: 1px solid currentColor;
-    background: transparent;
+  .q-field__control::before {
+    border: var(--t-border-width) solid var(--t-border-strong);
   }
 
-  // Soft background style
-  &--soft {
-    background-color: rgba(var(--q-primary-rgb), 0.12);
-    color: var(--q-primary);
+  .q-field__control:hover::before {
+    border-color: var(--t-muted);
   }
 
-  // Improved icon spacing
-  .q-chip__icon {
-    margin-right: 6px;
-  }
-
-  // Improved close button
-  .q-chip__icon--remove {
-    opacity: 0.5;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 1;
-      background: rgba(0, 0, 0, 0.05);
-    }
+  &.q-field--highlighted .q-field__control::after {
+    border: var(--t-border-width) solid var(--t-ring);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--t-ring) 30%, transparent);
   }
 }
 
-// Modern Select Styling
-.q-select {
-  .q-field__control {
-    border-radius: 8px;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
+body .q-field {
+  font-family: inherit;
 
-    &:hover {
-      border-color: rgba(var(--q-primary-rgb), 0.5);
-    }
+  .q-field__native,
+  .q-field__input {
+    color: var(--t-text);
+    font-size: 14px;
   }
 
   .q-field__marginal {
-    color: rgba(0, 0, 0, 0.54);
-  }
-
-  // Focused state
-  &.q-field--focused {
-    .q-field__control {
-      box-shadow: 0 0 0 3px rgba(var(--q-primary-rgb), 0.15);
-    }
-  }
-
-  // Dropdown styling
-  .q-menu {
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    padding: 8px;
-
-    .q-item {
-      border-radius: 6px;
-      min-height: 40px;
-      padding: 8px 12px;
-      margin-bottom: 2px;
-
-      &--active {
-        background: rgba(var(--q-primary-rgb), 0.12);
-        color: var(--q-primary);
-        font-weight: 500;
-      }
-
-      &:hover:not(.q-item--active) {
-        background: rgba(0, 0, 0, 0.03);
-      }
-    }
-  }
-
-  // Selected chip styling inside select
-  .q-chip {
-    margin: 2px;
+    color: var(--t-muted);
   }
 }
 
-// Modern Linear Progress Styling
-.q-linear-progress {
-  height: 6px;
-  border-radius: 3px;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.08);
-
-  // Container for the progress bar
-  &__track {
-    background: inherit;
-  }
-
-  // Actual progress indicator
-  &__model {
-    border-radius: 3px;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    // Add subtle gradient to the progress bar
-    &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.2),
-        rgba(255, 255, 255, 0.1)
-      );
-    }
-  }
-
-  // Indeterminate animation improvements
-  &--indeterminate {
-    .q-linear-progress__model {
-      animation-duration: 2s;
-    }
-
-    &:before {
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    }
-  }
-
-  // Stripe animation improvements
-  &--striped {
-    .q-linear-progress__model {
-      background-image: linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.15) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.15) 75%,
-        transparent 75%,
-        transparent
-      );
-      background-size: 40px 40px;
-    }
-  }
-
-  // Variants
-  &--rounded {
-    border-radius: 12px;
-    height: 8px;
-
-    .q-linear-progress__model {
-      border-radius: 12px;
-    }
-  }
-
-  &--thin {
-    height: 3px;
-    border-radius: 1.5px;
-
-    .q-linear-progress__model {
-      border-radius: 1.5px;
-    }
-  }
-
-  // Animation for loading state
-  @keyframes q-progress-stripes {
-    from {
-      background-position: 40px 0;
-    }
-    to {
-      background-position: 0 0;
-    }
-  }
-
-  &--animate-stripes {
-    .q-linear-progress__model {
-      animation: q-progress-stripes 2s linear infinite;
-    }
-  }
+// q-select's options menu is teleported to <body>, so it still sees the tokens.
+body .q-menu {
+  border: var(--t-border-width) solid var(--t-border);
+  border-radius: var(--t-radius-sm);
+  background: var(--t-surface);
+  box-shadow: var(--t-shadow-pop);
+  color: var(--t-text);
 }
 
-// Modern Input Styling
-.q-field {
-  // Base field styling
-  .q-field__control {
-    height: 48px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+// ---------------------------------------------------------------------------
+// Small screens
+// ---------------------------------------------------------------------------
 
-    &:before {
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      border-radius: inherit;
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    &:hover:before {
-      border-color: rgba(0, 0, 0, 0.3);
-    }
+@media (max-width: 599px) {
+  .dashboard {
+    --t-pad: 16px;
   }
 
-  // Label styling
-  .q-field__label {
-    font-weight: 500;
-    font-size: 0.875rem;
-    color: rgba(0, 0, 0, 0.7);
-    transition: all 0.2s ease;
+  .app-header__inner {
+    height: 56px;
   }
 
-  // Native input styling
-  .q-field__native,
-  .q-field__input {
-    padding: 0 12px;
-    font-size: 0.95rem;
-    color: rgba(0, 0, 0, 0.9);
-
-    &::placeholder {
-      color: rgba(0, 0, 0, 0.4);
-    }
+  .theme-picker__label,
+  .app-header__version {
+    display: none;
   }
 
-  // Bottom styling
-  .q-field__bottom {
-    padding: 4px 12px 0;
-    font-size: 0.75rem;
-    min-height: 20px;
+  .theme-picker__control {
+    width: min(180px, 46vw);
   }
 
-  // Focused state
-  &.q-field--focused {
-    .q-field__control:before {
-      border-color: var(--q-primary);
-      border-width: 1px;
-    }
-
-    .q-field__control:after {
-      display: none;
-    }
-
-    .q-field__control {
-      box-shadow: 0 0 0 3px rgba(var(--q-primary-rgb), 0.15);
-    }
-
-    .q-field__label {
-      color: var(--q-primary);
-    }
-  }
-
-  // Filled variant
-  &.q-field--filled {
-    .q-field__control {
-      background: rgba(0, 0, 0, 0.03);
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.05);
-      }
-    }
-
-    &.q-field--focused .q-field__control {
-      background: rgba(var(--q-primary-rgb), 0.05);
-    }
-  }
-
-  // Outlined variant
-  &.q-field--outlined {
-    .q-field__control {
-      background: transparent;
-    }
-
-    &.q-field--focused .q-field__control:before {
-      border-width: 1px;
-    }
-  }
-
-  // Standout variant
-  &.q-field--standout {
-    .q-field__control {
-      background: rgba(0, 0, 0, 0.03);
-      border-radius: 8px;
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.05);
-      }
-    }
-
-    &.q-field--focused .q-field__control {
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  // Rounded variant
-  &.q-field--rounded {
-    .q-field__control {
-      border-radius: 24px;
-    }
-  }
-
-  // Error state
-  &.q-field--error {
-    .q-field__control:before {
-      border-color: var(--q-negative);
-    }
-
-    &.q-field--focused .q-field__control {
-      box-shadow: 0 0 0 3px rgba(var(--q-negative-rgb), 0.15);
-    }
-
-    .q-field__bottom {
-      color: var(--q-negative);
-    }
-  }
-
-  // Disabled state
-  &.q-field--disabled {
-    .q-field__control {
-      opacity: 0.6;
-      background: rgba(0, 0, 0, 0.03);
-    }
-
-    .q-field__label,
-    .q-field__native,
-    .q-field__input {
-      opacity: 0.6;
-    }
-  }
-
-  // Dense variant
-  &.q-field--dense {
-    .q-field__control {
-      height: 40px;
-    }
-
-    .q-field__label {
-      font-size: 0.8rem;
-    }
-
-    .q-field__native,
-    .q-field__input {
-      font-size: 0.875rem;
-    }
-  }
-
-  // With icon
-  .q-field__prepend,
-  .q-field__append {
-    padding: 0 8px;
-    color: rgba(0, 0, 0, 0.5);
+  .chart__value {
+    font-size: 10px;
+    letter-spacing: -0.02em;
   }
 }
