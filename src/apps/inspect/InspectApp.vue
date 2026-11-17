@@ -101,8 +101,7 @@
                 :class="{ 'check--error': showCheckErrors && !item.result }"
               >
                 <legend class="check__q">
-                  <span class="check__n">{{ String(i + 1).padStart(2, '0') }}</span
-                  >{{ item.text }}
+                  <span class="check__n">{{ String(i + 1).padStart(2, '0') }}</span>{{ item.text }}
                 </legend>
                 <div class="check__choices">
                   <button

@@ -126,8 +126,7 @@
             <p class="pocket__sub">Swipe an entry left to delete it.</p>
             <section v-for="group in expenseGroups" :key="group.key" class="group">
               <h2 class="group__head">
-                <span>{{ group.label }}</span
-                ><span>{{ formatMoney(group.total) }}</span>
+                <span>{{ group.label }}</span><span>{{ formatMoney(group.total) }}</span>
               </h2>
               <q-list class="group__list">
                 <q-slide-item
