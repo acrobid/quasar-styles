@@ -1,0 +1,56 @@
+// Bento & bouncy — spending & habit tracker (/tracker)
+// iOS-widget tiles in cheerful colour blocks, chunky Bricolage numbers,
+// springy presses. Tile colours are extra tokens (`--bento-*`); text on every
+// tile is the ink colour, which clears AA on all of them.
+
+.theme-bento {
+  --t-bg: #f4f1ea;
+  --t-surface: #ffffff;
+  --t-surface-2: #ebe6dc;
+  --t-header-bg: rgb(244 241 234 / 0.92);
+  --t-border: #e2ddd2;
+  --t-border-strong: #8c857a;
+  --t-border-width: 1px;
+  --t-track: rgb(28 27 31 / 0.14);
+  --t-text: #1c1b1f;
+  --t-muted: #5d5864;
+  --t-primary: #1c1b1f;
+  --t-on-primary: #ffffff;
+  --t-accent: #ff7a59;
+  --t-positive: #1f8a4c;
+  --t-warning: #b86e00;
+  --t-negative: #d1361f;
+  --t-info: #2d6fd6;
+  --t-neutral: #8c857a;
+  --t-ring: #2d6fd6;
+  --t-input-bg: #ffffff;
+  --t-radius: 28px;
+  --t-radius-sm: 16px;
+  --t-radius-pill: 999px;
+  --t-shadow: 0 1px 0 rgb(28 27 31 / 0.04), 0 10px 24px -14px rgb(28 27 31 / 0.25);
+  --t-shadow-pop: 0 30px 60px -20px rgb(28 27 31 / 0.4);
+  --t-font-body: 'Geist', system-ui, sans-serif;
+  --t-font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 800;
+  --t-display-tracking: -0.03em;
+  --t-ease: cubic-bezier(0.34, 1.56, 0.64, 1); // overshoot = the bounce
+  --t-duration: 320ms;
+
+  --bento-lemon: #ffe27a;
+  --bento-mint: #b7efc8;
+  --bento-lilac: #d8cbff;
+  --bento-coral: #ffb199;
+  --bento-sky: #b3dcff;
+  --bento-ink: #1c1b1f;
+}
+
+body.theme-bento {
+  .q-dialog__inner--bottom > .q-card {
+    border-radius: var(--t-radius) var(--t-radius) 0 0;
+  }
+
+  .q-field--outlined .q-field__control {
+    border-radius: var(--t-radius-sm);
+  }
+}

@@ -1,0 +1,59 @@
+// Calm editorial — AI chat assistant (/chat)
+// Warm paper and ink, a Newsreader serif for headings over Geist, generous
+// whitespace and almost no chrome. Follows the system light/dark setting:
+// Quasar's Dark 'auto' toggles body--dark, which swaps in the night palette.
+
+.theme-editorial {
+  --t-bg: #f6f1e8;
+  --t-surface: #fbf8f2;
+  --t-surface-2: #eee6d8;
+  --t-header-bg: rgb(246 241 232 / 0.9);
+  --t-border: #e2d8c7;
+  --t-border-strong: #9a8b76;
+  --t-border-width: 1px;
+  --t-track: #e2d8c7;
+  --t-text: #2b2520;
+  --t-muted: #6a5f53;
+  --t-primary: #9b4a2c;
+  --t-on-primary: #fffaf3;
+  --t-accent: #4f6b5a;
+  --t-positive: #3f7a52;
+  --t-warning: #9a6a12;
+  --t-negative: #a8372b;
+  --t-info: #3d6585;
+  --t-neutral: #7d7266;
+  --t-ring: #9b4a2c;
+  --t-radius: 18px;
+  --t-radius-sm: 12px;
+  --t-radius-pill: 999px;
+  --t-shadow: none;
+  --t-shadow-pop: 0 18px 40px -18px rgb(60 40 20 / 0.35);
+  --t-font-body: 'Geist', system-ui, sans-serif;
+  --t-font-display: 'Newsreader', Georgia, serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 500;
+  --t-display-tracking: -0.01em;
+  --t-duration: 220ms;
+}
+
+body.body--dark.theme-editorial {
+  --t-bg: #1a1815;
+  --t-surface: #211e1a;
+  --t-surface-2: #2b2722;
+  --t-header-bg: rgb(26 24 21 / 0.9);
+  --t-border: #34302a;
+  --t-border-strong: #7d7366;
+  --t-track: #34302a;
+  --t-text: #ede6da;
+  --t-muted: #aba093;
+  --t-primary: #e4a481;
+  --t-on-primary: #1a1815;
+  --t-accent: #9cbca8;
+  --t-positive: #8cc49b;
+  --t-warning: #e2b860;
+  --t-negative: #ec8f82;
+  --t-info: #94bbdb;
+  --t-neutral: #a49a8d;
+  --t-ring: #e4a481;
+  --t-shadow-pop: 0 18px 40px -18px rgb(0 0 0 / 0.7);
+}

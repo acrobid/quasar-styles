@@ -1,0 +1,35 @@
+// Launcher — neutral, refined
+// Quiet off-white canvas, ink text, one indigo for focus. Lets the five
+// app previews carry the colour.
+
+.theme-launcher {
+  --t-bg: #f5f5f2;
+  --t-surface: #ffffff;
+  --t-surface-2: #ededea;
+  --t-header-bg: rgb(245 245 242 / 0.86);
+  --t-border: #e3e3de;
+  --t-border-strong: #8a8a84;
+  --t-border-width: 1px;
+  --t-track: #e3e3de;
+  --t-text: #17171a;
+  --t-muted: #5c5c63;
+  --t-primary: #17171a;
+  --t-on-primary: #ffffff;
+  --t-accent: #4f46e5;
+  --t-positive: #15803d;
+  --t-warning: #b45309;
+  --t-negative: #b91c1c;
+  --t-info: #1d4ed8;
+  --t-neutral: #71717a;
+  --t-ring: #4f46e5;
+  --t-radius: 20px;
+  --t-radius-sm: 10px;
+  --t-radius-pill: 999px;
+  --t-shadow: 0 1px 2px rgb(23 23 26 / 0.04), 0 8px 24px -12px rgb(23 23 26 / 0.12);
+  --t-shadow-pop: 0 24px 48px -20px rgb(23 23 26 / 0.3);
+  --t-font-body: 'Geist', system-ui, sans-serif;
+  --t-font-display: 'Geist', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 600;
+  --t-display-tracking: -0.035em;
+}

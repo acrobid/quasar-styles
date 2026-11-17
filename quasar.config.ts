@@ -16,12 +16,13 @@ export default defineConfig((/* ctx */) => {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: [
       'app.scss',
-      '/themes/theme1-linear.scss',
-      '/themes/theme2-brutalist.scss',
-      '/themes/theme3-organic.scss',
-      '/themes/theme4-skeuomorph.scss',
-      '/themes/theme5-kinetic.scss',
-      '/themes/theme6-shadcn.scss',
+      // Tokens for every app style; global so the launcher can preview them all.
+      '/themes/launcher.scss',
+      '/themes/editorial.scss',
+      '/themes/precision.scss',
+      '/themes/bento.scss',
+      '/themes/glass.scss',
+      '/themes/industrial.scss',
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -34,7 +35,7 @@ export default defineConfig((/* ctx */) => {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      // Text fonts come from Google Fonts in index.html (one set per theme).
+      // Text fonts come from Google Fonts in index.html.
       'material-icons', // optional, you are not bound to it
     ],
 
@@ -98,7 +99,11 @@ export default defineConfig((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {},
+      config: {
+        ripple: false,
+        // `toast` is a custom brand colour defined in app.scss from theme tokens.
+        notify: { color: 'toast', textColor: 'toast', position: 'bottom', timeout: 2200 },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
@@ -111,7 +116,7 @@ export default defineConfig((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['Notify'],
     },
 
     // animations: 'all', // --- includes all animations

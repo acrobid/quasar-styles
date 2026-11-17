@@ -1,0 +1,66 @@
+// Precision dark — issue tracker (/issues)
+// Near-black, hairline borders, monochrome type with a single lime accent,
+// compact 13px UI, tabular numbers and visible keyboard hints.
+
+.theme-precision {
+  --t-bg: #09090a;
+  --t-surface: #101012;
+  --t-surface-2: #17171a;
+  --t-header-bg: #09090a;
+  --t-border: #222226;
+  --t-border-strong: #5b5b63;
+  --t-border-width: 1px;
+  --t-track: #222226;
+  --t-text: #ececee;
+  --t-muted: #8e8e97;
+  --t-primary: #c8f04c;
+  --t-on-primary: #0b0d05;
+  --t-accent: #c8f04c;
+  --t-positive: #c8f04c;
+  --t-warning: #ececee;
+  --t-negative: #ff6b5b;
+  --t-info: #a9a9b2;
+  --t-neutral: #6e6e77;
+  --t-ring: #c8f04c;
+  --t-input-bg: #101012;
+  --t-radius: 10px;
+  --t-radius-sm: 6px;
+  --t-radius-pill: 6px;
+  --t-shadow: none;
+  --t-shadow-pop: 0 0 0 1px #2c2c31, 0 16px 40px -12px rgb(0 0 0 / 0.9);
+  --t-font-body: 'Geist', system-ui, sans-serif;
+  --t-font-display: 'Geist', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 600;
+  --t-display-tracking: -0.02em;
+  --t-duration: 120ms;
+}
+
+body.theme-precision {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+
+  .q-menu .q-item {
+    min-height: 32px;
+    font-size: 13px;
+  }
+
+  .q-menu .q-item.q-manual-focusable--focused > .q-focus-helper,
+  .q-menu .q-item--active {
+    color: var(--t-text);
+  }
+
+  .q-field--dense .q-field__control,
+  .q-field--dense .q-field__marginal {
+    height: 34px;
+  }
+
+  .q-field--dense .q-field__native {
+    font-size: 13px;
+  }
+
+  .q-dialog .q-card {
+    border: 1px solid var(--t-border);
+    box-shadow: var(--t-shadow-pop);
+  }
+}

@@ -1,36 +1,35 @@
 // Shared component layer
 // =============================================================================
-// Every theme file (src/css/themes/*) sets this token contract on `body.themeN`;
-// the rules below consume only tokens, so a theme is tokens + its own flourishes.
-// Fonts are loaded in index.html.
+// Each theme file (src/css/themes/*) sets this token contract on `.theme-<id>`.
+// The router puts the active app's class on <body>; the launcher also puts
+// classes on its preview cards (with `.theme-scope`) to show every style at once.
+// The rules below consume only tokens; layout lives in each app's SFC.
 //
 //   Surfaces   --t-bg  --t-bg-image  --t-surface  --t-surface-2  --t-header-bg
-//   Lines      --t-border  --t-border-strong  --t-border-width  --t-grid  --t-track
+//   Lines      --t-border  --t-border-strong  --t-border-width  --t-track
 //   Text       --t-text  --t-muted
 //   Colour     --t-primary  --t-on-primary  --t-accent  --t-positive  --t-warning
-//              --t-negative  --t-info  --t-neutral  --t-chart  --t-ring
+//              --t-negative  --t-info  --t-neutral  --t-ring
 //   Shape      --t-radius  --t-radius-sm  --t-radius-pill
-//   Depth      --t-shadow  --t-shadow-hover  --t-shadow-pop  --t-field-shadow
+//   Depth      --t-shadow  --t-shadow-pop  --t-input-bg  --t-blur
 //   Type       --t-font-body  --t-font-display  --t-font-mono
 //              --t-display-weight  --t-display-tracking
-//   Rhythm     --t-gap  --t-pad  --t-ease  --t-duration
+//   Motion     --t-ease  --t-duration
 //
 // Component rules are prefixed with `body` so they outrank Quasar's own
-// `.q-*--dark` modifiers without !important; theme files use `body.themeN …`,
-// which outranks these in turn.
+// `.q-*--dark` modifiers without !important; theme files use
+// `body.theme-<id> …`, which outranks these in turn.
 
 // ---------------------------------------------------------------------------
-// Page canvas + Quasar palette hand-off
+// Token defaults + Quasar palette hand-off
 // ---------------------------------------------------------------------------
 
-body {
+body,
+.theme-scope {
   // Optional tokens with neutral defaults.
   --t-bg-image: none;
   --t-input-bg: transparent;
-  --t-field-shadow: none;
-  --t-shadow-hover: var(--t-shadow);
-  --t-gap: 16px;
-  --t-pad: 20px;
+  --t-blur: none;
   --t-ease: cubic-bezier(0.2, 0, 0, 1);
   --t-duration: 160ms;
 
@@ -44,6 +43,13 @@ body {
   --q-info: var(--t-info);
   --q-dark: var(--t-surface);
   --q-dark-page: var(--t-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .theme-scope {
+    --t-duration: 0ms;
+  }
 }
 
 // Same specificity as Quasar's `body.body--dark`, declared later, so it wins.
@@ -74,320 +80,93 @@ body :focus-visible {
   white-space: nowrap;
 }
 
-// ---------------------------------------------------------------------------
-// Header + theme picker
-// ---------------------------------------------------------------------------
+// Back-to-launcher link (components/AppBackLink.vue) --------------------------
 
-.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--t-header-bg);
-  border-bottom: var(--t-border-width) solid var(--t-border);
-}
-
-.app-header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  max-width: 1280px;
-  height: 64px;
-  margin-inline: auto;
-  padding-inline: var(--t-gap);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-  color: inherit;
-  text-decoration: none;
-  border-radius: var(--t-radius-sm);
-}
-
-.brand__mark {
+.app-back {
+  display: inline-flex;
   flex: none;
-  width: 24px;
-  height: 24px;
-  border-radius: var(--t-radius-sm);
-  background: var(--t-primary);
-}
-
-.brand__name {
-  overflow: hidden;
-  font-family: var(--t-font-display);
-  font-size: 1rem;
-  font-weight: var(--t-display-weight);
-  letter-spacing: var(--t-display-tracking);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.app-header__actions {
-  display: flex;
   align-items: center;
-  gap: 16px;
-  min-width: 0;
-}
-
-.app-header__version {
-  color: var(--t-muted);
-  font-family: var(--t-font-mono);
-  font-size: 12px;
-}
-
-.theme-picker {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.theme-picker__label {
-  color: var(--t-muted);
-  font-size: 13px;
-}
-
-.theme-picker__control {
-  position: relative;
-  display: block;
-  min-width: 0;
-}
-
-.theme-picker__select {
-  appearance: none;
-  width: 100%;
-  min-width: 0;
-  height: 36px;
-  padding: 0 34px 0 12px;
-  border: var(--t-border-width) solid var(--t-border-strong);
-  border-radius: var(--t-radius-sm);
-  background: var(--t-input-bg);
-  box-shadow: var(--t-field-shadow);
-  color: var(--t-text);
-  font: inherit;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 12px 0 8px;
+  border-radius: var(--t-radius-pill);
+  color: inherit;
   font-size: 14px;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  transition: border-color var(--t-duration) var(--t-ease);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color var(--t-duration) var(--t-ease);
+
+  .q-icon {
+    font-size: 20px;
+  }
 
   &:hover {
-    border-color: var(--t-muted);
+    background: color-mix(in srgb, currentColor 10%, transparent);
   }
 }
 
-.theme-picker__icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  translate: 0 -50%;
-  color: var(--t-muted);
-  font-size: 18px;
-  pointer-events: none;
-}
-
-// ---------------------------------------------------------------------------
-// Page grid
-// ---------------------------------------------------------------------------
-
-.dashboard {
-  display: grid;
-  gap: var(--t-gap);
-  max-width: 1280px;
-  margin-inline: auto;
-  padding: calc(var(--t-gap) * 1.5) var(--t-gap) calc(var(--t-gap) * 3);
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: var(--t-gap);
-}
-
-.dashboard__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--t-gap);
-  align-items: start;
-}
-
-@media (min-width: 1024px) {
-  .dashboard__grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+@media (max-width: 599px) {
+  .app-back__label {
+    display: none;
   }
 
-  .span-8 {
-    grid-column: span 8;
-  }
-
-  .span-4 {
-    grid-column: span 4;
+  .app-back {
+    padding: 0 10px;
   }
 }
 
 // ---------------------------------------------------------------------------
-// Panels (q-card)
+// Quasar components
 // ---------------------------------------------------------------------------
+
+body .q-layout__section--marginal {
+  background: var(--t-header-bg);
+  color: var(--t-text);
+}
+
+body .q-drawer {
+  background: var(--t-surface);
+  color: var(--t-text);
+}
+
+body .q-drawer--bordered.q-drawer--left {
+  border-right: var(--t-border-width) solid var(--t-border);
+}
+
+body .q-drawer--bordered.q-drawer--right {
+  border-left: var(--t-border-width) solid var(--t-border);
+}
 
 body .q-card {
   min-width: 0;
-  border: var(--t-border-width) solid var(--t-border);
   border-radius: var(--t-radius);
   background: var(--t-surface);
   box-shadow: var(--t-shadow);
   color: var(--t-text);
-  transition:
-    box-shadow var(--t-duration) var(--t-ease),
-    border-color var(--t-duration) var(--t-ease),
-    translate var(--t-duration) var(--t-ease);
 }
 
-.panel__head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding: var(--t-pad) var(--t-pad) 0;
-}
-
-.panel__title {
-  margin: 0;
-  font-family: var(--t-font-display);
-  font-size: 1rem;
-  font-weight: var(--t-display-weight);
-  line-height: 1.4;
-  letter-spacing: var(--t-display-tracking);
-}
-
-.panel__sub {
-  margin: 2px 0 0;
-  color: var(--t-muted);
-  font-size: 13px;
-}
-
-.eyebrow {
-  margin: 0 0 8px;
-  color: var(--t-muted);
-  font-family: var(--t-font-mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-// Hero ----------------------------------------------------------------------
-
-.hero {
-  padding: clamp(20px, 4vw, 36px) var(--t-pad);
-}
-
-.hero__title {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 0.25em;
-  margin: 0;
-  font-family: var(--t-font-display);
-  font-size: clamp(1.75rem, 1rem + 3vw, 2.75rem);
-  font-weight: var(--t-display-weight);
-  line-height: 1.1;
-  letter-spacing: var(--t-display-tracking);
-  text-wrap: balance;
-}
-
-.hero__word {
-  display: inline-block;
-}
-
-.hero__lede {
-  max-width: 52ch;
-  margin: 12px 0 0;
-  color: var(--t-muted);
-  font-size: 1rem;
-  text-wrap: pretty;
-}
-
-// Stat cards ----------------------------------------------------------------
-
-.stat {
-  display: grid;
-  gap: 10px;
-  padding: var(--t-pad);
-}
-
-.stat__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.stat__label {
-  color: var(--t-muted);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.stat__value {
-  font-family: var(--t-font-display);
-  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.125rem);
-  font-weight: var(--t-display-weight);
-  font-variant-numeric: tabular-nums;
-  line-height: 1.1;
-  letter-spacing: var(--t-display-tracking);
-}
-
-.stat__foot {
-  color: var(--t-muted);
-  font-size: 12px;
-}
-
-.delta {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 2px 8px 2px 6px;
-  border-radius: var(--t-radius-pill);
-  background: color-mix(in srgb, var(--tone) 14%, transparent);
-  color: var(--tone-text);
-  font-size: 12px;
+// Kept at (0,1,1) so an app's own `.class[data-v]` button styles still win.
+body .q-btn {
+  border-radius: var(--t-radius-sm);
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
-
-  .q-icon {
-    font-size: 14px;
-  }
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-// Tones: one source for chips, deltas and avatars. Text is nudged toward the
-// theme's text colour so it stays legible on the tinted background.
-.tone--primary {
-  --tone: var(--t-primary);
-}
-.tone--positive {
-  --tone: var(--t-positive);
-}
-.tone--warning {
-  --tone: var(--t-warning);
-}
-.tone--negative {
-  --tone: var(--t-negative);
-}
-.tone--info {
-  --tone: var(--t-info);
-}
-.tone--neutral {
-  --tone: var(--t-neutral);
-}
-[class*='tone--'] {
-  --tone-text: color-mix(in srgb, var(--tone), var(--t-text) 25%);
+body .q-btn--round {
+  border-radius: 50%;
 }
 
-// Progress (q-linear-progress) ---------------------------------------------
+body .q-tab {
+  text-transform: none;
+}
 
-body .q-linear-progress {
-  height: 6px;
-  border-radius: var(--t-radius-pill);
+body .q-separator {
+  background: var(--t-border);
+}
+
+body .q-item__label--caption {
+  color: var(--t-muted);
 }
 
 body .q-linear-progress__track {
@@ -395,288 +174,32 @@ body .q-linear-progress__track {
   opacity: 1;
 }
 
-body .q-linear-progress__model {
-  border-radius: inherit;
-}
+// Fields: outlined variant with a token-driven ring.
+body .q-field {
+  font-family: inherit;
 
-// Chart ---------------------------------------------------------------------
-
-// The chart card stretches to its row; the plot absorbs the extra height.
-.chart-panel {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-}
-
-.chart {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin: 0;
-  padding: var(--t-pad);
-}
-
-.chart__cols {
-  display: grid;
-  flex: 1;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.chart__col {
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
-
-.chart__plot {
-  position: relative;
-  display: block;
-  min-height: clamp(160px, 28vw, 240px);
-  border-bottom: 1px solid var(--t-border-strong);
-  // Gridlines at 0/25/50/75% of CHART_MAX.
-  background: linear-gradient(var(--t-grid) 1px, transparent 1px) 0 0 / 100% 25%;
-}
-
-.chart__bar {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: min(56%, 48px);
-  height: var(--h);
-  translate: -50% 0;
-  border-radius: var(--t-radius-sm) var(--t-radius-sm) 0 0;
-  background: var(--t-chart);
-  transition: background-color var(--t-duration) var(--t-ease);
-}
-
-.chart__value {
-  position: absolute;
-  bottom: calc(var(--h) + 6px);
-  left: 50%;
-  translate: -50% 0;
-  color: var(--t-muted);
-  font-family: var(--t-font-mono);
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.chart__label {
-  padding-top: 8px;
-  color: var(--t-muted);
-  font-size: 12px;
-  text-align: center;
-}
-
-.chart__col.is-current {
-  .chart__bar {
-    background: var(--t-primary);
-  }
-
-  .chart__value,
-  .chart__label {
+  .q-field__native,
+  .q-field__input,
+  .q-field__prefix,
+  .q-field__suffix {
     color: var(--t-text);
-    font-weight: 600;
-  }
-}
-
-// Activity list -------------------------------------------------------------
-
-.activity {
-  padding: 8px 0;
-}
-
-body .activity__item {
-  min-height: 0;
-  padding: 10px var(--t-pad);
-}
-
-.activity__text {
-  color: var(--t-muted);
-  font-size: 14px;
-  line-height: 1.4;
-
-  strong {
-    color: var(--t-text);
-    font-weight: 600;
-  }
-}
-
-body .activity__time {
-  margin-top: 2px;
-  color: var(--t-muted);
-  font-size: 12px;
-}
-
-body .q-avatar.avatar {
-  border-radius: var(--t-radius-pill);
-  background: color-mix(in srgb, var(--tone) 18%, var(--t-surface));
-  color: var(--tone-text);
-  font-weight: 600;
-
-  .q-avatar__content {
-    font-size: 13px;
-    line-height: 1;
-  }
-}
-
-body .q-badge.badge-new {
-  padding: 2px 8px;
-  border-radius: var(--t-radius-pill);
-  background: var(--t-primary);
-  color: var(--t-on-primary);
-  font-size: 11px;
-  font-weight: 600;
-}
-
-// Table (q-table) -----------------------------------------------------------
-
-body .q-table__card {
-  border-radius: 0 0 var(--t-radius) var(--t-radius);
-  background: transparent;
-  box-shadow: none;
-  color: inherit;
-}
-
-body .q-table {
-  min-width: 640px;
-  margin-top: 12px;
-  font-variant-numeric: tabular-nums;
-
-  thead tr,
-  tbody td {
-    height: 52px;
   }
 
-  th,
-  td {
-    padding: 8px 12px;
-    border-color: var(--t-border);
-    font-size: 14px;
-  }
-
-  th:first-child,
-  td:first-child {
-    padding-left: var(--t-pad);
-  }
-
-  th:last-child,
-  td:last-child {
-    padding-right: var(--t-pad);
-  }
-
-  th {
+  .q-field__label,
+  .q-field__marginal,
+  .q-field__bottom {
     color: var(--t-muted);
-    font-size: 12px;
-    font-weight: 500;
   }
 
-  tbody tr:last-child td {
-    border-bottom: 0;
+  &.q-field--error .q-field__bottom {
+    color: var(--t-negative);
   }
-
-  tbody td::before {
-    background: var(--t-surface-2);
-  }
-}
-
-.cell-progress {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 120px;
-
-  .q-linear-progress {
-    flex: 1;
-  }
-}
-
-.cell-progress__pct {
-  width: 3.5ch;
-  color: var(--t-muted);
-  font-size: 12px;
-  text-align: right;
-}
-
-body .q-chip.status {
-  height: 24px;
-  margin: 0;
-  padding: 0 10px;
-  border-radius: var(--t-radius-pill);
-  background: color-mix(in srgb, var(--tone) 14%, transparent);
-  color: var(--tone-text);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-// Buttons -------------------------------------------------------------------
-
-body .q-btn.btn-primary,
-body .q-btn.btn-ghost {
-  min-height: 36px;
-  padding: 0 14px;
-  border-radius: var(--t-radius-sm);
-  font-weight: 600;
-  transition:
-    background-color var(--t-duration) var(--t-ease),
-    box-shadow var(--t-duration) var(--t-ease),
-    translate var(--t-duration) var(--t-ease);
-}
-
-body .q-btn.btn-primary {
-  min-height: 40px;
-  background: var(--t-primary);
-  color: var(--t-on-primary);
-}
-
-body .q-btn.btn-ghost {
-  flex: none;
-  color: var(--t-text);
-  font-size: 13px;
-
-  .q-btn__content {
-    flex-wrap: nowrap;
-    white-space: nowrap;
-  }
-
-  .q-icon {
-    font-size: 18px;
-  }
-}
-
-// Form (q-input / q-select, outlined + external labels) ---------------------
-
-.quick-form {
-  display: grid;
-  gap: 14px;
-  padding: var(--t-pad);
-}
-
-.field {
-  display: grid;
-  gap: 6px;
-}
-
-.field__label {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.quick-form__status {
-  min-height: 1.5em;
-  margin: -4px 0 0;
-  color: var(--t-muted);
-  font-size: 13px;
 }
 
 body .q-field--outlined {
   .q-field__control {
-    padding-inline: 12px;
     border-radius: var(--t-radius-sm);
     background: var(--t-input-bg);
-    box-shadow: var(--t-field-shadow);
   }
 
   .q-field__control::before {
@@ -693,21 +216,7 @@ body .q-field--outlined {
   }
 }
 
-body .q-field {
-  font-family: inherit;
-
-  .q-field__native,
-  .q-field__input {
-    color: var(--t-text);
-    font-size: 14px;
-  }
-
-  .q-field__marginal {
-    color: var(--t-muted);
-  }
-}
-
-// q-select's options menu is teleported to <body>, so it still sees the tokens.
+// Popups are teleported to <body>, so they still see the active tokens.
 body .q-menu {
   border: var(--t-border-width) solid var(--t-border);
   border-radius: var(--t-radius-sm);
@@ -716,30 +225,33 @@ body .q-menu {
   color: var(--t-text);
 }
 
-// ---------------------------------------------------------------------------
-// Small screens
-// ---------------------------------------------------------------------------
+body .q-dialog__backdrop {
+  background: color-mix(in srgb, var(--t-bg) 60%, rgb(0 0 0 / 0.5));
+}
 
-@media (max-width: 599px) {
-  .dashboard {
-    --t-pad: 16px;
-  }
+body .q-tooltip {
+  border-radius: var(--t-radius-sm);
+  background: var(--t-text);
+  color: var(--t-bg);
+  font-size: 12px;
+}
 
-  .app-header__inner {
-    height: 56px;
-  }
+// Text colour for content on a primary fill (e.g. q-btn-toggle toggle-text-color).
+.text-on-primary {
+  color: var(--t-on-primary);
+}
 
-  .theme-picker__label,
-  .app-header__version {
-    display: none;
-  }
+// `toast` is the Notify default colour (quasar.config.ts): an inverted chip.
+.bg-toast {
+  background: var(--t-text);
+}
 
-  .theme-picker__control {
-    width: min(180px, 46vw);
-  }
+.text-toast {
+  color: var(--t-bg);
+}
 
-  .chart__value {
-    font-size: 10px;
-    letter-spacing: -0.02em;
-  }
+body .q-notification {
+  border-radius: var(--t-radius-sm);
+  box-shadow: var(--t-shadow-pop);
+  font-family: var(--t-font-body);
 }

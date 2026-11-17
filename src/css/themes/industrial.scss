@@ -1,0 +1,78 @@
+// Industrial utility — field inspection checklist (/inspect)
+// Safety orange on black and white, 2px rules, Archivo condensed headings,
+// Geist Mono labels, 56px touch targets. Orange is only ever a fill behind
+// black text (7:1); it is never used as text on white.
+
+.theme-industrial {
+  --t-bg: #ecebe6;
+  --t-surface: #ffffff;
+  --t-surface-2: #f5f4f0;
+  --t-header-bg: #0d0d0d;
+  --t-border: #0d0d0d;
+  --t-border-strong: #0d0d0d;
+  --t-border-width: 2px;
+  --t-track: #d4d3cc;
+  --t-text: #0d0d0d;
+  --t-muted: #46463f;
+  --t-primary: #ff5f00;
+  --t-on-primary: #0d0d0d;
+  --t-accent: #ffc400;
+  --t-positive: #0a7a3a;
+  --t-warning: #ffc400;
+  --t-negative: #c4170c;
+  --t-info: #1f4fbf;
+  --t-neutral: #46463f;
+  --t-ring: #1f4fbf;
+  --t-input-bg: #ffffff;
+  --t-radius: 4px;
+  --t-radius-sm: 2px;
+  --t-radius-pill: 2px;
+  --t-shadow: 4px 4px 0 #0d0d0d;
+  --t-shadow-pop: 6px 6px 0 #0d0d0d;
+  --t-font-body: 'Archivo', system-ui, sans-serif;
+  --t-font-display: 'Archivo', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 800;
+  --t-display-tracking: -0.01em;
+  --t-duration: 100ms;
+}
+
+body.theme-industrial {
+  font-size: 16px;
+
+  .q-btn {
+    min-height: 48px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .q-field__label,
+  .q-field__bottom {
+    font-family: var(--t-font-mono);
+    letter-spacing: 0.02em;
+  }
+
+  .q-field--outlined .q-field__control {
+    min-height: 56px;
+  }
+
+  .q-field--outlined.q-field--highlighted .q-field__control::after {
+    border-width: 3px;
+    box-shadow: none;
+  }
+
+  .q-field--error .q-field__bottom {
+    color: var(--t-negative);
+    font-weight: 600;
+  }
+
+  .q-menu .q-item {
+    min-height: 52px;
+  }
+
+  .q-notification {
+    border-left: 8px solid var(--t-primary);
+    font-weight: 700;
+  }
+}

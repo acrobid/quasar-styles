@@ -1,0 +1,51 @@
+// Frosted glass — focus timer & ambient mixer (/focus)
+// Translucent, blurred panels over a deep gradient mesh. The mesh lives in
+// --t-bg-image (static here; FocusApp drifts a copy of it). Panels carry a
+// dark tint so text stays AA even where the mesh is brightest.
+
+.theme-glass {
+  --t-bg: #120f26;
+  --t-bg-image:
+    radial-gradient(40% 50% at 15% 20%, rgb(124 92 255 / 0.55), transparent 70%),
+    radial-gradient(35% 45% at 85% 25%, rgb(32 178 170 / 0.45), transparent 70%),
+    radial-gradient(45% 50% at 70% 85%, rgb(236 72 153 / 0.4), transparent 70%),
+    radial-gradient(40% 40% at 20% 85%, rgb(59 130 246 / 0.4), transparent 70%);
+  --t-surface: rgb(22 18 48 / 0.5);
+  --t-surface-2: rgb(255 255 255 / 0.08);
+  --t-header-bg: transparent;
+  --t-border: rgb(255 255 255 / 0.14);
+  --t-border-strong: rgb(255 255 255 / 0.5);
+  --t-border-width: 1px;
+  --t-track: rgb(255 255 255 / 0.14);
+  --t-text: #f7f5ff;
+  --t-muted: #cdc8ec;
+  --t-primary: #ffffff;
+  --t-on-primary: #1a1638;
+  --t-accent: #8ff0e0;
+  --t-positive: #8ff0c0;
+  --t-warning: #ffd88a;
+  --t-negative: #ff9db0;
+  --t-info: #a9c6ff;
+  --t-neutral: #b8b3d9;
+  --t-ring: #8ff0e0;
+  --t-input-bg: rgb(255 255 255 / 0.06);
+  --t-blur: blur(24px) saturate(150%);
+  --t-radius: 28px;
+  --t-radius-sm: 14px;
+  --t-radius-pill: 999px;
+  --t-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18), 0 1px 0 rgb(0 0 0 / 0.2),
+    0 30px 60px -30px rgb(0 0 0 / 0.6);
+  --t-shadow-pop: 0 30px 60px -20px rgb(0 0 0 / 0.7);
+  --t-font-body: 'Geist', system-ui, sans-serif;
+  --t-font-display: 'Geist', system-ui, sans-serif;
+  --t-font-mono: 'Geist Mono', ui-monospace, monospace;
+  --t-display-weight: 300;
+  --t-display-tracking: -0.04em;
+  --t-duration: 240ms;
+}
+
+body.theme-glass .q-notification {
+  border: 1px solid var(--t-border);
+  backdrop-filter: var(--t-blur);
+}
